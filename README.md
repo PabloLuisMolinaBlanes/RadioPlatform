@@ -1,4 +1,6 @@
-# RadioPlatform
+# RadioPlatform - A Platform for Radio Amateurs
+
+RadioPlatform is an Angular platform thought for radio amateurs to have a safe place to chat and manage their next purchase of equipment. 
 
 ## Mar 18, 2021
 Initial commit

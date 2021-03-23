@@ -13,5 +13,7 @@ Create .gitignore - I just created a file called .gitignore, generated from the 
 
 I edited the README to add the first actions taken
 
+Added purpose for the program
+
 @PabloLuisMolinaBlanes
 PabloLuisMolinaBlanes committed 23/03/2021

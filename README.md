@@ -17,6 +17,9 @@ RadioPlatform will use several technologies to accomplish its objectives.
 * MySQL for holding the maps data.
 * Firebase Storage for holding users' pictures.
 * Firebase Database for holding users' data.
+# Mockup
+
+![Mockup](https://github.com/PabloLuisMolinaBlanes/RadioPlatform/blob/main/Mockup/RadioPlatform.png)
 
 ## Mar 18, 2021
 Initial commit

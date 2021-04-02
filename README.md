@@ -14,9 +14,11 @@ RadioPlatform is an Angular platform thought for radio amateurs to have a safe p
 # Technologies
 RadioPlatform will use several technologies to accomplish its objectives.
 * Ionic and Angular for the frontend.
-* MySQL for holding the maps data.
+* MySQL for holding the maps data and some usage checking.
 * Firebase Storage for holding users' pictures.
 * Firebase Database for holding users' data.
+* Leaflet for rendering the maps.
+* Nominatim for obtaining OpenStreetMap's data.
 # Mockup
 
 ![Mockup](https://github.com/PabloLuisMolinaBlanes/RadioPlatform/blob/main/Mockup/RadioPlatform.png)

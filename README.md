@@ -6,7 +6,7 @@ RadioPlatform is an Angular platform thought for radio amateurs to have a safe p
 * Users can share antennae used for their equipment, along with transceivers they may use, and make it known to other radio amateurs.
 * Users can chat, where they can ask for advice, find buying options among other radio-amateur related topics.
 * Users have a list of users they can filter by country, equipment, antennae, preferred frequency range... When they search for contacts.
-* (Maybe not) Users have a map where they can see at a quick glance all the contacts they have neatly shown in the 'Contacts' section.
+* Users have a map where they can see at a quick glance all the contacts they have neatly shown in the 'Contacts' section.
 * Users can set their favoured frequency and let other users know when they start transmitting and when.
 * Users can give a price to equipment and make simple calculations to know whether they can afford it or not.
 * Admins can moderate the chat with several tools that will allow for it.
@@ -14,9 +14,14 @@ RadioPlatform is an Angular platform thought for radio amateurs to have a safe p
 # Technologies
 RadioPlatform will use several technologies to accomplish its objectives.
 * Ionic and Angular for the frontend.
-* MySQL for holding the maps data.
+* MySQL for holding the maps data and some usage checking.
 * Firebase Storage for holding users' pictures.
 * Firebase Database for holding users' data.
+* Leaflet for rendering the maps.
+* Nominatim for obtaining OpenStreetMap's data.
+# Mockup
+
+![Mockup](https://github.com/PabloLuisMolinaBlanes/RadioPlatform/blob/main/Mockup/RadioPlatform.png)
 
 ## Mar 18, 2021
 Initial commit

@@ -19,6 +19,7 @@ RadioPlatform will use several technologies to accomplish its objectives.
 * Firebase Database for holding users' data.
 * Leaflet for rendering the maps.
 * Nominatim for obtaining OpenStreetMap's data.
+* PHP for building an access point to the MySQL database
 # Mockup
 
 ![Mockup](https://github.com/PabloLuisMolinaBlanes/RadioPlatform/blob/main/Mockup/RadioPlatform.png)

@@ -22,7 +22,18 @@ RadioPlatform will use several technologies to accomplish its objectives.
 * PHP for building an access point to the MySQL database
 # Mockup
 
-![Mockup](https://github.com/PabloLuisMolinaBlanes/RadioPlatform/blob/main/Mockup/RadioPlatform.png)
+![Mockup 1](https://github.com/PabloLuisMolinaBlanes/RadioPlatform/blob/main/Mockup/Web%201920%20%E2%80%93%201.png)
+![Mockup 2](https://github.com/PabloLuisMolinaBlanes/RadioPlatform/blob/main/Mockup/Web%201920%20%E2%80%93%202.png)
+![Mockup 3](https://github.com/PabloLuisMolinaBlanes/RadioPlatform/blob/main/Mockup/Web%201920%20%E2%80%93%203.png)
+![Mockup 4](https://github.com/PabloLuisMolinaBlanes/RadioPlatform/blob/main/Mockup/Web%201920%20%E2%80%93%204.png)
+![Mockup 5](https://github.com/PabloLuisMolinaBlanes/RadioPlatform/blob/main/Mockup/Web%201920%20%E2%80%93%205.png)
+![Mockup 6](https://github.com/PabloLuisMolinaBlanes/RadioPlatform/blob/main/Mockup/Web%201920%20%E2%80%93%206.png)
+![Mockup 7](https://github.com/PabloLuisMolinaBlanes/RadioPlatform/blob/main/Mockup/Web%201920%20%E2%80%93%207.png)
+![Mockup 8](https://github.com/PabloLuisMolinaBlanes/RadioPlatform/blob/main/Mockup/Web%201920%20%E2%80%93%208.png)
+![Mockup 9](https://github.com/PabloLuisMolinaBlanes/RadioPlatform/blob/main/Mockup/Web%201920%20%E2%80%93%209.png)
+![Mockup 10](https://github.com/PabloLuisMolinaBlanes/RadioPlatform/blob/main/Mockup/Web%201920%20%E2%80%93%2010.png)
+![Mockup 11](https://github.com/PabloLuisMolinaBlanes/RadioPlatform/blob/main/Mockup/Web%201920%20%E2%80%93%2011.png)
+![Mockup 12](https://github.com/PabloLuisMolinaBlanes/RadioPlatform/blob/main/Mockup/Web%201920%20%E2%80%93%2012.png)
 
 ## Mar 18, 2021
 Initial commit

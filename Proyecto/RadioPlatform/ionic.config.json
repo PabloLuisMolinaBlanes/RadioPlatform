@@ -1,0 +1,7 @@
+{
+  "name": "RadioPlatform",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

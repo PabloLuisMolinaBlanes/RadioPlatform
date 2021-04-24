@@ -17,6 +17,8 @@ RadioPlatform will use several technologies to accomplish its objectives.
 * MySQL for caching coordinate data and usage limitation checking.
 * Firebase Storage for holding users' pictures.
 * Firebase Database for holding users' data.
+* Express for holding the chat server
+* Socket.io for chat application allowing
 * Leaflet for rendering the maps.
 * Nominatim for obtaining OpenStreetMap's data.
 * PHP for building an access point to the MySQL database

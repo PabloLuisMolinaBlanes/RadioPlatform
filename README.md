@@ -59,3 +59,12 @@ Added relevant application description and info
 @PabloLuisMolinaBlanes
 PabloLuisMolinaBlanes committed 30/03/2021
 
+## Apr 25, 2021
+
+I went and searched for information on how to perform some basic actions on Ionic this week; including installing, configuring and getting everything ready, including Git. I also went and developed the ionic login page and refreshed my knowledge on ionic components:
+
+* https://ionicframework.com/docs/api/thumbnail
+* https://ionicframework.com/docs/api/button
+* https://ionicframework.com/docs/api/input
+
+I also saw a little mistake on how would I do the chat, as it wouldn't be efficient to do with the current technology, so I added express and socket.io implementation in Ionic to the technology requirements.

@@ -9,12 +9,18 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-select placeholder="Nombre"></ion-select>
-      <ion-select placeholder="Alcance"></ion-select>
-      <ion-select placeholder="Tipo"></ion-select>
       <ion-title size="large">Antenas</ion-title>
     </ion-toolbar>
   </ion-header>
-
   <app-explore-container name="Antenas"></app-explore-container>
+  <ion-item>
+    <ion-select placeholder="Nombre"></ion-select></ion-item>
+  <ion-item>
+    <ion-select placeholder="Marca"></ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-select placeholder="Tipo"></ion-select></ion-item>
+    <ion-item>
+        <ion-select placeholder="Altura"></ion-select>
+    </ion-item>
 </ion-content>

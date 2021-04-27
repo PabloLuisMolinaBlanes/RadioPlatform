@@ -9,11 +9,15 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-select placeholder="País"></ion-select>
-      <ion-select placeholder="Frecuencia"></ion-select>
       <ion-title size="large">Contactos</ion-title>
     </ion-toolbar>
   </ion-header>
-
-  <app-explore-container name="Contactos"></app-explore-container>
+  <app-explore-container name="Contactos">
+  </app-explore-container>
+  <ion-item>
+    <ion-select placeholder="País"></ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-select placeholder="Frecuencia"></ion-select>
+  </ion-item>
 </ion-content>

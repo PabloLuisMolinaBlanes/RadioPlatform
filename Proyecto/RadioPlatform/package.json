@@ -20,7 +20,10 @@
     "@angular/platform-browser-dynamic": "~11.2.0",
     "@angular/router": "~11.2.0",
     "@capacitor/core": "2.4.7",
+    "@ionic-native/image-picker": "^5.22.0-beta-1",
     "@ionic/angular": "^5.5.2",
+    "cordova-plugin-image-picker": "^1.1.3",
+    "ngx-socket-io": "^4.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

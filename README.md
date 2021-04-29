@@ -71,6 +71,10 @@ I also saw a little mistake on how would I do the chat, as it wouldn't be effici
 
 ## Apr 29, 2021
 
-I have got the infrastructure (Firebase, MySQL and Express) ready thus far, I wondered whether I should replace PHP with Express just because it seems easier: https://dev.to/nurofsun/building-simple-rest-api-with-express-js-and-mysql-140p.
+I have got the infrastructure (Firebase, MySQL and Express) ready thus far, I wondered whether I should replace PHP with Express just because it seems easier: 
+* https://dev.to/nurofsun/building-simple-rest-api-with-express-js-and-mysql-140p.
+* https://devdactic.com/ionic-4-socket-io/
+* https://ionicthemes.com/tutorials/about/building-a-ionic-firebase-app-step-by-step
+
 
 I also put together the database and how is the data going to be organized. I will add a picture in a minute or two

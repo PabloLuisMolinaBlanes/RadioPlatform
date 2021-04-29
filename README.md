@@ -68,3 +68,9 @@ I went and searched for information on how to perform some basic actions on Ioni
 * https://ionicframework.com/docs/api/input
 
 I also saw a little mistake on how would I do the chat, as it wouldn't be efficient to do with the current technology, so I added express and socket.io implementation in Ionic to the technology requirements.
+
+## Apr 29, 2021
+
+I have got the infrastructure (Firebase, MySQL and Express) ready thus far, I wondered whether I should replace PHP with Express just because it seems easier: https://dev.to/nurofsun/building-simple-rest-api-with-express-js-and-mysql-140p.
+
+I also put together the database and how is the data going to be organized. I will add a picture in a minute or two

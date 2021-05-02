@@ -77,4 +77,6 @@ I have got the infrastructure (Firebase, MySQL and Express) ready thus far, I wo
 * https://ionicthemes.com/tutorials/about/building-a-ionic-firebase-app-step-by-step
 
 
-I also put together the database and how is the data going to be organized. I will add a picture in a minute or two
+I also put together the database and how is the data going to be organized.
+
+![Design](https://github.com/PabloLuisMolinaBlanes/RadioPlatform/blob/main/Proyecto/Disenio/Diagrama1.png)

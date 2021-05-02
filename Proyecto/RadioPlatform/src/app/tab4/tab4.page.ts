@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import {Socket} from 'ngx-socket-io';
 @Component({
   selector: 'app-tab4',
   templateUrl: './tab4.page.html',
@@ -7,9 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Tab4Page implements OnInit {
 
-  constructor() { }
+  constructor(private socket: Socket) { }
 
   ngOnInit() {
+    this.socket.connect();
   }
 
 }

@@ -69,14 +69,26 @@ I went and searched for information on how to perform some basic actions on Ioni
 
 I also saw a little mistake on how would I do the chat, as it wouldn't be efficient to do with the current technology, so I added express and socket.io implementation in Ionic to the technology requirements.
 
-## Apr 29, 2021
+## Apr 29, 2021 - May 02, 2021
 
 I have got the infrastructure (Firebase, MySQL and Express) ready thus far, I wondered whether I should replace PHP with Express just because it seems easier: 
-* https://dev.to/nurofsun/building-simple-rest-api-with-express-js-and-mysql-140p.
-* https://devdactic.com/ionic-4-socket-io/
-* https://ionicthemes.com/tutorials/about/building-a-ionic-firebase-app-step-by-step
-
 
 I also put together the database and how is the data going to be organized.
 
 ![Design](https://github.com/PabloLuisMolinaBlanes/RadioPlatform/blob/main/Proyecto/Disenio/Diagrama1.png)
+
+I designed the final logo for RadioPlatform.
+
+![Logo](https://github.com/PabloLuisMolinaBlanes/RadioPlatform/blob/main/Mockup/logoRadioPlatform.svg)
+
+I also developed the server further, adding test Socket.io functionality and a basic listing for cached coordinate data in my MySQL database. I also managed to connect this server through Socket.IO with my Ionic app.
+
+I also think I managed to connect to Firebase.
+
+Relevant Bibliography:
+
+* https://dev.to/nurofsun/building-simple-rest-api-with-express-js-and-mysql-140p.
+* https://devdactic.com/ionic-4-socket-io/
+* https://ionicthemes.com/tutorials/about/building-a-ionic-firebase-app-step-by-step
+* https://stackoverflow.com/questions/60455433/property-auth-does-not-exist-on-type-angularfireauth (An error I had)
+

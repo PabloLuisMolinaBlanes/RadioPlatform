@@ -23,4 +23,7 @@
     <ion-item>
         <ion-select placeholder="Altura"></ion-select>
     </ion-item>
+    <div *ngFor="let antenna of antennaeVisible">
+      <app-antennaitem [antenna]="antenna"></app-antennaitem>
+    </div>
 </ion-content>

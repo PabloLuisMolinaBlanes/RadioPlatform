@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="modifiedlogoRadioPlatform.svg">
+  <title
+     id="title3733">logo</title>
+  <defs
+     id="defs2">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="-57.45238 : 181.7619 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="152.54762 : 181.7619 : 1"
+       inkscape:persp3d-origin="47.547621 : 132.2619 : 1"
+       id="perspective3717" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="400"
+     inkscape:cy="560"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1366"
+     inkscape:window-height="705"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>logo</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000080;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="0.75595093"
+       y="63.410713"
+       id="text3715"><tspan
+         sodipodi:role="line"
+         id="tspan3713"
+         x="0.75595093"
+         y="63.410713"
+         style="fill:#000080;stroke-width:0.26458332">RadioPlatform</tspan></text>
+    <g
+       sodipodi:type="inkscape:box3d"
+       id="g3719"
+       style="fill:#000080"
+       inkscape:perspectiveID="#perspective3717"
+       inkscape:corner0="0.40300647 : 0.19009295 : 0 : 1"
+       inkscape:corner7="0.22918267 : 0.15316108 : 0.25 : 1">
+      <path
+         sodipodi:type="inkscape:box3dside"
+         id="path3721"
+         style="fill:#353564;fill-rule:evenodd;stroke:none;stroke-linejoin:round"
+         inkscape:box3dsidetype="6"
+         d="m 17.386905,15.029768 v 26.323377 l 20.44165,11.17433 V 30.185234 Z"
+         points="17.386905,41.353145 37.828555,52.527475 37.828555,30.185234 17.386905,15.029768 " />
+      <path
+         sodipodi:type="inkscape:box3dside"
+         id="path3731"
+         style="fill:#e9e9ff;fill-rule:evenodd;stroke:none;stroke-linejoin:round"
+         inkscape:box3dsidetype="11"
+         d="m 37.828555,30.185234 11.196788,-9.994853 v 24.967754 l -11.196788,7.36934 z"
+         points="49.025343,20.190381 49.025343,45.158135 37.828555,52.527475 37.828555,30.185234 " />
+      <path
+         sodipodi:type="inkscape:box3dside"
+         id="path3723"
+         style="fill:#4d4d9f;fill-rule:evenodd;stroke:none;stroke-linejoin:round"
+         inkscape:box3dsidetype="5"
+         d="M 17.386905,15.029768 27.970238,0.85889246 49.025343,20.190381 37.828555,30.185234 Z"
+         points="27.970238,0.85889246 49.025343,20.190381 37.828555,30.185234 17.386905,15.029768 " />
+      <path
+         sodipodi:type="inkscape:box3dside"
+         id="path3729"
+         style="fill:#afafde;fill-rule:evenodd;stroke:none;stroke-linejoin:round"
+         inkscape:box3dsidetype="13"
+         d="M 17.386905,41.353145 27.970238,30.904768 49.025343,45.158135 37.828555,52.527475 Z"
+         points="27.970238,30.904768 49.025343,45.158135 37.828555,52.527475 17.386905,41.353145 " />
+      <path
+         sodipodi:type="inkscape:box3dside"
+         id="path3727"
+         style="fill:#d7d7ff;fill-rule:evenodd;stroke:none;stroke-linejoin:round"
+         inkscape:box3dsidetype="14"
+         d="M 27.970238,0.85889246 V 30.904768 L 49.025343,45.158135 V 20.190381 Z"
+         points="27.970238,30.904768 49.025343,45.158135 49.025343,20.190381 27.970238,0.85889246 " />
+      <path
+         sodipodi:type="inkscape:box3dside"
+         id="path3725"
+         style="fill:#8686bf;fill-rule:evenodd;stroke:none;stroke-linejoin:round"
+         inkscape:box3dsidetype="3"
+         d="M 17.386905,15.029768 27.970238,0.85889246 V 30.904768 L 17.386905,41.353145 Z"
+         points="27.970238,0.85889246 27.970238,30.904768 17.386905,41.353145 17.386905,15.029768 " />
+    </g>
+  </g>
+</svg>

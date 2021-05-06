@@ -4,27 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RadioPlatform</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="icon" href="modifiedlogoRadioPlatform.svg">
+    <script src="canvas.js"></script>
 </head>
 <body>
-    <h1>RadioPlatform - A Platform for Radio Amateurs</h1>
+    <div id="navbar">
+        <img src="modifiedlogoRadioPlatform.svg">
+        <img id="hamburger" src="assets/hamburger.png">
+        <nav>
+            <div class="link" id="link1"><a href="#first">RadioPlatform - A platform for Radio Amateurs</a></div>
+            <div class="link" id="link2"><a href="#second">Functionality</a></div>
+            <div class="link" id="link3"><a href="#third">Powered by</a></div>
+            <div class="link" id="link4"><a href="#fourth">Why</a></div>
+        </nav>
+    </div>
+    <header>
+        <div id="welcomescreen">
+            <video autoplay muted loop>
+                <source src="radio.mp4" type="video/mp4">
+            </video>
+            <h2 id="first">RadioPlatform - A Platform for Radio Amateurs</h1>
+        </div>
+    </header>
+    <br>
+    <br>
+    <br>
     <p>RadioPlatform is an Angular platform thought for radio amateurs to have a safe place to chat and manage their next purchase of equipment.</p>
-    <h2>Functionality</h2>
-    <p>Users can share antennae used for their equipment, along with transceivers they may use, and make it known to other radio amateurs.</p>
-<p>Users can chat, where they can ask for advice, find buying options among other radio-amateur related topics.</p>
-<p>Users have a list of users they can filter by country, equipment, antennae, preferred frequency range... When they search for contacts.</p>
-<p>Users have a map where they can see at a quick glance all the contacts they have neatly shown in the 'Contacts' section.</p>
-<p>Users can set their favoured frequency and let other users know when they start transmitting and when.</p>
-<p>    Users can give a price to equipment and make simple calculations to know whether they can afford it or not.</p>
-<p>    Admins can moderate the chat with several tools that will allow for it.</p>
-<h2>Powered by</h2>
-<p>Angular/Ionic</p>
-<p>MySQL</p>
-<p>Firebase</p>
-<p>Express</p>
-<p>Socket.io</p>
-<p>Leaflet</p>
-<p>Nominatim</p>
+    <h2 id="second">Functionality</h2>
+    <ul>
+        <li>Users can share antennae used for their equipment, along with transceivers they may use, and make it known to other radio amateurs.</li>
+        <li>Users can chat, where they can ask for advice, find buying options among other radio-amateur related topics.
+        </li>
+        <li>Users have a list of users they can filter by country, equipment, antennae, preferred frequency range... When they search for contacts.
+        </li>
+        <li>Users have a map where they can see at a quick glance all the contacts they have neatly shown in the 'Contacts' section.
+        </li>
+        <li>Users can set their favoured frequency and let other users know when they start transmitting and when.
+        </li>
+        <li>Users can give a price to equipment and make simple calculations to know whether they can afford it or not.
+        </li>
+        <li>Admins can moderate the chat with several tools that will allow for it.
+        </li>
+    </ul>
+<h2 id="third">Powered by</h2>
+<div id="imagecontainer">
+    <img src="assets/angular.png">
+    <img src="assets/firebase.png">
+    <img src="assets/openstreetmap.png">
+    <img src="assets/mysql.png">
+    <img src="assets/express.jfif">
+    <img src="assets/socketio.jfif">
+    <img src="assets/leaflet.png">
+</div>
+<h2 id="fourth">Why radio amateur?</h2>
+<p>Radio Amateur is an amazing hobby! You can listen to anything you want, and we mean it; you can find new friends, listen to problems in your WIFI, even communicate in disasters!</p>
+<p>The following is just a glimpse of what you can hear in this hobby!</p>
+<div id="audiocontainer">
+<audio controls>
+    <source src="assets/ADS-B_AM_mode.mp3">
+</audio>
+<audio controls>
+    <source src="assets/AM_Modulatio_2015-06-27T16-57-35Z_198.0kHz.mp3"> 
+</audio>
+<audio controls>
+    <source src="assets/LTEsample.mp3">
+</audio>
+<audio controls>
+    <source src="assets/Robot_36_prev.mp3">
+</audio>
+<audio controls>
+    <source src="assets/WFM.mp3">
+</audio>
+<audio controls>
+    <source src="assets/802.11n.mp3">
+</audio>
+</div>
+
+
 <p>So, what are you waiting for? Click down below, and register into the only amateur radio social network! Keep the contact!</p>
-<input type="button">Enter</input>
+<div id="buttonContainer">
+    <canvas id="button" width="200" height="100"></canvas>
+</div>
 </body>
 </html>

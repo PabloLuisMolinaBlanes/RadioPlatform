@@ -8,12 +8,13 @@ import { AngularFireAuth } from '../../../node_modules/@angular/fire/auth'
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-
+  testResult: string;
   constructor(public afauth: AngularFireAuth) { 
 
   }
 
   ngOnInit() {
+    this.testResult = "test to be done";
   }
   public login(user: string, password: string) {
     return new Promise<any>((resolve, reject) => {
@@ -23,5 +24,16 @@ export class LoginPage implements OnInit {
       );
     });
   }
-
+  public testLogin(user: string, password: string) {
+      this.afauth.signInWithEmailAndPassword("test@example.com", "test123").then(
+        res => {
+          this.testResult = "success!";
+          return true
+        },
+        err => {
+          this.testResult = "failure";
+          return false
+        }
+      );
+  }
 }

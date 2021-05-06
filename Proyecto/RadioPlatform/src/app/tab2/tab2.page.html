@@ -23,4 +23,7 @@
     <ion-select placeholder="Tipo"></ion-select></ion-item>
       <ion-item>
         <ion-select placeholder="Amplitud"></ion-select></ion-item>
+        <div *ngFor="let equipment of radiosetsVisible">       
+           <app-radiosetitem [radioset]="equipment"></app-radiosetitem>
+        </div>
 </ion-content>

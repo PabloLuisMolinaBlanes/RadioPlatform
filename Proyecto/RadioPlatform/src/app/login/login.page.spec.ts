@@ -19,4 +19,7 @@ describe('LoginPage', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('should login', () => {
+    expect(component.testLogin("test@example.com","test123")).toBeTruthy();
+  })
 });

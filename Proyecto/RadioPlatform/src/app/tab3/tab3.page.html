@@ -20,4 +20,7 @@
   <ion-item>
     <ion-select placeholder="Frecuencia"></ion-select>
   </ion-item>
+  <div *ngFor="let contact of contactsVisible">
+    <app-contactitem [contact]="contact"></app-contactitem>
+  </div>
 </ion-content>

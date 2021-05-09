@@ -1,12 +1,19 @@
+import { SafeResourceUrl } from "@angular/platform-browser";
+
 export class Contact {
     frequency: string;
-    recording?: File;
+    recording?: SafeResourceUrl;
     callsign?: string;
-    country?: string;
-    constructor(frequency: string, recording?: File, country?: string,callsign?:string) {
+    location?: string;
+    coordinates?: string;
+    id?: string;
+    number?: number;
+    constructor(frequency: string, recording?: SafeResourceUrl, location?: string,callsign?:string, coordinates?: string, id?: string) {
         this.frequency = frequency;
         this.recording = recording
         this.callsign = callsign;
-        this.country = country;
+        this.location = location;
+        this.coordinates = coordinates;
+        this.id = id;
     }
 }

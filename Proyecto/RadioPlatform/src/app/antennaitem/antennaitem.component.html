@@ -1,1 +1,5 @@
-<p>{{antenna.name}}     {{antenna.type}}     {{antenna.height}} <span *ngIf="antenna.brand != null">    {{antenna.brand}}</span>    {{antenna.range}}</p>
+<span>Nombre: {{antenna.name}} Tipo: {{antenna.type}}  Altura: {{antenna.height}} <span *ngIf="antenna.brand != null"> Marca: {{antenna.brand}}</span>  Rango: {{antenna.range}} <span *ngIf="antenna.price != null"> Price: {{antenna.price}}</span>
+<ion-button (click)="presentDeleteConfirmation(antenna)"><ion-icon name="close-circle-outline"></ion-icon></ion-button>
+<ion-button (click)="presentModalModify()"><ion-icon name="brush"></ion-icon></ion-button>
+<ion-button (click)="presentDeleteConfirmation(antenna)"><ion-icon name="close-circle"></ion-icon></ion-button>
+<ion-button (click)="presentModalModify()"><ion-icon name="create"></ion-icon></ion-button>

@@ -27,8 +27,20 @@ const routes: Routes = [
     loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
   },
   {
-    path: 'landing',
-    loadChildren: () => import('./landing/landing.module').then( m => m.LandingPageModule)
+    path: 'antenna-crudpage',
+    loadChildren: () => import('./antenna-crudpage/antenna-crudpage.module').then( m => m.AntennaCRUDPagePageModule)
+  },
+  {
+    path: 'radio-set-crudpage',
+    loadChildren: () => import('./radio-set-crudpage/radio-set-crudpage.module').then( m => m.RadioSetCRUDPagePageModule)
+  },
+  {
+    path: 'contact-crudpage',
+    loadChildren: () => import('./contact-crudpage/contact-crudpage.module').then( m => m.ContactCRUDPagePageModule)
+  },
+  {
+    path: 'pricecalculator',
+    loadChildren: () => import('./pricecalculator/pricecalculator.module').then( m => m.PricecalculatorPageModule)
   }
 ];
 @NgModule({

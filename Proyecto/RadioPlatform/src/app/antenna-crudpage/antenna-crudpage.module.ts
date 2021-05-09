@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { LandingPageRoutingModule } from './landing-routing.module';
+import { AntennaCRUDPagePageRoutingModule } from './antenna-crudpage-routing.module';
 
-import { LandingPage } from './landing.page';
+import { AntennaCRUDPagePage } from './antenna-crudpage.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    LandingPageRoutingModule
+    AntennaCRUDPagePageRoutingModule
   ],
-  declarations: [LandingPage]
+  declarations: [AntennaCRUDPagePage]
 })
-export class LandingPageModule {}
+export class AntennaCRUDPagePageModule {}

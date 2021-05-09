@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { LandingPage } from './landing.page';
+import { RadioSetCRUDPagePage } from './radio-set-crudpage.page';
 
-describe('LandingPage', () => {
-  let component: LandingPage;
-  let fixture: ComponentFixture<LandingPage>;
+describe('RadioSetCRUDPagePage', () => {
+  let component: RadioSetCRUDPagePage;
+  let fixture: ComponentFixture<RadioSetCRUDPagePage>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ LandingPage ],
+      declarations: [ RadioSetCRUDPagePage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(LandingPage);
+    fixture = TestBed.createComponent(RadioSetCRUDPagePage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

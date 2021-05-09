@@ -1,1 +1,5 @@
-<p>{{radioset.name}} {{radioset.brand}} {{radioset.type}} - {{radioset.amplitude}}</p>
+<span>Nombre: {{radioset.name}} Marca: {{radioset.brand}} Tipo: {{radioset.type}} Amplitud: {{radioset.amplitude}} <span *ngIf="radioset.price != null"> Price: {{radioset.price}}</span>
+<ion-button (click)="presentDeleteConfirmation(radioset)"><ion-icon name="close-circle-outline"></ion-icon></ion-button>
+<ion-button (click)="presentModalModify(radioset)"><ion-icon name="brush" ></ion-icon></ion-button>
+<ion-button (click)="presentDeleteConfirmation(radioset)"><ion-icon name="close-circle"></ion-icon></ion-button>
+<ion-button (click)="presentModalModify(radioset)"><ion-icon name="create" ></ion-icon></ion-button>

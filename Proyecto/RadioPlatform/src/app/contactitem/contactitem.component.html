@@ -1,1 +1,5 @@
-<p>{{contact.frequency}} <span *ngIf="contact.country != null"> {{contact.country}}</span><span *ngIf="contact.callsign != null"> {{contact.callsign}}</span><span *ngIf="contact.recording != null"> {{contact.recording}}</span></p>
+<span>Frecuencia: {{contact.frequency}} <span *ngIf="contact.country != null"> País: {{contact.country}}</span><span *ngIf="contact.callsign != null"> Signo de llamada: {{contact.callsign}}</span><span *ngIf="contact.recording != null"> Grabación: <audio controls [src]="contact.recording"></audio></span></span>
+<ion-button (click)="presentDeleteConfirmation(contact)"><ion-icon name="close-circle-outline"></ion-icon></ion-button>
+<ion-button (click)="presentModalModify()"><ion-icon name="brush"></ion-icon></ion-button>
+<ion-button (click)="presentDeleteConfirmation(contact)"><ion-icon name="close-circle"></ion-icon></ion-button>
+<ion-button (click)="presentModalModify()"><ion-icon name="create"></ion-icon></ion-button>

@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Price calculator</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-select (ionChange)="updateAntennaChosen()" [(ngModel)]="antennaChosen">
+    <ion-select-option *ngFor="let antenna of antennae" [value]="antenna">{{antenna.name}}</ion-select-option>
+  </ion-select>
+  <div id="antennae" *ngFor="let antenna of antennaeChosen">
+    <span>Nombre: {{antenna.name}} Tipo: {{antenna.type}}  Altura: {{antenna.height}} <span *ngIf="antenna.brand != null"> Marca: {{antenna.brand}}</span>  Rango: {{antenna.range}} <span *ngIf="antenna.price != null"> Price: {{antenna.price}}</span></span>
+    <span>x</span><ion-input type="number" [(ngModel)]="antennaeMultiplier"  (ionChange)="updateAntennaMultiplier(antenna)"></ion-input>
+  </div>
+  <ion-select (ionChange)="updateEquipmentChosen()" [(ngModel)]="radiosetChosen">
+    <ion-select-option *ngFor="let radioset of equipment"  [value]="radioset" >{{radioset.name}}</ion-select-option>
+  </ion-select>
+  <div id="equipment" *ngFor="let radioset of equipmentChosen">
+    <span>Nombre: {{radioset.name}} Marca: {{radioset.brand}} Tipo: {{radioset.type}} Amplitud: {{radioset.amplitude}} <span *ngIf="radioset.price != null"> Price: {{radioset.price}}</span></span>
+    <span>x</span><ion-input type="number" [(ngModel)]="equipmentMultiplier" (ionChange)="updateEquipmentMultiplier(radioset)"></ion-input>
+  </div>
+  <p>Total: {{total}}</p>
+</ion-content>

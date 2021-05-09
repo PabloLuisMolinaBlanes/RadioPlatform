@@ -15,12 +15,22 @@
   <app-explore-container name="Contactos">
   </app-explore-container>
   <ion-item>
-    <ion-select placeholder="País"></ion-select>
+    <ion-select  [(ngModel)]="country" (ionChange)="updateArray()" placeholder="País">
+      <ion-select-option *ngFor="let contact of contactsVisibleTotal" [value]="contact.country">{{ contact.country }}</ion-select-option>
+    </ion-select>
   </ion-item>
   <ion-item>
-    <ion-select placeholder="Frecuencia"></ion-select>
+    <ion-select  [(ngModel)]="frequency" (ionChange)="updateArray()" placeholder="Frecuencia">
+      <ion-select-option *ngFor="let contact of contactsVisibleTotal" [value]="contact.frequency">{{ contact.frequency }}</ion-select-option>
+    </ion-select>
   </ion-item>
   <div *ngFor="let contact of contactsVisible">
     <app-contactitem [contact]="contact"></app-contactitem>
+  </div>
+  <ion-button (click)="presentModal()">Add new</ion-button>
+  <div class="map-container">
+    <div class="map-frame">
+      <div id="map"></div>
+    </div>
   </div>
 </ion-content>

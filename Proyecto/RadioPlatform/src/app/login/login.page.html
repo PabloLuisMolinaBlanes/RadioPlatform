@@ -5,9 +5,9 @@
 </ion-header>
 
 <ion-content>
-  <ion-input placeholder="Usuario/Signo de llamada" type="text"></ion-input>
-  <ion-input placeholder="Contraseña" type="password"></ion-input>
-  <ion-button shape="round" expand="full">Entrar</ion-button>
+  <ion-input placeholder="Usuario/Signo de llamada" [(ngModel)]="username" type="text"></ion-input>
+  <ion-input placeholder="Contraseña" [(ngModel)]="password" type="password"></ion-input>
+  <ion-button shape="round" expand="full" (click)="login()">Entrar</ion-button>
   <ion-button shape="round" expand="full" (click)="testLogin()">Test Login</ion-button>
   <p>{{ testResult }}</p>>
 </ion-content>

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import  * as rxjs  from 'rxjs';
 import * as firebase from 'firebase/app';
+import {NavController} from '@ionic/angular'
 import { AngularFireAuth } from '../../../node_modules/@angular/fire/auth'
 @Component({
   selector: 'app-login',
@@ -9,7 +10,9 @@ import { AngularFireAuth } from '../../../node_modules/@angular/fire/auth'
 })
 export class LoginPage implements OnInit {
   testResult: string;
-  constructor(public afauth: AngularFireAuth) { 
+  @Input() username: string;
+  @Input() password: string;
+  constructor(public afauth: AngularFireAuth, public router: NavController) { 
 
   }
 
@@ -18,8 +21,8 @@ export class LoginPage implements OnInit {
   }
   public login(user: string, password: string) {
     return new Promise<any>((resolve, reject) => {
-      this.afauth.signInWithEmailAndPassword(user, password).then(
-        res => {return true},
+      this.afauth.signInWithEmailAndPassword(this.username, this.password).then(
+        res => {this.router.navigateForward("/tabs")},
         err => {return false}
       );
     });
@@ -28,6 +31,7 @@ export class LoginPage implements OnInit {
       this.afauth.signInWithEmailAndPassword("test@example.com", "test123").then(
         res => {
           this.testResult = "success!";
+          this.router.navigateForward("/tabs")
           return true
         },
         err => {

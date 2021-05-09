@@ -10,6 +10,12 @@
       <ion-title size="large">Chat</ion-title>
     </ion-toolbar>
   </ion-header>
-
+<div id="chat-container">
+  <div id="chat-window">
+    <p *ngFor="let message of messages">{{ message }}</p>
+  </div>
+  <ion-input type="text" placeholder="Write your message here" [(ngModel)]="message"></ion-input>  
+</div>
+<ion-button (click)="send()">Send</ion-button>
   <app-explore-container name="Chat"></app-explore-container>
 </ion-content>

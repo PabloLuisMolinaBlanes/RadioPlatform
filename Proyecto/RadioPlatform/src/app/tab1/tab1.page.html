@@ -14,16 +14,26 @@
   </ion-header>
   <app-explore-container name="Antenas"></app-explore-container>
   <ion-item>
-    <ion-select placeholder="Nombre"></ion-select></ion-item>
+    <ion-select [(ngModel)]="name" (ionChange)="updateArray()" placeholder="Nombre">
+      <ion-select-option *ngFor="let antenna of antennaeVisible" [value]="antenna.name">{{antenna.name}}</ion-select-option>
+    </ion-select></ion-item>
   <ion-item>
-    <ion-select placeholder="Marca"></ion-select>
+    <ion-select placeholder="Marca">
+      <ion-select-option *ngFor="let antenna of antennaeVisible" [value]="antenna.brand">{{antenna.brand}}</ion-select-option>
+    </ion-select>
   </ion-item>
   <ion-item>
-    <ion-select placeholder="Tipo"></ion-select></ion-item>
+    <ion-select placeholder="Tipo">
+      <ion-select-option *ngFor="let antenna of antennaeVisible" [value]="antenna.type">{{antenna.type}}</ion-select-option>
+    </ion-select></ion-item>
     <ion-item>
-        <ion-select placeholder="Altura"></ion-select>
+        <ion-select placeholder="Altura">
+          <ion-select-option *ngFor="let antenna of antennaeVisible" [value]="antenna.height">{{antenna.height}}</ion-select-option>
+        </ion-select>
     </ion-item>
     <div *ngFor="let antenna of antennaeVisible">
       <app-antennaitem [antenna]="antenna"></app-antennaitem>
     </div>
+    <ion-button (click)="presentModal()">Add new</ion-button>
+    <ion-button (click)="presentCalculator()">Price calculator</ion-button>
 </ion-content>

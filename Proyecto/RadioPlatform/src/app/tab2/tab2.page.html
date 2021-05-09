@@ -14,16 +14,24 @@
   </ion-header>
   <app-explore-container name="Radios"></app-explore-container>
   <ion-item>
-    <ion-select placeholder="Nombre"></ion-select>
+    <ion-select placeholder="Nombre">
+      <ion-select-option *ngFor="let radioset of radiosetsVisible" [value]="radioset.name">{{radioset.name}}</ion-select-option>
+    </ion-select>
     </ion-item>
   <ion-item>
-    <ion-select placeholder="Marca"></ion-select>
+    <ion-select placeholder="Marca">
+      <ion-select-option *ngFor="let radioset of radiosetsVisible" [value]="radioset.brand">{{radioset.brand}}</ion-select-option>
+    </ion-select>
   </ion-item>
   <ion-item>
-    <ion-select placeholder="Tipo"></ion-select></ion-item>
+    <ion-select placeholder="Tipo">
+      <ion-select-option *ngFor="let radioset of radiosetsVisible" [value]="radioset.type">{{radioset.type}}</ion-select-option>
+    </ion-select></ion-item>
       <ion-item>
         <ion-select placeholder="Amplitud"></ion-select></ion-item>
         <div *ngFor="let equipment of radiosetsVisible">       
            <app-radiosetitem [radioset]="equipment"></app-radiosetitem>
         </div>
+        <ion-button (click)="presentModal()">Add new</ion-button>
+        <ion-button (click)="presentCalculator()">Price calculator</ion-button>
 </ion-content>

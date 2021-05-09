@@ -1,9 +1,22 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>register</ion-title>
+    <ion-title>Registration</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <p>Email</p>
+  <ion-input [(ngModel)]="email"></ion-input>
+  <p>Password</p>
+  <ion-input [(ngModel)]="password" type="password"></ion-input>
+  <p>Callsign</p>
+  <ion-input [(ngModel)]="callsign"></ion-input>
+  <p>Country</p>
+  <ion-input [(ngModel)]="country"></ion-input>
+  <p>Preferred frequency</p>
+  <ion-input [(ngModel)]="preferredFrequency"></ion-input>
+  <p>Profile picture</p>
+  <input type="file" (change)="onFileSelected($event)">
+  <img [src]="imageUrl">
+  <ion-button (click)="register()">Register</ion-button>
 </ion-content>

@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>ContactCRUDPage</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <p>Frequency</p>
+<ion-input [(ngModel)]="frequency"></ion-input>
+<p>Callsign</p>
+<ion-input [(ngModel)]="callsign"></ion-input>
+<p>Location</p>
+<ion-input [(ngModel)]="location"></ion-input>
+<p>Recording</p>
+<input type="file" (change)="onFileSelected($event)">
+<audio [src]="audioUrl" controls ></audio>
+<ion-button (click)="submit()">Submit</ion-button>
+</ion-content>

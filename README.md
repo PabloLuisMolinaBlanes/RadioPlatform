@@ -7,7 +7,7 @@ RadioPlatform is an Angular platform thought for radio amateurs to have a safe p
 * Users can chat, where they can ask for advice, find buying options among other radio-amateur related topics.
 * Users have a list of users they can filter by country, equipment, antennae, preferred frequency range... When they search for contacts.
 * Users have a map where they can see at a quick glance all the contacts they have neatly shown in the 'Contacts' section.
-* Users can set their favoured frequency and let other users know when they start transmitting and when.
+* Users can set their favoured frequency and let other users know when they start transmitting and where.
 * Users can give a price to equipment and make simple calculations to know whether they can afford it or not.
 * Admins can moderate the chat with several tools that will allow for it.
 
@@ -17,11 +17,10 @@ RadioPlatform will use several technologies to accomplish its objectives.
 * MySQL for caching coordinate data and usage limitation checking.
 * Firebase Storage for holding users' pictures.
 * Firebase Database for holding users' data.
-* Express for holding the chat server
+* Express and node for holding the chat server and making an API to the MySQL server
 * Socket.io for chat application allowing
 * Leaflet for rendering the maps.
 * Nominatim for obtaining OpenStreetMap's data.
-* PHP for building an access point to the MySQL database
 # Mockup
 
 ![Mockup 1](https://github.com/PabloLuisMolinaBlanes/RadioPlatform/blob/main/Mockup/Web%201920%20%E2%80%93%201.png)
@@ -91,4 +90,43 @@ Relevant Bibliography:
 * https://devdactic.com/ionic-4-socket-io/
 * https://ionicthemes.com/tutorials/about/building-a-ionic-firebase-app-step-by-step
 * https://stackoverflow.com/questions/60455433/property-auth-does-not-exist-on-type-angularfireauth (An error I had)
+
+## May 03, 2021 - May 10, 2021
+
+It seems I have completed the functional version. The basic functionality is complete, except for the external API access. More specifically, these parts are marked as at the very least functional.
+
+* Users have a map where they can see at a quick glance all the contacts they have neatly shown in the 'Contacts' section.
+* Users can chat, where they can ask for advice, find buying options among other radio-amateur related topics.
+* Users can set their favoured frequency
+* Users can give a price to equipment and make simple calculations to know whether they can afford it or not.
+* Users can read, remove, set and update antennae, radio sets and contacts (the latter only under certain circumstances yet)
+
+The landing page is almost complete as well.
+
+I also decided to remove PHP from the list of technologies as it is too cumbersome and it is much more efficient to use express and node. Express and node also allow for more possibilities with respect to future features with less code and hardship.
+
+List of relevant bibliography:
+
+  Project:
+  
+* https://blog.angular-university.io/angular-material-dialog/
+* https://ionicframework.com/docs/api/select/
+* https://www.digitalocean.com/community/tutorials/angular-angular-and-leaflet
+* https://www.djamware.com/post/5b74e54f80aca74669894413/ionic-4-and-angular-6-tutorial-firebase-realtime-crud-mobile-app
+* https://ionicframework.com/docs/api/modal
+* https://blog.angular-university.io/angular-file-upload/
+* https://www.joshmorony.com/using-angular-routing-with-ionic-4/
+* https://www.technbuzz.com/2020/02/09/upload-photos-to-firebase-storage-with-ionic-angular/
+* https://www.bennadel.com/blog/3630-pasting-images-into-your-app-using-file-blobs-and-url-createobjecturl-in-angular-7-2-15.htm
+* https://blog.angular-university.io/angular-http/
+
+Landing page:
+* https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+* https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout
+* https://www.w3schools.com/css/css_grid.asp
+
+And many StackOverFlow threads, too.
+
+
+
 

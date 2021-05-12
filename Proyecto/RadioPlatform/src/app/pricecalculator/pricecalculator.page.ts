@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Antenna } from '../antenna';
 import { RadioSet } from '../radioset';
 import {Storage} from '@ionic/storage';
+import {ModalController} from '@ionic/angular'
 @Component({
   selector: 'app-pricecalculator',
   templateUrl: './pricecalculator.page.html',
@@ -19,8 +20,10 @@ export class PricecalculatorPage implements OnInit {
 total: number = 0;
 antennaeChosen: Antenna[] = [];
 equipmentChosen: RadioSet[] = [];
-  constructor(public storage: Storage) { }
-
+  constructor(public storage: Storage, private modalController: ModalController) { }
+  dismiss() {
+    this.modalController.dismiss();
+  }
   ngOnInit() {
     this.storage.get('antennae').then((r) => {
       this.antennae = r;

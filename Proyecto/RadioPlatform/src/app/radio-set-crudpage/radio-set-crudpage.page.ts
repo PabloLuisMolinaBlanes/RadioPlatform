@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {FirebaseUpdaterAndSetterService} from '../firebase-updater-and-setter.service';
 import { RadioSet } from '../radioset';
+import {ModalController} from '@ionic/angular'
 @Component({
   selector: 'app-radio-set-crudpage',
   templateUrl: './radio-set-crudpage.page.html',
@@ -15,9 +16,12 @@ export class RadioSetCRUDPagePage implements OnInit {
 @Input() result: boolean;
 @Input() id?: string;
 @Input() price: number;
-  constructor(private firebaseUpdaterAndSetter: FirebaseUpdaterAndSetterService) { }
+  constructor(private firebaseUpdaterAndSetter: FirebaseUpdaterAndSetterService, private modalController: ModalController) { }
 
   ngOnInit() {
+  }
+  dismiss() {
+    this.modalController.dismiss();
   }
   submit() {
     if (this.id !== undefined) {

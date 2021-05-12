@@ -5,6 +5,7 @@ import { ModalController } from '@ionic/angular';
 import {ContactCRUDPagePage} from '../contact-crudpage/contact-crudpage.page'
 import {FirebaseObtainerService} from '../firebase-obtainer.service'
 import {DomSanitizer, SafeHtml, SafeResourceUrl, SafeUrl, ɵDomSanitizerImpl} from "@angular/platform-browser";
+import {AngularFireDatabase} from '../../../node_modules/@angular/fire/database'
 import { AngularFireAuth } from '../../../node_modules/@angular/fire/auth'
 import { AngularFireStorage } from '@angular/fire/storage';
 import { DataSnapshot } from '@angular/fire/database/interfaces';
@@ -38,7 +39,7 @@ frequency: string = "placeholder";
 allContacts: Promise<DataSnapshot>;
 country: string = "placeholder";
 private map;
-  constructor(private modalController: ModalController, private firebaseObtainerService: FirebaseObtainerService, private storage: AngularFireStorage, private auth: AngularFireAuth,private sanitizer: ɵDomSanitizerImpl) {}
+  constructor(private modalController: ModalController, private firebaseObtainerService: FirebaseObtainerService, private storage: AngularFireStorage, private auth: AngularFireAuth,private sanitizer: ɵDomSanitizerImpl, private afDatabase: AngularFireDatabase) {}
   
   ngOnInit() {
   }
@@ -75,6 +76,32 @@ private map;
           });
         });
       });
+      this.afDatabase.database.ref("users").on("child_added", function (childsnapshot) {
+        this.auth.currentUser.then(user => {
+          this.storage.ref(user.uid).child(this.contactsTotal.size()).subscribe(data => {
+            if (data !== undefined) {
+              data.getDownloadURL().then(url => {
+                const contact = childsnapshot.val() as unknown as Contact;
+                contact.recording = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+                contact.number = this.contactsTotal.length;
+                const lat = contact.coordinates.substr(0,contact.coordinates.search(",")) as unknown as number;
+                const lon = contact.coordinates.substr(contact.coordinates.search(",")+1, contact.coordinates.length) as unknown as number;
+                const marker = L.marker([lat, lon]);
+                marker.bindPopup(`<div>Frecuencia: ${contact.frequency}</div>` + `<div>Localización: ${contact.location}</div>`+ `<div>Signo de llamada: ${contact.callsign}</div>`);
+                marker.addTo(this.map);
+                this.contactsTotal.push(contact);
+                this.contactsVisible = this.contactsTotal;
+              })
+            } else {
+              const contact = childsnapshot.val() as unknown as Contact;
+              contact.recording = undefined;
+              contact.number = this.contactsTotal.length;
+              this.contactsTotal.push(contact);
+              this.contactsVisible = this.contactsTotal;
+            }
+          })
+        });
+      })
   }
   private initMap(): void {
     this.map = L.map('map', {

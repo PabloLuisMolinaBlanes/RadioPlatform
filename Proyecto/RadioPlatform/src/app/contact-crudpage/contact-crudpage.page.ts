@@ -3,6 +3,7 @@ import { Contact } from '../contact';
 import { AngularFireAuth } from '../../../node_modules/@angular/fire/auth'
 import {FirebaseUpdaterAndSetterService} from '../firebase-updater-and-setter.service';
 import {DomSanitizer, SafeHtml, SafeResourceUrl, SafeUrl, ɵDomSanitizerImpl} from "@angular/platform-browser";
+import {ModalController} from '@ionic/angular'
 @Component({
   selector: 'app-contact-crudpage',
   templateUrl: './contact-crudpage.page.html',
@@ -21,10 +22,13 @@ audio: File = null;
 audioUrl: SafeResourceUrl;
 @Input() number?: number;
 
-  constructor(private firebaseUpdaterAndSetter: FirebaseUpdaterAndSetterService, private afauth: AngularFireAuth, private sanitizer: ɵDomSanitizerImpl) { }
+  constructor(private firebaseUpdaterAndSetter: FirebaseUpdaterAndSetterService, private afauth: AngularFireAuth, private sanitizer: ɵDomSanitizerImpl, private modalController: ModalController) { }
 
   ngOnInit() {
     this.firebaseUpdaterAndSetter.testHTML();
+  }
+  dismiss() {
+    this.modalController.dismiss();
   }
   onFileSelected(event) {
     this.afauth.currentUser.then((user) => {

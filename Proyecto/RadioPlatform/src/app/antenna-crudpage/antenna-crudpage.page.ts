@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Antenna } from '../antenna';
 import {FirebaseUpdaterAndSetterService} from '../firebase-updater-and-setter.service';
+import {ModalController} from '@ionic/angular'
 @Component({
   selector: 'app-antenna-crudpage',
   templateUrl: './antenna-crudpage.page.html',
@@ -15,10 +16,13 @@ export class AntennaCRUDPagePage implements OnInit {
 @Input() id?:string;
 @Input() price?:number;
 antenna: Antenna;
-  constructor(private firebaseUpdaterAndSetter: FirebaseUpdaterAndSetterService) {
+  constructor(private firebaseUpdaterAndSetter: FirebaseUpdaterAndSetterService, private modalController: ModalController) {
    }
 
   ngOnInit() {
+  }
+  dismiss() {
+    this.modalController.dismiss();
   }
   submit() {
     if (this.id !== undefined) {

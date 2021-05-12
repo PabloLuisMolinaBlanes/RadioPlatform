@@ -103,6 +103,11 @@ It seems I have completed the functional version. The basic functionality is com
 
 The landing page is almost complete as well.
 
+![Landing1](https://github.com/PabloLuisMolinaBlanes/RadioPlatform/blob/main/Landing/landingpage.png)
+![Landing2](https://github.com/PabloLuisMolinaBlanes/RadioPlatform/blob/main/Landing/landingpage2.png)
+![Landing3](https://github.com/PabloLuisMolinaBlanes/RadioPlatform/blob/main/Landing/landingpage3.png)
+
+
 I also decided to remove PHP from the list of technologies as it is too cumbersome and it is much more efficient to use express and node. Express and node also allow for more possibilities with respect to future features with less code and hardship.
 
 List of relevant bibliography:

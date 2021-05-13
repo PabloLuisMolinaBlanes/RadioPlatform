@@ -132,6 +132,15 @@ Landing page:
 
 And many StackOverFlow threads, too.
 
+## May 10, 2021 - May 16, 2021
 
+Added both the video (.mkv) and the .apk of the functional version (can be found in "Proyecto" folder).
+
+Here is the video (in .mp4 format, in spanish):
+
+
+![video](https://github.com/PabloLuisMolinaBlanes/RadioPlatform/blob/main/Proyecto/Video/2021-05-13%2012-12-34.mp4)
+
+For those who don't understand spoken spanish, I am basically presenting my application and saying what functionality is yet to be added (refactoring, an admin panel, chat moderation and better design)
 
 

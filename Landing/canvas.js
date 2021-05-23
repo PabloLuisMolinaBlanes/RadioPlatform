@@ -5,6 +5,9 @@ window.onload = function() {
     var clickedTrue = false;
     ctx.font = "30px Arial";
     ctx.strokeText("Enter", 10, 50);
+    canvas.addEventListener('click', function() {
+        window.location.href = "http://localhost:8081/login"
+    })
     var hamburger = document.getElementById("hamburger");
     var divs = document.getElementsByClassName("link");
     hamburger.onclick = function() {

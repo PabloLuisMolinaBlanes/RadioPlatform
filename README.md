@@ -143,4 +143,6 @@ Here is the video (in .mp4 format, in spanish):
 
 For those who don't understand spoken spanish, I am basically presenting my application and saying what functionality is yet to be added (refactoring, an admin panel, chat moderation and better design)
 
+## May 17, 2021 - May 23, 2021
 
+I modified the landing page in order to fix some layout bugs, make the canvas button functional and add some new images. 

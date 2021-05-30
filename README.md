@@ -146,3 +146,31 @@ For those who don't understand spoken spanish, I am basically presenting my appl
 ## May 17, 2021 - May 23, 2021
 
 I modified the landing page in order to fix some layout bugs, make the canvas button functional and add some new images. 
+
+## May 23, 2021 - May 30, 2021
+
+I did various additions and bug fixes, among those:
+
+Fix bug in contacts page in which audio files were duplicated across contacts.
+Added a rudimentary admininstration page (still not fully functional).
+Added login through callsign for new accounts.
+Fixed testing issue in which phone emulators/phones couldn't connect to the application's infrastructure.
+Added basic form validation where if the required data is not input it won't be allowed to make the new relevant item.
+Fixed bug where map would gray out consistently.
+Now the antennae and equipment are listed based on the user instead of being in a generic all-encompasing list.
+Now data is shown tabularly.
+Fixed certain layout problems in mobile phones.
+Now if data is added changes are registered in real time.
+Login is required to go to any part of the page except for the login and registration pages.
+
+To-do list:
+
+Add chat moderation tools.
+Improve accesibility.
+Update and delete items from all lists in real time.
+Improve the appereance of the profile page.
+Let users choose preferred antennae and equipment.
+Let users be shown data based on drop-down forms.
+Improve feedback for the user.
+
+

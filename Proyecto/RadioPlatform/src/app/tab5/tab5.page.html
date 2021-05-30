@@ -22,8 +22,6 @@
     <ion-select placeholder="Online"></ion-select></ion-item>
       <ion-item>
         <ion-select placeholder="Emitiendo"></ion-select></ion-item>
-        <div *ngFor="let user of usersVisible">
-          <app-useritem [user]="user"></app-useritem>
-        </div>
+          <app-useritem [users]="usersVisible"></app-useritem>
         
 </ion-content>

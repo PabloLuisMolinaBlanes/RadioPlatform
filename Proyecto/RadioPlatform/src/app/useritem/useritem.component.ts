@@ -8,6 +8,7 @@ import { User } from '../user';
 })
 export class UseritemComponent implements OnInit {
 @Input() user: User;
+@Input() users: User[] = [];
   constructor() { }
 
   ngOnInit() {}

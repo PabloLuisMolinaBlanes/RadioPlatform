@@ -11,21 +11,22 @@ import {FirebaseUpdaterAndSetterService} from '../firebase-updater-and-setter.se
 })
 export class ContactitemComponent implements OnInit {
 @Input() contact: Contact;
+@Input() contacts: Contact[] = [];
 @Input() numberInArray: number;
   constructor(public modalController: ModalController, public alertCtrl: AlertController, public firebaseUpdaterAndSetter: FirebaseUpdaterAndSetterService) { }
 
   ngOnInit() {}
-  async presentModalModify(){
+  async presentModalModify(contact: Contact){
     const modal = await this.modalController.create({
       component:ContactCRUDPagePage,
       cssClass: 'placeholder',
       componentProps: {
-        'frequency': this.contact.frequency,
-        'callsign': this.contact.callsign,
-        'location': this.contact.location,
-        'recording': this.contact.recording,
-        'id': this.contact.id,
-        'number': this.contact.number
+        'frequency': contact.frequency,
+        'callsign': contact.callsign,
+        'location': contact.location,
+        'recording': contact.recording,
+        'id': contact.id,
+        'number': contact.number
        }
     });
     return await modal.present();
@@ -39,7 +40,7 @@ export class ContactitemComponent implements OnInit {
       },
       {text:'Delete',
       handler: () => {
-        this.firebaseUpdaterAndSetter.deleteContact(this.contact);
+        this.firebaseUpdaterAndSetter.deleteContact(contact);
       }
       }]
     });

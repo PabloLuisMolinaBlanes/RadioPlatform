@@ -11,21 +11,22 @@ import {FirebaseUpdaterAndSetterService} from '../firebase-updater-and-setter.se
 })
 export class RadiosetitemComponent implements OnInit {
 @Input() radioset: RadioSet;
+@Input() equipment: RadioSet[] = [];
   constructor(public modalController: ModalController, public alertCtrl: AlertController, public firebaseUpdaterAndSetter: FirebaseUpdaterAndSetterService) { }
 
   ngOnInit() {}
 
-  async presentModalModify(){
+  async presentModalModify(radioset: RadioSet){
     const modal = await this.modalController.create({
       component:RadioSetCRUDPagePage,
       cssClass: 'placeholder',
       componentProps: {
-        'id': this.radioset.id,
-        'type': this.radioset.type,
-        'name': this.radioset.name,
-        'amplitude': this.radioset.amplitude,
-        'brand': this.radioset.brand,
-        'price': this.radioset.price
+        'id': radioset.id,
+        'type': radioset.type,
+        'name': radioset.name,
+        'amplitude': radioset.amplitude,
+        'brand': radioset.brand,
+        'price': radioset.price
       }
     });
     return await modal.present();

@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Administracion</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Panel de administracion</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div id="grid">
+    <div id="chat-window">
+      <p *ngFor="let message of messages">{{ message }}</p>
+    </div>
+    <div id="antennacontainer">
+      <p>Antenas</p>
+      <app-antennaitem [antennae]="antennaeVisible"></app-antennaitem>
+    </div>
+    <div id="radiocontainer">
+      <p>Radios</p>
+      <app-radiosetitem [equipment]="radiosetsVisible"></app-radiosetitem>
+    </div>
+  </div>
+
+</ion-content>

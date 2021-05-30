@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataSnapshot } from '@angular/fire/database/interfaces';
 import * as firebase from 'firebase';
 import { Antenna } from '../antenna';
+import { AngularFireAuth } from '../../../node_modules/@angular/fire/auth'
 import {ModalController} from '@ionic/angular'
 import {FirebaseObtainerService} from '../firebase-obtainer.service'
 import {AngularFireDatabase} from '../../../node_modules/@angular/fire/database'
@@ -22,21 +23,18 @@ brand: string;
 type: string;
 height: number;
 price: number;
-  constructor(private firebaseObtainerService: FirebaseObtainerService,public modalController: ModalController, public storage: Storage,public afDatabase: AngularFireDatabase) {}
+  constructor(private firebaseObtainerService: FirebaseObtainerService,public modalController: ModalController, public storage: Storage,public afDatabase: AngularFireDatabase, public auth: AngularFireAuth) {}
   async ngOnInit() {
     this.antennaeVisible = this.antennaeTotal;
-    this.allAntennae = this.firebaseObtainerService.listAllAntennas();
+    this.auth.currentUser.then(user => {
+      this.afDatabase.database.ref("users/"+user.uid+"/antennae").on("child_added", function (childsnapshot) {
+        this.antennaeTotal.push(childsnapshot.val() as unknown as Antenna);
+        this.antennaeVisible = this.antennaeTotal;
+        this.storage.set('antennae', this.antennaeTotal);
+      }, () => {console.log("error here")}, this);
+        this.antennaeTotal = [];
+    });
     await this.storage.create();
-    this.allAntennae.then(m => {
-      m.forEach(antenna => {this.antennaeTotal.push(antenna.val() as unknown as Antenna)
-      this.antennaeVisible = this.antennaeTotal
-      });
-      this.storage.set('antennae', this.antennaeTotal); 
-    });
-    this.afDatabase.database.ref("antennae").on("child_added", function (childsnapshot) {
-      this.antennaeTotal.push(childsnapshot.val() as unknown as Antenna);
-      this.antennaeVisible = this.antennaeTotal;
-    });
   }
   async presentModal(){
     const modal = await this.modalController.create({

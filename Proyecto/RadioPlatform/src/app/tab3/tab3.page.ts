@@ -9,6 +9,8 @@ import {AngularFireDatabase} from '../../../node_modules/@angular/fire/database'
 import { AngularFireAuth } from '../../../node_modules/@angular/fire/auth'
 import { AngularFireStorage } from '@angular/fire/storage';
 import { DataSnapshot } from '@angular/fire/database/interfaces';
+import {Storage} from '@ionic/storage'
+
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
 const shadowUrl = 'assets/marker-shadow.png';
@@ -33,87 +35,76 @@ contactsTotal: Contact[] = [];
 contactsVisible: Contact[] = [];
 contactsVisibleTotal: Contact[] = [];
 coordinates: string[] = [];
-contact: Contact = new Contact("440mhz");
-contact2: Contact = new Contact("405mhz");
 frequency: string = "placeholder";
 allContacts: Promise<DataSnapshot>;
 country: string = "placeholder";
+counter: number = 0;
 private map;
-  constructor(private modalController: ModalController, private firebaseObtainerService: FirebaseObtainerService, private storage: AngularFireStorage, private auth: AngularFireAuth,private sanitizer: ɵDomSanitizerImpl, private afDatabase: AngularFireDatabase) {}
+  constructor(private modalController: ModalController, private firebaseObtainerService: FirebaseObtainerService, private storage: AngularFireStorage, private auth: AngularFireAuth,private sanitizer: ɵDomSanitizerImpl, private afDatabase: AngularFireDatabase, public store: Storage) {}
   
   ngOnInit() {
   }
+  ngAfterViewChecked() {
+    this.map.invalidateSize();
+  }
+  contact: Contact;
   ngAfterViewInit() {
     this.initMap();
-    this.allContacts = this.firebaseObtainerService.listAllContacts();
-    var counter: number = 0;
-    this.allContacts.then(m => {
-      m.forEach(c => {
+    this.store.create();
+    this.store.set("contacts", this.contactsTotal);
+    this.auth.currentUser.then((user) => {
         this.auth.currentUser.then(user => {
-          this.storage.ref(user.uid).listAll().subscribe(data => {
-            if (data.items[counter] !== undefined) {
-              data.items[counter].getDownloadURL().then(url => {
-                const contact = c.val() as unknown as Contact;
-                contact.recording = this.sanitizer.bypassSecurityTrustResourceUrl(url);
-                contact.number = this.contactsTotal.length;
-                const lat = contact.coordinates.substr(0,contact.coordinates.search(",")) as unknown as number;
-                const lon = contact.coordinates.substr(contact.coordinates.search(",")+1, contact.coordinates.length) as unknown as number;
-                const marker = L.marker([lat, lon]);
-                marker.bindPopup(`<div>Frecuencia: ${contact.frequency}</div>` + `<div>Localización: ${contact.location}</div>`+ `<div>Signo de llamada: ${contact.callsign}</div>`);
-                marker.addTo(this.map);
-                this.contactsTotal.push(contact);
-                this.contactsVisible = this.contactsTotal;
-                counter++;
-              });
-            } else {
-              const contact = c.val() as unknown as Contact;
-              contact.recording = undefined;
-              contact.number = this.contactsTotal.length;
-              this.contactsTotal.push(contact);
-              this.contactsVisible = this.contactsTotal;
-            }
-            });
-          });
-        });
-      });
-      this.afDatabase.database.ref("users").on("child_added", function (childsnapshot) {
-        this.auth.currentUser.then(user => {
-          this.storage.ref(user.uid).child(this.contactsTotal.size()).subscribe(data => {
-            if (data !== undefined) {
-              data.getDownloadURL().then(url => {
-                const contact = childsnapshot.val() as unknown as Contact;
-                contact.recording = this.sanitizer.bypassSecurityTrustResourceUrl(url);
-                contact.number = this.contactsTotal.length;
-                const lat = contact.coordinates.substr(0,contact.coordinates.search(",")) as unknown as number;
-                const lon = contact.coordinates.substr(contact.coordinates.search(",")+1, contact.coordinates.length) as unknown as number;
-                const marker = L.marker([lat, lon]);
-                marker.bindPopup(`<div>Frecuencia: ${contact.frequency}</div>` + `<div>Localización: ${contact.location}</div>`+ `<div>Signo de llamada: ${contact.callsign}</div>`);
-                marker.addTo(this.map);
-                this.contactsTotal.push(contact);
-                this.contactsVisible = this.contactsTotal;
-              })
-            } else {
-              const contact = childsnapshot.val() as unknown as Contact;
-              contact.recording = undefined;
-              contact.number = this.contactsTotal.length;
-              this.contactsTotal.push(contact);
-              this.contactsVisible = this.contactsTotal;
-            }
-          })
-        });
-      })
+          this.afDatabase.database.ref("users/"+user.uid+"/contacts").on("child_added", function (childsnapshot) {
+              this.storage.ref(user.uid).listAll().subscribe(data => {
+                this.counter++; 
+                var contact = childsnapshot.val() as unknown as Contact;
+                console.log(data.items.length);
+                if (data.items[contact.number] !== undefined) {
+                  data.items[contact.number].getDownloadURL().then(data => {
+                    console.log(data);
+                    const contact = childsnapshot.val() as unknown as Contact;
+                    contact.recording = this.sanitizer.bypassSecurityTrustResourceUrl(data);
+                    contact.number = this.contactsTotal.length;
+                    const lat = contact.coordinates.substr(0,contact.coordinates.search(",")) as unknown as number;
+                    const lon = contact.coordinates.substr(contact.coordinates.search(",")+1, contact.coordinates.length) as unknown as number;
+                    const marker = L.marker([lat, lon]);
+                    marker.bindPopup(`<div>Frecuencia: ${contact.frequency}</div>` + `<div>Localización: ${contact.location}</div>`+ `<div>Signo de llamada: ${contact.callsign}</div>`);
+                    marker.addTo(this.map);
+                    this.contactsTotal.push(contact);
+                    this.contactsVisible = this.contactsTotal;
+                    this.store.set("contacts", this.contactsTotal);
+                  })
+                } else {
+                  const contact = childsnapshot.val() as unknown as Contact;
+                  contact.recording = undefined;
+                  contact.number = this.contactsTotal.length;
+                  this.contactsTotal.push(contact);
+                  this.contactsVisible = this.contactsTotal;
+                  this.store.set("contacts", this.contactsTotal);
+                }
+                });
+        }, () => {console.log("error here")}, this)
+        })
+    });
   }
   private initMap(): void {
     this.map = L.map('map', {
       center:[40.416775, 3.703790],
       zoom: 3
+    }).on('load', function() {
+      this.map.invalidateSize();
     });
     const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 18,
       minZoom: 3,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <a href="http://localhost:3001/listall"> - Get all coordinate data</a>'
     });
     tiles.addTo(this.map);
+  }
+  onMapReady(map : L.Map) {
+    setTimeout(() => {
+      map.invalidateSize();
+    }, 0);
   }
   async presentModal(){
     const modal = await this.modalController.create({

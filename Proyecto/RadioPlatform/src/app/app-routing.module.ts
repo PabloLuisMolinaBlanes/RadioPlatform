@@ -41,6 +41,10 @@ const routes: Routes = [
   {
     path: 'pricecalculator',
     loadChildren: () => import('./pricecalculator/pricecalculator.module').then( m => m.PricecalculatorPageModule)
+  },
+  {
+    path: 'tab7',
+    loadChildren: () => import('./tab7/tab7.module').then( m => m.Tab7PageModule)
   }
 ];
 @NgModule({

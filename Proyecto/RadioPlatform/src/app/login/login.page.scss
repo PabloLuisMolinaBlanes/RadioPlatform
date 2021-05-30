@@ -1,6 +1,25 @@
-.success {
-    color: green;
+
+.center {
+    width:100%;
+    display:flex;
+    justify-content:center;
+    margin: 0 0 20px 0;
 }
-.failure {
-    color: red;
+.centerion-input {
+    width:25%;
+    display:flex;
+    justify-content:center;
+    margin: auto auto;
+    border: 1px solid black;
+}
+@media (max-width: 1024px) {
+    .centerion-input {
+        width:60%;
+    }
+}
+.centerbutton {
+    width:25%;
+    display:flex;
+    justify-content:center;
+    margin: auto auto;
 }

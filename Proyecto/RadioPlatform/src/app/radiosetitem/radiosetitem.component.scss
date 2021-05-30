@@ -1,0 +1,14 @@
+table td, table th {
+    padding: 20px;
+}
+@media (max-width: 766px) {
+    table td, table th {
+        padding: 10px;
+    }
+}
+@media (max-width: 450px) {
+    table td, table th {
+        padding: 0px;
+        margin-bottom:5px;
+    }
+}

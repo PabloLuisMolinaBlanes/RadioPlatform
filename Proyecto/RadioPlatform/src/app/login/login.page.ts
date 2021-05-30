@@ -3,6 +3,7 @@ import  * as rxjs  from 'rxjs';
 import * as firebase from 'firebase/app';
 import {NavController} from '@ionic/angular'
 import { AngularFireAuth } from '../../../node_modules/@angular/fire/auth'
+import { AngularFireDatabase } from '../../../node_modules/@angular/fire/database'
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -12,7 +13,7 @@ export class LoginPage implements OnInit {
   testResult: string;
   @Input() username: string;
   @Input() password: string;
-  constructor(public afauth: AngularFireAuth, public router: NavController) { 
+  constructor(public afauth: AngularFireAuth, public router: NavController, public afDatabase: AngularFireDatabase) { 
 
   }
 
@@ -23,7 +24,16 @@ export class LoginPage implements OnInit {
     return new Promise<any>((resolve, reject) => {
       this.afauth.signInWithEmailAndPassword(this.username, this.password).then(
         res => {this.router.navigateForward("/tabs")},
-        err => {return false}
+        err => {this.afDatabase.database.ref('callsigns/'+this.username).get().then(u => {
+          if (u.val() === null) {
+            return false;
+          } else {
+            this.afauth.signInWithEmailAndPassword(u.val() as unknown as string, this.password).then(
+              res => {this.router.navigateForward("/tabs")},
+              err => {return false;}
+            )
+          }
+        })}
       );
     });
   }

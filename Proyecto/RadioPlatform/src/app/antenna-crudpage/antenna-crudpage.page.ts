@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Antenna } from '../antenna';
+import { AngularFireAuth } from '../../../node_modules/@angular/fire/auth'
 import {FirebaseUpdaterAndSetterService} from '../firebase-updater-and-setter.service';
 import {ModalController} from '@ionic/angular'
 @Component({
@@ -8,15 +9,15 @@ import {ModalController} from '@ionic/angular'
   styleUrls: ['./antenna-crudpage.page.scss'],
 })
 export class AntennaCRUDPagePage implements OnInit {
-@Input() type:string;
-@Input() name:string;
-@Input() range:number;
-@Input() height:number;
-@Input() brand?:string;
+@Input() type:string = null;
+@Input() name:string = null;
+@Input() range:number = null;
+@Input() height:number = null;
+@Input() brand?:string = null;
 @Input() id?:string;
 @Input() price?:number;
 antenna: Antenna;
-  constructor(private firebaseUpdaterAndSetter: FirebaseUpdaterAndSetterService, private modalController: ModalController) {
+  constructor(private firebaseUpdaterAndSetter: FirebaseUpdaterAndSetterService, private modalController: ModalController, private auth: AngularFireAuth) {
    }
 
   ngOnInit() {

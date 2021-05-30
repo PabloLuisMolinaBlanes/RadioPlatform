@@ -28,10 +28,8 @@
       <ion-select-option *ngFor="let radioset of radiosetsVisible" [value]="radioset.type">{{radioset.type}}</ion-select-option>
     </ion-select></ion-item>
       <ion-item>
-        <ion-select placeholder="Amplitud"></ion-select></ion-item>
-        <div *ngFor="let equipment of radiosetsVisible">       
-           <app-radiosetitem [radioset]="equipment"></app-radiosetitem>
-        </div>
+        <ion-select placeholder="Amplitud"></ion-select></ion-item> 
+           <app-radiosetitem [equipment]="radiosetsVisible"></app-radiosetitem>
         <ion-button (click)="presentModal()">Add new</ion-button>
         <ion-button (click)="presentCalculator()">Price calculator</ion-button>
 </ion-content>

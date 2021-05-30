@@ -17,6 +17,6 @@
 <ion-input [(ngModel)]="brand"></ion-input>
 <p>Price</p>
 <ion-input [(ngModel)]="price"></ion-input>
-<ion-button (click)="submit()">Submit</ion-button>
+<ion-button (click)="submit()" *ngIf="type && name && range && height">Submit</ion-button>
 <ion-button (click)="dismiss()">Cancel</ion-button>
 </ion-content>

@@ -4,6 +4,8 @@ import { AngularFireAuth } from '../../../node_modules/@angular/fire/auth'
 import {FirebaseUpdaterAndSetterService} from '../firebase-updater-and-setter.service';
 import {DomSanitizer, SafeHtml, SafeResourceUrl, SafeUrl, ɵDomSanitizerImpl} from "@angular/platform-browser";
 import {ModalController} from '@ionic/angular'
+import {Storage} from '@ionic/storage'
+
 @Component({
   selector: 'app-contact-crudpage',
   templateUrl: './contact-crudpage.page.html',
@@ -15,17 +17,20 @@ contact: Contact;
 @Input() coordinates?: string = null;
 @Input() callsign?: string = null;
 @Input() frequency: string = null;
-@Input() recording?: File = null;
+@Input() recording?: SafeResourceUrl = null;
 @Input() id?: string;
 filename: string;
 audio: File = null;
 audioUrl: SafeResourceUrl;
 @Input() number?: number;
 
-  constructor(private firebaseUpdaterAndSetter: FirebaseUpdaterAndSetterService, private afauth: AngularFireAuth, private sanitizer: ɵDomSanitizerImpl, private modalController: ModalController) { }
+  constructor(private firebaseUpdaterAndSetter: FirebaseUpdaterAndSetterService, private afauth: AngularFireAuth, private sanitizer: ɵDomSanitizerImpl, private modalController: ModalController, public store: Storage) { }
 
   ngOnInit() {
     this.firebaseUpdaterAndSetter.testHTML();
+    if (this.recording !== null) {
+      this.audioUrl = this.recording;
+    }
   }
   dismiss() {
     this.modalController.dismiss();
@@ -61,8 +66,11 @@ audioUrl: SafeResourceUrl;
   submit() {
     if (this.id === undefined) {
       this.id = "placeholder";
-      this.contact = new Contact(this.frequency, this.audio, this.location, this.callsign, null, this.id);
-      this.firebaseUpdaterAndSetter.setContact(this.contact, this.audio);
+      this.store.get("contacts").then(cs => {
+        this.contact = new Contact(this.frequency, this.audio, this.location, this.callsign, null, this.id);
+        this.contact.number = cs.length;
+        this.firebaseUpdaterAndSetter.setContact(this.contact, this.audio);
+      })
     } else {
     this.contact = new Contact(this.frequency, this.audio, this.location, this.callsign, null, this.id);
     this.contact.number = this.number;

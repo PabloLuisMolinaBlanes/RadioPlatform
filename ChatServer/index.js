@@ -35,6 +35,15 @@ app.get('/list/:localizacion', function(req, res) {
             res.json(data);
     });
 });
+app.get('/listall', function(req,res) {
+    let sql = 'SELECT * FROM mapacache';
+    db.query(sql, function(err,data) {
+        if (err) {
+            throw err
+        }
+        res.json(data);
+    });
+});
 app.post('/newcoordinate', jsonParser, function(req, res) {
     let sql = `INSERT INTO mapacache(coordenada, terminobusqueda) VALUES (?)`;
     let values = [req.body.coordenada, req.body.terminobusqueda];

@@ -20,14 +20,14 @@ export class FirebaseObtainerService {
    listAllUsers() {
     return this.afDatabase.database.ref("users").get();
    }
-   listAllContacts() {
-    return this.afDatabase.database.ref("contacts").get();
+   listAllContacts(userid: string) {
+    return this.afDatabase.database.ref('/users/'+userid+'/contacts').get();
    }
    listAllUserAntennas(userid: string) {
-     return this.afDatabase.database.ref(userid+"/antennae").get();
+     return this.afDatabase.database.ref('/users/'+userid+"/antennae").get();
    }
    listAllUserRadioSets(userid: string) {
-    return this.afDatabase.database.ref(userid+"/equipment").get();
+    return this.afDatabase.database.ref('/users/'+userid+"/equipment").get();
   }
 }
 

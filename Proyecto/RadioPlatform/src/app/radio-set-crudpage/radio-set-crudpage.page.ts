@@ -8,14 +8,14 @@ import {ModalController} from '@ionic/angular'
   styleUrls: ['./radio-set-crudpage.page.scss'],
 })
 export class RadioSetCRUDPagePage implements OnInit {
-@Input() brand: string;
-@Input() name: string;
-@Input() type: string;
-@Input() amplitude: string;
-@Input() radio: RadioSet;
-@Input() result: boolean;
-@Input() id?: string;
-@Input() price: number;
+@Input() brand: string = null;
+@Input() name: string = null;
+@Input() type: string = null;
+@Input() amplitude: string = null;
+@Input() radio: RadioSet = null;
+@Input() result: boolean = null;
+@Input() id?: string = null;
+@Input() price: number = null;
   constructor(private firebaseUpdaterAndSetter: FirebaseUpdaterAndSetterService, private modalController: ModalController) { }
 
   ngOnInit() {

@@ -11,21 +11,22 @@ import {FirebaseUpdaterAndSetterService} from '../firebase-updater-and-setter.se
 })
 export class AntennaitemComponent implements OnInit {
 @Input() antenna: Antenna;
+@Input() antennae: Antenna[];
   constructor(public modalController: ModalController, public alertCtrl: AlertController, public firebaseUpdaterAndSetter: FirebaseUpdaterAndSetterService) { 
   }
   ngOnInit() {}
-  async presentModalModify(){
+  async presentModalModify(antenna: Antenna){
     const modal = await this.modalController.create({
       component:AntennaCRUDPagePage,
       cssClass: 'placeholder',
       componentProps: {
-        'id': this.antenna.id,
-        'type': this.antenna.type,
-        'name': this.antenna.name,
-        'range': this.antenna.range,
-        'height': this.antenna.height,
-        'brand': this.antenna.brand,
-        'price': this.antenna.price
+        'id': antenna.id,
+        'type': antenna.type,
+        'name': antenna.name,
+        'range': antenna.range,
+        'height': antenna.height,
+        'brand': antenna.brand,
+        'price': antenna.price
       }
     });
     return await modal.present();

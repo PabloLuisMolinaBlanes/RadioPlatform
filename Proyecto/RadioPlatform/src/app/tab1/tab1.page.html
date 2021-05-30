@@ -31,9 +31,7 @@
           <ion-select-option *ngFor="let antenna of antennaeVisible" [value]="antenna.height">{{antenna.height}}</ion-select-option>
         </ion-select>
     </ion-item>
-    <div *ngFor="let antenna of antennaeVisible">
-      <app-antennaitem [antenna]="antenna"></app-antennaitem>
-    </div>
+      <app-antennaitem [antennae]="antennaeVisible"></app-antennaitem>
     <ion-button (click)="presentModal()">Add new</ion-button>
     <ion-button (click)="presentCalculator()">Price calculator</ion-button>
 </ion-content>

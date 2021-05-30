@@ -30,7 +30,6 @@ equipmentChosen: RadioSet[] = [];
     });
     this.storage.get('equipment').then((r) => {
       this.equipment = r;
-      console.log(r);
     });
   }
   updateAntennaChosen() {
@@ -48,7 +47,6 @@ equipmentChosen: RadioSet[] = [];
   updateEquipmentMultiplier(equipment: RadioSet) {
     this.equipment.forEach(e => {
       if (e.name === equipment.name) {
-        console.log("found");
         e.multiplier = this.equipmentMultiplier;
       }
     })

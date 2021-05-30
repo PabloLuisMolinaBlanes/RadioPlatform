@@ -5,9 +5,14 @@
 </ion-header>
 
 <ion-content>
+  <div class="center">
+    <img src="assets/modifiedlogoRadioPlatform.svg">
+  </div>
+  <div class="centerion-input">
   <ion-input placeholder="Usuario/Signo de llamada" [(ngModel)]="username" type="text"></ion-input>
-  <ion-input placeholder="Contraseña" [(ngModel)]="password" type="password"></ion-input>
-  <ion-button shape="round" expand="full" (click)="login()">Entrar</ion-button>
-  <ion-button shape="round" expand="full" (click)="testLogin()">Test Login</ion-button>
-  <p>{{ testResult }}</p>>
+  </div>
+  <div class="centerion-input">
+    <ion-input placeholder="Contraseña" [(ngModel)]="password" type="password"></ion-input>
+  </div>
+  <ion-button class="centerbutton" shape="round" (click)="login()">Entrar</ion-button>
 </ion-content>

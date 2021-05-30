@@ -24,13 +24,11 @@
       <ion-select-option *ngFor="let contact of contactsVisibleTotal" [value]="contact.frequency">{{ contact.frequency }}</ion-select-option>
     </ion-select>
   </ion-item>
-  <div *ngFor="let contact of contactsVisible">
-    <app-contactitem [contact]="contact"></app-contactitem>
-  </div>
+    <app-contactitem [contacts]="contactsVisible"></app-contactitem>
   <ion-button (click)="presentModal()">Add new</ion-button>
   <div class="map-container">
     <div class="map-frame">
-      <div id="map"></div>
+      <div id="map" leaflet (leafletMapReady)="onMapReady($event)"></div>
     </div>
   </div>
 </ion-content>

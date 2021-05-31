@@ -9,6 +9,7 @@ var port = process.env.PORT || 3001;
 var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json();
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
+var blockedUsers = [];
 let db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -75,7 +76,22 @@ app.post('/operatecon', function(req, res) {
 
 io.on('connection', (socket) => {
     console.log("connection detected");
-    socket.on('send', (data) => {
+    socket.on('send', (data, username) => {
+        if (blockedUsers[username] !== 0 && blockedUsers[username] !== undefined) {
+            data = "You have been blocked by the moderators, please try again in " + blockedUsers[username] + " minutes";
+        }
         io.emit('newmessage', data);
     });
+    socket.on('delete', (data) => {
+        io.emit('deletethis', data);
+    })
+    socket.on('block', (username, time) => {
+    if (blockedUsers[username] !== 0 && blockedUsers[username] !== undefined) {
+
+    } else {
+        blockedUsers[username] = (time/100)/60;
+        setTimeout(() => {blockedUsers[username] = 0}, time);
+    }
+
+    })
 });

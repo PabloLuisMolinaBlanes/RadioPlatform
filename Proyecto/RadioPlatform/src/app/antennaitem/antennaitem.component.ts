@@ -12,9 +12,20 @@ import {FirebaseUpdaterAndSetterService} from '../firebase-updater-and-setter.se
 export class AntennaitemComponent implements OnInit {
 @Input() antenna: Antenna;
 @Input() antennae: Antenna[];
+@Input() favouriteAntenna: string;
+@Input() isadmin: boolean;
   constructor(public modalController: ModalController, public alertCtrl: AlertController, public firebaseUpdaterAndSetter: FirebaseUpdaterAndSetterService) { 
   }
-  ngOnInit() {}
+  ngOnInit() {
+    setTimeout(() => {
+      this.antennae.forEach(ant => {
+        var test = ant.name + ' ' + ant.brand;
+        if (test === this.favouriteAntenna) {
+          ant.isfavourite = true;
+        }
+      })
+    }, 2000)
+  }
   async presentModalModify(antenna: Antenna){
     const modal = await this.modalController.create({
       component:AntennaCRUDPagePage,
@@ -26,7 +37,8 @@ export class AntennaitemComponent implements OnInit {
         'range': antenna.range,
         'height': antenna.height,
         'brand': antenna.brand,
-        'price': antenna.price
+        'price': antenna.price,
+        'isadmin': this.isadmin
       }
     });
     return await modal.present();
@@ -40,11 +52,24 @@ export class AntennaitemComponent implements OnInit {
       },
       {text:'Delete',
       handler: () => {
-        this.firebaseUpdaterAndSetter.deleteAntenna(this.antenna);
+        if (this.isadmin) {
+          this.firebaseUpdaterAndSetter.deleteAntenna(antenna);
+        } else {
+          this.firebaseUpdaterAndSetter.deleteAntennaUser(antenna);
+
+        }
       }
       }
     ]
     });
     (await alert).present();
+  }
+  sendFavouriteData(antenna: Antenna) {
+    if (antenna.isfavourite) {
+      var favourite = antenna.name + ' ' + antenna.brand;
+    } else {
+      var favourite = "";
+    }
+    this.firebaseUpdaterAndSetter.setFavouriteAntenna(favourite);
   }
 }

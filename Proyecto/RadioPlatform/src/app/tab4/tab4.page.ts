@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Socket} from 'ngx-socket-io';
 import { AngularFireAuth } from '../../../node_modules/@angular/fire/auth'
 import firebase from "firebase/app"
+import * as socket from 'socket.io-client';
 @Component({
   selector: 'app-tab4',
   templateUrl: './tab4.page.html',
@@ -11,16 +11,24 @@ export class Tab4Page implements OnInit {
 message: string;
 messages: string[] = [];
 user: firebase.User;
-  constructor(private socket: Socket, private afauth: AngularFireAuth) { }
+socketio: any;
+  constructor(private afauth: AngularFireAuth) { }
 
   ngOnInit() {
-    this.socket.connect(); //temporal
-    this.socket.on('newmessage', (data) => {
+    this.socketio = socket.io("http://localhost:3001");
+    this.socketio.connect();
+    this.socketio.on('newmessage', (data) => {
       this.messages.push(data);
       });
+      this.socketio.on('deletethis', (data) => {
+        if (this.messages.findIndex(message => data === message) === -1) {
+
+        } else {
+          this.messages[this.messages.findIndex(message => data === message)] = "(This message has been deleted by the moderators)";
+        }
+      })
     this.afauth.currentUser.then(user => {
       if (user != null) {
-        this.socket.connect();
         this.user = user;
       }
     });
@@ -31,7 +39,7 @@ user: firebase.User;
     if (this.user !== undefined) {
       email = this.user.email
     }
-    this.socket.emit('send', email === "placeholder" ? "anonymous" + ": " + this.message : email + ": " + this.message);
+    this.socketio.emit('send', email === "placeholder" ? "anonymous" + ": " + this.message : email + ": " + this.message, email);
   }
 
 }

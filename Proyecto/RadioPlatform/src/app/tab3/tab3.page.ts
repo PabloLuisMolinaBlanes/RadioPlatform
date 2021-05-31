@@ -34,6 +34,7 @@ export class Tab3Page implements OnInit, AfterViewInit {
 contactsTotal: Contact[] = [];
 contactsVisible: Contact[] = [];
 contactsVisibleTotal: Contact[] = [];
+markers: L.Marker[] = [];
 coordinates: string[] = [];
 frequency: string = "placeholder";
 allContacts: Promise<DataSnapshot>;
@@ -64,10 +65,10 @@ private map;
                     console.log(data);
                     const contact = childsnapshot.val() as unknown as Contact;
                     contact.recording = this.sanitizer.bypassSecurityTrustResourceUrl(data);
-                    contact.number = this.contactsTotal.length;
                     const lat = contact.coordinates.substr(0,contact.coordinates.search(",")) as unknown as number;
                     const lon = contact.coordinates.substr(contact.coordinates.search(",")+1, contact.coordinates.length) as unknown as number;
                     const marker = L.marker([lat, lon]);
+                    this.markers.push(marker);
                     marker.bindPopup(`<div>Frecuencia: ${contact.frequency}</div>` + `<div>Localización: ${contact.location}</div>`+ `<div>Signo de llamada: ${contact.callsign}</div>`);
                     marker.addTo(this.map);
                     this.contactsTotal.push(contact);
@@ -77,12 +78,78 @@ private map;
                 } else {
                   const contact = childsnapshot.val() as unknown as Contact;
                   contact.recording = undefined;
-                  contact.number = this.contactsTotal.length;
+                  const lat = contact.coordinates.substr(0,contact.coordinates.search(",")) as unknown as number;
+                  const lon = contact.coordinates.substr(contact.coordinates.search(",")+1, contact.coordinates.length) as unknown as number;
+                  const marker = L.marker([lat, lon]);
+                  this.markers.push(marker);
+                  marker.bindPopup(`<div>Frecuencia: ${contact.frequency}</div>` + `<div>Localización: ${contact.location}</div>`+ `<div>Signo de llamada: ${contact.callsign}</div>`);
+                  marker.addTo(this.map);
                   this.contactsTotal.push(contact);
                   this.contactsVisible = this.contactsTotal;
                   this.store.set("contacts", this.contactsTotal);
                 }
                 });
+        }, () => {console.log("error here")}, this)
+        this.afDatabase.database.ref("users/"+user.uid+"/contacts").on("child_removed", function (childsnapshot) {
+          const child = childsnapshot.val() as unknown as Contact;
+          const index = this.contactsVisible.findIndex(c => c.id === child.id);
+          this.contactsVisible = this.contactsVisible.filter(c => c.id !== child.id);
+          this.contactsTotal = this.contactsVisible;
+          this.map.removeLayer(this.markers[index]);
+          this.store.set("contacts", this.contactsTotal);
+        }, () => {console.log("error here")}, this)
+        this.afDatabase.database.ref("users/"+user.uid+"/contacts").on("child_changed", function (childsnapshot) {
+          console.log("child changed... here we go");
+          const contact = childsnapshot.val() as unknown as Contact;
+          const index = this.contactsVisible.findIndex(c => c.id === contact.id);
+          this.map.removeLayer(this.markers[index]);
+          const lat = contact.coordinates.substr(0,contact.coordinates.search(",")) as unknown as number;
+          const lon = contact.coordinates.substr(contact.coordinates.search(",")+1, contact.coordinates.length) as unknown as number;
+          const marker = L.marker([lat, lon]);
+          this.markers.push(marker);
+          marker.bindPopup(`<div>Frecuencia: ${contact.frequency}</div>` + `<div>Localización: ${contact.location}</div>`+ `<div>Signo de llamada: ${contact.callsign}</div>`);
+          marker.addTo(this.map);
+          console.log("checkpoint 1");
+          this.storage.ref(user.uid).listAll().subscribe(data => {
+            var contact = childsnapshot.val() as unknown as Contact;
+            if (data.items[contact.number] !== undefined) {
+              data.items[contact.number].getDownloadURL().then(data => {
+                console.log("checkpoint 2");
+                this.contactsVisible.forEach(contact2 => {
+                  if (contact2.id === contact.id) {
+
+                    contact2.frequency = contact.frequency;
+                    contact2.recording = this.sanitizer.bypassSecurityTrustResourceUrl(data);
+                    contact2.callsign = contact.callsign;
+                    contact2.location = contact.location;
+                    contact2.coordinates = contact.coordinates;
+                    contact2.id = contact.id;
+                    contact2.number = contact.number;
+                  }
+                })
+                this.contactsTotal = this.contactsVisible;
+                this.store.set("contacts", this.contactsTotal);
+                console.log("finished 1");
+              });
+            } else {
+              console.log("checkpoint 2");
+              this.contactsVisible.forEach(contact2 => {
+                if (contact2.id === contact.id) {
+                  contact2.frequency = contact.frequency;
+                  contact2.recording = undefined;
+                  contact2.callsign = contact.callsign;
+                  contact2.location = contact.location;
+                  contact2.coordinates = contact.coordinates;
+                  contact2.id = contact.id;
+                  contact2.number = contact.number;
+                }
+              })
+              this.contactsTotal = this.contactsVisible;
+              this.store.set("contacts", this.contactsTotal);
+              console.log("finished 2");
+            }
+          })
+          this.store.set("contacts", this.contactsTotal);
         }, () => {console.log("error here")}, this)
         })
     });

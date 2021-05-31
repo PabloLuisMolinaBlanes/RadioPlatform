@@ -7,6 +7,8 @@ export class User {
     callsign?: string;
     status?: string;
     transmitting?: boolean;
+    favouriteAntenna?: string;
+    favouriteRadioSet?: string;
     constructor(country: string,preferredFrequency: string,username: string,status?:string,transmitting?: boolean,id?:string, password?: string,profilepicture?: File,callsign?: string) {
         this.id = id;
         this.country = country;

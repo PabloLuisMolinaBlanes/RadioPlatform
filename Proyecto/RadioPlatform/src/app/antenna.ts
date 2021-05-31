@@ -7,6 +7,7 @@ export class Antenna {
     range: number;
     price?: number;
     multiplier?: number;
+    isfavourite?: boolean = false;
     constructor(type: string, name: string, range: number,height: number,brand?: string,id?:string, price?: number) {
         this.id = id;
         this.type = type;

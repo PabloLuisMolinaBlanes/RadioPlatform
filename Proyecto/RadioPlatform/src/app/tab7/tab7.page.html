@@ -12,15 +12,18 @@
   </ion-header>
   <div id="grid">
     <div id="chat-window">
-      <p *ngFor="let message of messages">{{ message }}</p>
+      <p *ngFor="let message of messages">{{ message }}
+        <ion-button (click)="presentBlockDialog(message)" [attr.aria-label]="'Block user'"><ion-icon name="stopwatch"></ion-icon></ion-button>
+        <ion-button (click)="presentDeleteConfirmation(message)" [attr.aria-label]="'Delete message'"><ion-icon name="close-circle-outline"></ion-icon></ion-button>
+      </p>
     </div>
     <div id="antennacontainer">
       <p>Antenas</p>
-      <app-antennaitem [antennae]="antennaeVisible"></app-antennaitem>
+      <app-antennaitem [antennae]="antennaeVisible" [isadmin]="isadmin"></app-antennaitem>
     </div>
     <div id="radiocontainer">
       <p>Radios</p>
-      <app-radiosetitem [equipment]="radiosetsVisible"></app-radiosetitem>
+      <app-radiosetitem [equipment]="radiosetsVisible" [isadmin]="isadmin"></app-radiosetitem>
     </div>
   </div>
 

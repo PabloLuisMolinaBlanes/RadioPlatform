@@ -68,7 +68,11 @@ audioUrl: SafeResourceUrl;
       this.id = "placeholder";
       this.store.get("contacts").then(cs => {
         this.contact = new Contact(this.frequency, this.audio, this.location, this.callsign, null, this.id);
-        this.contact.number = cs.length;
+        if (cs.length === 0) {
+          this.contact.number = 0;
+        } else {
+          this.contact.number = cs[cs.length-1].number + 1;
+        }
         this.firebaseUpdaterAndSetter.setContact(this.contact, this.audio);
       })
     } else {

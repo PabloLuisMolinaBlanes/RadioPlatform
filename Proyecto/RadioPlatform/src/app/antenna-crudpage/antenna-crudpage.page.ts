@@ -16,6 +16,7 @@ export class AntennaCRUDPagePage implements OnInit {
 @Input() brand?:string = null;
 @Input() id?:string;
 @Input() price?:number;
+@Input() isadmin: boolean;
 antenna: Antenna;
   constructor(private firebaseUpdaterAndSetter: FirebaseUpdaterAndSetterService, private modalController: ModalController, private auth: AngularFireAuth) {
    }
@@ -28,6 +29,7 @@ antenna: Antenna;
   submit() {
     if (this.id !== undefined) {
       this.antenna = new Antenna(this.type, this.name, this.range, this.height, this.brand, this.id, this.price);
+      if (this.isadmin) {}
       this.firebaseUpdaterAndSetter.updateAntenna(this.antenna);
     } else {
       this.id = "placeholder";

@@ -7,7 +7,8 @@ import { AngularFireStorageModule } from "@angular/fire/storage";
 import {environment} from '../environments/environment';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import {SocketIoModule, SocketIoConfig} from 'ngx-socket-io';
-const config: SocketIoConfig = {url: 'http://90.162.39.97:3001', options: {}};
+import {Storage} from '@ionic/storage'
+const config: SocketIoConfig = {url: 'http://localhost:3001', options: {}};
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {AngularFireDatabaseModule} from '@angular/fire/database';

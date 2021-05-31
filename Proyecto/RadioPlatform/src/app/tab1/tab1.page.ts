@@ -23,6 +23,8 @@ brand: string;
 type: string;
 height: number;
 price: number;
+favouriteAntenna: string;
+isadmin: boolean = false;
   constructor(private firebaseObtainerService: FirebaseObtainerService,public modalController: ModalController, public storage: Storage,public afDatabase: AngularFireDatabase, public auth: AngularFireAuth) {}
   async ngOnInit() {
     this.antennaeVisible = this.antennaeTotal;
@@ -32,6 +34,42 @@ price: number;
         this.antennaeVisible = this.antennaeTotal;
         this.storage.set('antennae', this.antennaeTotal);
       }, () => {console.log("error here")}, this);
+      this.afDatabase.database.ref("users/"+user.uid+"/antennae").on("child_changed", function (childsnapshot) {
+        var child = childsnapshot.val() as unknown as Antenna;
+        console.log("detected change");
+        console.log(this.antennaeVisible);
+        this.antennaeVisible.forEach(ant => {
+          if (child.id === ant.id || ant.id === "placeholder") {
+            console.log(ant);
+            console.log("found antenna");
+            ant.name = child.name;
+            ant.type = child.type;
+            ant.height = child.height;
+            ant.brand = child.brand;
+            ant.range = child.range;
+            ant.price = child.price;
+            ant.id = child.id;
+          }
+        });
+        this.antennaeTotal = this.antennaeVisible;
+        this.storage.set('antennae', this.antennaeTotal);
+      }, () => {console.log("error here")}, this);
+      this.afDatabase.database.ref("users/"+user.uid+"/antennae").on("child_removed", function (childsnapshot) {
+        var child = childsnapshot.val() as unknown as Antenna
+        console.log("detected deleted");
+        this.antennaeVisible.forEach(ant => {
+          if (child.id === ant.id) {
+            console.log("found deleted");
+            this.antennaeVisible = this.antennaeVisible.filter(antenna => antenna !== ant);
+          }
+        });
+        this.antennaeTotal = this.antennaeVisible;
+        this.storage.set('antennae', this.antennaeTotal);
+      }, () => {console.log("error here")}, this);
+      this.afDatabase.database.ref("users/"+user.uid+"/favouriteAntenna").on("value", function (childsnapshot) {
+          this.favouriteAntenna = childsnapshot.val() as unknown as string;
+          console.log("done");
+      }, () => {console.log("error here")}, this)
         this.antennaeTotal = [];
     });
     await this.storage.create();

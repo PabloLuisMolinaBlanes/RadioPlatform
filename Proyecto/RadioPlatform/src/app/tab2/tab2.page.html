@@ -14,22 +14,25 @@
   </ion-header>
   <app-explore-container name="Radios"></app-explore-container>
   <ion-item>
-    <ion-select placeholder="Nombre">
-      <ion-select-option *ngFor="let radioset of radiosetsVisible" [value]="radioset.name">{{radioset.name}}</ion-select-option>
+    <ion-select [(ngModel)]="name" (ionChange)="updateArray()" placeholder="Nombre">
+      <ion-select-option *ngFor="let radioset of radiosetsTotal" [value]="radioset.name">{{radioset.name}}</ion-select-option>
     </ion-select>
     </ion-item>
   <ion-item>
-    <ion-select placeholder="Marca">
-      <ion-select-option *ngFor="let radioset of radiosetsVisible" [value]="radioset.brand">{{radioset.brand}}</ion-select-option>
+    <ion-select [(ngModel)]="brand" (ionChange)="updateArray()" placeholder="Marca">
+      <ion-select-option *ngFor="let radioset of radiosetsTotal" [value]="radioset.brand">{{radioset.brand}}</ion-select-option>
     </ion-select>
   </ion-item>
   <ion-item>
-    <ion-select placeholder="Tipo">
-      <ion-select-option *ngFor="let radioset of radiosetsVisible" [value]="radioset.type">{{radioset.type}}</ion-select-option>
+    <ion-select [(ngModel)]="type" (ionChange)="updateArray()" placeholder="Tipo">
+      <ion-select-option *ngFor="let radioset of radiosetsTotal" [value]="radioset.type">{{radioset.type}}</ion-select-option>
     </ion-select></ion-item>
       <ion-item>
-        <ion-select placeholder="Amplitud"></ion-select></ion-item> 
-           <app-radiosetitem [equipment]="radiosetsVisible"></app-radiosetitem>
+        <ion-select [(ngModel)]="amplitude" (ionChange)="updateArray()"  placeholder="Amplitud">
+          <ion-select-option *ngFor="let radioset of radiosetsTotal" [value]="radioset.amplitude">{{radioset.amplitude}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+           <app-radiosetitem [equipment]="radiosetsVisible" [favouriteRadioSet]="favouriteRadioSet" [isadmin]="isadmin"></app-radiosetitem>
         <ion-button (click)="presentModal()">Add new</ion-button>
         <ion-button (click)="presentCalculator()">Price calculator</ion-button>
 </ion-content>

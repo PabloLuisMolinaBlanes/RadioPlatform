@@ -12,9 +12,22 @@ import {FirebaseUpdaterAndSetterService} from '../firebase-updater-and-setter.se
 export class RadiosetitemComponent implements OnInit {
 @Input() radioset: RadioSet;
 @Input() equipment: RadioSet[] = [];
+@Input() favouriteRadioSet: string;
+@Input() isadmin: boolean;
+
+isfavourite: boolean = false;
   constructor(public modalController: ModalController, public alertCtrl: AlertController, public firebaseUpdaterAndSetter: FirebaseUpdaterAndSetterService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    setTimeout(() => {
+      this.equipment.forEach(eq => {
+        var test = eq.name + ' ' + eq.brand;
+        if (test === this.favouriteRadioSet) {
+          eq.isfavourite = true;
+        }
+      })
+    }, 2000);
+  }
 
   async presentModalModify(radioset: RadioSet){
     const modal = await this.modalController.create({
@@ -40,10 +53,22 @@ export class RadiosetitemComponent implements OnInit {
       },
       {text:'Delete',
       handler: () => {
-        this.firebaseUpdaterAndSetter.deleteRadioSet(this.radioset);
+        if (this.isadmin) {
+          this.firebaseUpdaterAndSetter.deleteRadioSet(radioset);
+        } else {
+          this.firebaseUpdaterAndSetter.deleteRadioSetUser(radioset);
+        }
       }
       }]
     });
     (await alert).present();
+  }
+  sendFavouriteData(radioset: RadioSet) {
+    if (radioset.isfavourite) {
+      var favourite = radioset.name + ' ' + radioset.brand;
+    } else {
+      var favourite = "";
+    }
+    this.firebaseUpdaterAndSetter.setFavouriteRadioSet(favourite);
   }
 }

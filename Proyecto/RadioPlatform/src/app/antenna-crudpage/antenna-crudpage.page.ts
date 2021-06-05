@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Antenna } from '../antenna';
 import { AngularFireAuth } from '../../../node_modules/@angular/fire/auth'
 import {FirebaseUpdaterAndSetterService} from '../firebase-updater-and-setter.service';
+import {FirebaseObtainerService} from '../firebase-obtainer.service'
 import {ModalController} from '@ionic/angular'
 @Component({
   selector: 'app-antenna-crudpage',
@@ -11,17 +12,32 @@ import {ModalController} from '@ionic/angular'
 export class AntennaCRUDPagePage implements OnInit {
 @Input() type:string = null;
 @Input() name:string = null;
-@Input() range:number = null;
-@Input() height:number = null;
+@Input() range:string = null;
+@Input() height:string = null;
 @Input() brand?:string = null;
 @Input() id?:string;
 @Input() price?:number;
 @Input() isadmin: boolean;
 antenna: Antenna;
-  constructor(private firebaseUpdaterAndSetter: FirebaseUpdaterAndSetterService, private modalController: ModalController, private auth: AngularFireAuth) {
+antennaeTotal: Antenna[] = [];
+  constructor(private firebaseUpdaterAndSetter: FirebaseUpdaterAndSetterService, private firebaseObtainerService: FirebaseObtainerService, private modalController: ModalController, private auth: AngularFireAuth) {
    }
 
   ngOnInit() {
+    this.firebaseObtainerService.listAllAntennas().then(ants => {
+     ants.forEach(ant => {
+       this.antennaeTotal.push(ant.val() as unknown as Antenna);
+     })
+    });
+  }
+  updateAntenna() {
+    this.type = this.antenna.type;
+    this.name = this.antenna.name;
+    this.range = this.antenna.range;
+    this.height = this.antenna.height;
+    this.brand = this.antenna.brand;
+    this.id = this.antenna.id;
+    this.price = this.antenna.price;
   }
   dismiss() {
     this.modalController.dismiss();

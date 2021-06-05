@@ -37,6 +37,9 @@ export class LoginPage implements OnInit {
       );
     });
   }
+  register() {
+    this.router.navigateForward("/register");
+  }
   public testLogin(user: string, password: string) {
       this.afauth.signInWithEmailAndPassword("test@example.com", "test123").then(
         res => {

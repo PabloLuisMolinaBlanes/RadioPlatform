@@ -22,7 +22,7 @@ contact: Contact;
 filename: string;
 audio: File = null;
 audioUrl: SafeResourceUrl;
-@Input() number?: number;
+@Input() number?: string;
 
   constructor(private firebaseUpdaterAndSetter: FirebaseUpdaterAndSetterService, private afauth: AngularFireAuth, private sanitizer: ɵDomSanitizerImpl, private modalController: ModalController, public store: Storage) { }
 
@@ -65,13 +65,16 @@ audioUrl: SafeResourceUrl;
   }
   submit() {
     if (this.id === undefined) {
+      console.log("Warning, id has been detected as undefined!");
       this.id = "placeholder";
       this.store.get("contacts").then(cs => {
         this.contact = new Contact(this.frequency, this.audio, this.location, this.callsign, null, this.id);
         if (cs.length === 0) {
-          this.contact.number = 0;
+          // this.contact.number = 0;
+          this.contact.number = "placeholder"
         } else {
-          this.contact.number = cs[cs.length-1].number + 1;
+          // this.contact.number = cs[cs.length-1].number + 1;
+          this.contact.number = "placeholder"
         }
         this.firebaseUpdaterAndSetter.setContact(this.contact, this.audio);
       })

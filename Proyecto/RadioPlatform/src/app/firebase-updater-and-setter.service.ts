@@ -44,10 +44,10 @@ export class FirebaseUpdaterAndSetterService {
   }
   setRadioSet(radioset: RadioSet) {
     this.auth.currentUser.then(user => {
-      this.afDatabase.database.ref('users/'+user.uid+'/equipment').push(radioset).then((r) => { 
+      this.afDatabase.database.ref('users/'+user.uid+'/equipment').push(radioset).then((r) => {
+        radioset.id = r.key; 
         this.afDatabase.database.ref('users/'+user.uid+'/equipment/' + r.key).update({ id: r.key }).then(() => {
-          radioset.id = r.key
-          this.afDatabase.database.ref('equipment/'+r.key).set(radioset);
+          this.afDatabase.database.ref('equipment/'+radioset.id).set(radioset);
           this.alertCtrl.create({
             message: "Item added succesfully",
             buttons: [{
@@ -64,10 +64,6 @@ export class FirebaseUpdaterAndSetterService {
     this.auth.currentUser.then(user => {
       this.afDatabase.database.ref('users/'+user.uid).update({favouriteAntenna: antenna});
     })
-  }
-  setUser(user: User) {
-    this.afDatabase.database.ref('users/' + user.id).set(user).then(() => {
-    });
   }
   testHTML() {
     const headers = new HttpHeaders();
@@ -127,38 +123,68 @@ export class FirebaseUpdaterAndSetterService {
       }
     });
   }
+  setContactMethod(contact: Contact, audio: File) {
+      this.auth.currentUser.then(u => {
+        this.storage.ref(u.uid).listAll().subscribe(data => {
+          this.storage.ref(u.uid).child(""+contact.number).put(audio).then(() => {
+            this.alertCtrl.create({
+              message: "Item added succesfully",
+              buttons: [{
+                text: "OK",
+                role: 'ok'
+              }]
+            }).then(a => {
+              a.present();
+            }); 
+          }).catch(err => {
+            this.alertCtrl.create({
+              message: "Item added succesfully, no audio detected",
+              buttons: [{
+                text: "OK",
+                role: 'ok'
+              }]
+            }).then(a => {
+              a.present();
+            });
+          });
+        });
+      });
+  }
+  updateContactMethod(contact: Contact, audio: File) {
+    this.auth.currentUser.then(u => {
+      this.storage.ref(u.uid).listAll().subscribe(data => {
+        this.storage.ref(u.uid).child(""+contact.number).put(audio).then(() => {
+          this.alertCtrl.create({
+            message: "Item updated succesfully",
+            buttons: [{
+              text: "OK",
+              role: 'ok'
+            }]
+          }).then(a => {
+            a.present();
+          });
+        }).catch(err => {
+          this.alertCtrl.create({
+            message: "Item added succesfully, no audio detected",
+            buttons: [{
+              text: "OK",
+              role: 'ok'
+            }]
+          }).then(a => {
+            a.present();
+          }); 
+        });
+      });
+    });
+  }
   async setContact(contact: Contact, audio: File) {
     if ((this.mayi1 && this.mayi2 && this.mayi3) || contact.location === null) {
       if (contact.location === null) {
         this.auth.currentUser.then(user => {
-          this.afDatabase.database.ref('users/'+user.uid+'/contacts/').push(contact).then((r) => { this.afDatabase.database.ref('users/'+user.uid+'/contacts/' + r.key).update({ id: r.key }) }).then(r => {
-            if (audio !== null) {
-              this.auth.currentUser.then(u => {
-                this.storage.ref(u.uid).listAll().subscribe(data => {
-                  this.storage.ref(u.uid).child(""+contact.number).put(audio).then(() => {
-                    this.alertCtrl.create({
-                      message: "Item added succesfully",
-                      buttons: [{
-                        text: "OK",
-                        role: 'ok'
-                      }]
-                    }).then(a => {
-                      a.present();
-                    }); 
-                  }).catch(err => {
-                    this.alertCtrl.create({
-                      message: "Item added succesfully, no audio detected",
-                      buttons: [{
-                        text: "OK",
-                        role: 'ok'
-                      }]
-                    }).then(a => {
-                      a.present();
-                    });
-                  });
-                });
-              });
-            }
+          this.afDatabase.database.ref('users/'+user.uid+'/contacts/').push(contact).then((r) => { 
+            contact.number = r.key.replace("-","").replace("_","");
+            this.afDatabase.database.ref('users/'+user.uid+'/contacts/' + r.key).update({ id: r.key, number: r.key.replace("-","").replace("_","") }) }).then(r => {
+           this.setContactMethod(contact, audio);
           });
         })
       } else {
@@ -168,34 +194,10 @@ export class FirebaseUpdaterAndSetterService {
             contact.recording = null;
             console.log("uploading... (1)");
             this.auth.currentUser.then(user => {
-              this.afDatabase.database.ref('users/'+user.uid+'/contacts/').push(contact).then((r) => { this.afDatabase.database.ref('users/'+user.uid+'/contacts/' + r.key).update({ id: r.key }) }).then(r => {
-                if (audio !== null) {
-                  this.auth.currentUser.then(u => {
-                    this.storage.ref(u.uid).listAll().subscribe(data => {
-                      this.storage.ref(u.uid).child(""+contact.number).put(audio).then(() =>{
-                        this.alertCtrl.create({
-                          message: "Item added succesfully",
-                          buttons: [{
-                            text: "OK",
-                            role: 'ok'
-                          }]
-                        }).then(a => {
-                          a.present();
-                        });  
-                      }).catch(err => {
-                        this.alertCtrl.create({
-                          message: "Item added succesfully, no audio detected",
-                          buttons: [{
-                            text: "OK",
-                            role: 'ok'
-                          }]
-                        }).then(a => {
-                          a.present();
-                        }); 
-                      });
-                    });
-                  });
-                }
+              this.afDatabase.database.ref('users/'+user.uid+'/contacts/').push(contact).then((r) => { 
+                contact.number = r.key.replace("-","").replace("_","");
+                this.afDatabase.database.ref('users/'+user.uid+'/contacts/' + r.key).update({ id: r.key, number: r.key.replace("-","").replace("_","") }) }).then(r => {
+                  this.setContactMethod(contact, audio);
               });
             })
           } else {
@@ -204,6 +206,7 @@ export class FirebaseUpdaterAndSetterService {
               if (data[0].issearching === 0) {
                 var headers = new HttpHeaders();
                 headers = headers.append('Application', 'RadioPlatform (https://github.com/PabloLuisMolinaBlanes/RadioPlatform)');
+                headers = headers.append('Access-Control-Allow-Origin', 'https://www.openstreetmap.org');
                 const params = new HttpParams();
                 params.append('q', contact.location);
                 params.append('email', 'pablo.molina@iescampanillas.com');
@@ -222,33 +225,7 @@ export class FirebaseUpdaterAndSetterService {
                           contact.recording = null;
                           console.log("uploading... (2)");
                           this.auth.currentUser.then(user => {
-                            this.afDatabase.database.ref('users/'+user.uid+'/contacts/').push(contact).then((r) => { this.afDatabase.database.ref('users/'+user.uid+'/contacts/' + r.key).update({ id: r.key }) }).then(r => {
-                              this.auth.currentUser.then(u => {
-                                this.storage.ref(u.uid).listAll().subscribe(data => {
-                                  this.storage.ref(u.uid).child(""+contact.number).put(audio).then(() => {
-                                    this.alertCtrl.create({
-                                      message: "Item added succesfully",
-                                      buttons: [{
-                                        text: "OK",
-                                        role: 'ok'
-                                      }]
-                                    }).then(a => {
-                                      a.present();
-                                    }); 
-                                  }).catch(err => {
-                                    this.alertCtrl.create({
-                                      message: "Item added succesfully, no audio detected",
-                                      buttons: [{
-                                        text: "OK",
-                                        role: 'ok'
-                                      }]
-                                    }).then(a => {
-                                      a.present();
-                                    }); 
-                                  });
-                                });
-                              });
-                            });
+                            this.setContactMethod(contact, audio);
                           })
                         });
                       }, 3000);
@@ -287,33 +264,7 @@ export class FirebaseUpdaterAndSetterService {
       if (contact.location === null) {
         this.auth.currentUser.then(user => {
           this.afDatabase.database.ref('users/'+user.uid+'/contacts/'+contact.id).set(contact).then(r => {
-            if (audio !== null) {
-              this.auth.currentUser.then(u => {
-                this.storage.ref(u.uid).listAll().subscribe(data => {
-                  this.storage.ref(u.uid).child(""+contact.number).put(audio).then(() => {
-                    this.alertCtrl.create({
-                      message: "Item updated succesfully",
-                      buttons: [{
-                        text: "OK",
-                        role: 'ok'
-                      }]
-                    }).then(a => {
-                      a.present();
-                    });
-                  }).catch(err => {
-                    this.alertCtrl.create({
-                      message: "Item added succesfully, no audio detected",
-                      buttons: [{
-                        text: "OK",
-                        role: 'ok'
-                      }]
-                    }).then(a => {
-                      a.present();
-                    }); 
-                  });
-                });
-              });
-            }
+            this.updateContactMethod(contact, audio);
           });
         })
       } else {
@@ -325,33 +276,7 @@ export class FirebaseUpdaterAndSetterService {
             console.log(contact);
             this.auth.currentUser.then(user => {
               this.afDatabase.database.ref('users/'+user.uid+'/contacts/'+contact.id).set(contact).then(r => {
-                if (audio !== null) {
-                  this.auth.currentUser.then(u => {
-                    this.storage.ref(u.uid).listAll().subscribe(data => {
-                      this.storage.ref(u.uid).child(""+contact.number).put(audio).then(() => {
-                        this.alertCtrl.create({
-                          message: "Item updated succesfully",
-                          buttons: [{
-                            text: "OK",
-                            role: 'ok'
-                          }]
-                        }).then(a => {
-                          a.present();
-                        });
-                      }).catch(err => {
-                        this.alertCtrl.create({
-                          message: "Item added succesfully, no audio detected",
-                          buttons: [{
-                            text: "OK",
-                            role: 'ok'
-                          }]
-                        }).then(a => {
-                          a.present();
-                        }); 
-                      });
-                    });
-                  });
-                }
+                this.updateContactMethod(contact, audio);
               });
             })
           } else {
@@ -360,6 +285,7 @@ export class FirebaseUpdaterAndSetterService {
               if (data[0].issearching === 0) {
                 var headers = new HttpHeaders();
                 headers = headers.append('Application', 'RadioPlatform (https://github.com/PabloLuisMolinaBlanes/RadioPlatform)');
+                headers = headers.append('Access-Control-Allow-Origin', 'https://www.openstreetmap.org');
                 const params = new HttpParams();
                 params.append('q', contact.location);
                 params.append('email', 'pablo.molina@iescampanillas.com');
@@ -377,35 +303,7 @@ export class FirebaseUpdaterAndSetterService {
                           console.log(data);
                           contact.recording = null;
                           console.log("uploading... (2)");
-                          this.auth.currentUser.then(user => {
-                            this.afDatabase.database.ref('users/'+user.uid+'/contacts/'+contact.id).set(contact).then(r => {
-                              this.auth.currentUser.then(u => {
-                                this.storage.ref(u.uid).listAll().subscribe(data => {
-                                  this.storage.ref(u.uid).child(""+contact.number).put(audio).then(() => {
-                                    this.alertCtrl.create({
-                                      message: "Item updated succesfully",
-                                      buttons: [{
-                                        text: "OK",
-                                        role: 'ok'
-                                      }]
-                                    }).then(a => {
-                                      a.present();
-                                    });
-                                  }).catch(err => {
-                                    this.alertCtrl.create({
-                                      message: "Item added succesfully, no audio detected",
-                                      buttons: [{
-                                        text: "OK",
-                                        role: 'ok'
-                                      }]
-                                    }).then(a => {
-                                      a.present();
-                                    }); 
-                                  });
-                                });
-                              });
-                            });
-                          })
+                          this.updateContactMethod(contact, audio);
                         });
                       }, 3000);
                     });
@@ -467,14 +365,12 @@ export class FirebaseUpdaterAndSetterService {
         })
       })
   }
-  setUserAndPhoto(user: User) {
+  setUser(user: User) : Promise<any> {
     if (user.callsign !== null || user.callsign !== undefined) {
       this.afDatabase.database.ref('callsigns/'+user.callsign).set(user.username).then(c => {
-        return this.afDatabase.database.ref('users/' + user.id).set(user);
       });
-    } else {
-      return this.afDatabase.database.ref('users/' + user.id).set(user);
     }
+    return this.afDatabase.database.ref('users/' + user.id).set(user);
   }
   updateUser(user: User) {
     this.afDatabase.database.ref('users/' + user.id).update({

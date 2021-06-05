@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AngularFireAuth } from '../../../node_modules/@angular/fire/auth'
 import {FirebaseUpdaterAndSetterService} from '../firebase-updater-and-setter.service';
+import {FirebaseObtainerService} from '../firebase-obtainer.service'
 import {DomSanitizer, SafeHtml, SafeResourceUrl, SafeUrl, ɵDomSanitizerImpl} from "@angular/platform-browser";
 import { AngularFireStorage } from '@angular/fire/storage';
 import {User} from '../user'
@@ -18,12 +19,28 @@ export class Tab6Page implements OnInit {
   @Input() callsign: string;
   @Input() country: string;
   @Input() preferredFrequency: string;
+  myself: User;
   image: File;
   filename: string;
   imageUrl: SafeResourceUrl;
-  constructor(private afauth: AngularFireAuth, private sanitizer: ɵDomSanitizerImpl, private firebaseUpdaterAndSetter: FirebaseUpdaterAndSetterService, private firestore: AngularFireStorage) { }
+  constructor(private afauth: AngularFireAuth, private sanitizer: ɵDomSanitizerImpl, private firebaseObtainer: FirebaseObtainerService, private firebaseUpdaterAndSetter: FirebaseUpdaterAndSetterService, private firestore: AngularFireStorage) { }
 
   ngOnInit() {
+    this.afauth.currentUser.then((user) => {
+      this.firebaseObtainer.listMyself(user.uid).then((result) => {
+        const me = result.val() as unknown as User;
+        this.email = me.username;
+        this.status = me.status;
+        this.transmitting = me.transmitting ? "true" : "false";
+        this.callsign = me.callsign;
+        this.country = me.country;
+        this.preferredFrequency = me.preferredFrequency;
+        this.firestore.ref(user.uid).getDownloadURL().toPromise().then(data => {
+          const urlSan = this.sanitizer.bypassSecurityTrustResourceUrl(data);
+          this.imageUrl = urlSan;
+        }).catch(err => {})
+      });
+    })
   }
   onFileSelected(event) {
     this.afauth.currentUser.then((user) => {
@@ -55,6 +72,9 @@ export class Tab6Page implements OnInit {
   }
   public setUser() {
         this.afauth.currentUser.then(res => {
+            if (this.password !== undefined || this.password !== "") {
+              res.updatePassword(this.password);
+            }
             let thisuser = new User(this.country, this.preferredFrequency, res.email, this.status === 'undefined' ? null : this.status, this.transmitting === 'yes' ? true : false, res.uid, null,null,this.callsign);
             if (this.image === undefined) {
               this.firebaseUpdaterAndSetter.updateUser(thisuser);

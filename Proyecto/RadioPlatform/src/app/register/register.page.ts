@@ -27,15 +27,16 @@ imageUrl: SafeResourceUrl;
       this.afauth.createUserWithEmailAndPassword(this.email, this.password).then(
         res => {
           this.afauth.signInWithEmailAndPassword(this.email, this.password).then(res => {
+              let useruid = res.user.uid;
               let thisuser = new User(this.country, this.preferredFrequency, this.email, "online", false, res.user.uid, null,null, this.callsign);
               if (this.image === undefined) {
-                this.firebaseUpdaterAndSetter.setUserAndPhoto(thisuser).then(() => {
-                  this.router.navigateForward("/tabs");
+                this.firebaseUpdaterAndSetter.setUser(thisuser).then(() => {
+                  this.router.navigateRoot("/tabs");
                 });
               } else {
-                this.firebaseUpdaterAndSetter.setUserAndPhoto(thisuser).then(res => {
-                  this.firestore.ref('').put(this.image).then(() => {
-                    this.router.navigateForward("/tabs");
+                this.firebaseUpdaterAndSetter.setUser(thisuser).then(res => {
+                  this.firestore.ref(useruid).put(this.image).then(() => {
+                    this.router.navigateRoot("/tabs");
                   });
                 })
               }

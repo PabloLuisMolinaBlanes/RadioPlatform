@@ -19,12 +19,29 @@ export class AntennaitemComponent implements OnInit {
   ngOnInit() {
     setTimeout(() => {
       this.antennae.forEach(ant => {
-        var test = ant.name + ' ' + ant.brand;
+        var test = ant.id + ant.name + ' ' + ant.brand;
         if (test === this.favouriteAntenna) {
           ant.isfavourite = true;
         }
       })
     }, 2000)
+  }
+  async presentModalModifyUser(antenna: Antenna){
+    const modal = await this.modalController.create({
+      component:AntennaCRUDPagePage,
+      cssClass: 'placeholder',
+      componentProps: {
+        'id': antenna.id,
+        'type': antenna.type,
+        'name': antenna.name,
+        'range': antenna.range,
+        'height': antenna.height,
+        'brand': antenna.brand,
+        'price': antenna.price,
+        'isadmin': false
+      }
+    });
+    return await modal.present();
   }
   async presentModalModify(antenna: Antenna){
     const modal = await this.modalController.create({
@@ -38,10 +55,27 @@ export class AntennaitemComponent implements OnInit {
         'height': antenna.height,
         'brand': antenna.brand,
         'price': antenna.price,
-        'isadmin': this.isadmin
+        'isadmin': true
       }
     });
     return await modal.present();
+  }
+  async presentDeleteConfirmationUser(antenna: Antenna) {
+    let alert = this.alertCtrl.create({
+      message: 'Are you sure you want to delete ' + antenna.name + '?',
+      buttons: [{
+        text: 'Cancel',
+        role: 'cancel'
+      },
+      {text:'Delete',
+      handler: () => {
+          this.firebaseUpdaterAndSetter.deleteAntennaUser(antenna);
+      }
+      }
+    ]
+    });
+    
+    (await alert).present();
   }
   async presentDeleteConfirmation(antenna: Antenna) {
     let alert = this.alertCtrl.create({
@@ -52,21 +86,17 @@ export class AntennaitemComponent implements OnInit {
       },
       {text:'Delete',
       handler: () => {
-        if (this.isadmin) {
-          this.firebaseUpdaterAndSetter.deleteAntenna(antenna);
-        } else {
           this.firebaseUpdaterAndSetter.deleteAntennaUser(antenna);
-
-        }
       }
       }
     ]
     });
+    
     (await alert).present();
   }
   sendFavouriteData(antenna: Antenna) {
     if (antenna.isfavourite) {
-      var favourite = antenna.name + ' ' + antenna.brand;
+      var favourite = antenna.id + antenna.name + ' ' + antenna.brand;
     } else {
       var favourite = "";
     }

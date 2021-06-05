@@ -24,7 +24,7 @@
         <td>{{antenna.height}}</td>
         <td>{{antenna.brand}}</td>
         <td>{{antenna.range}}</td>
-        <td>{{antenna.price}}</td>
+        <td>{{antenna.price}}$</td>
         <td><ion-input type="number" [(ngModel)]="antennaeMultiplier"  (ionChange)="updateAntennaMultiplier(antenna)"></ion-input></td>
         </tr>
   </table>
@@ -45,10 +45,10 @@
         <td>{{radioset.brand}}</td>
         <td>{{radioset.type}}</td>
         <td>{{radioset.amplitude}}</td>
-        <td>{{radioset.price}}</td>
+        <td>{{radioset.price}}$</td>
         <td><ion-input type="number" [(ngModel)]="equipmentMultiplier" (ionChange)="updateEquipmentMultiplier(radioset)"></ion-input></td>
     </tr>
   </table>
-  <p>Total: {{total}}</p>
+  <p>Total: {{total}}$</p>
   <ion-button (click)="dismiss()">Exit</ion-button>
 </ion-content>

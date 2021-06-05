@@ -1,13 +1,13 @@
 <table>
     <tr>
         <th>Frecuencia</th>
-        <th>País</th>
+        <th>Lugar</th>
         <th>Signo de llamada</th>
         <th>Grabación</th>
     </tr>
     <tr *ngFor="let contact of contacts">
         <td>{{contact.frequency}}</td>
-        <td>{{contact.country}}</td>
+        <td>{{contact.location}}</td>
         <td>{{contact.callsign}}</td>
         <td><audio controls [src]="contact.recording" [attr.aria-label]="'Recording of ' + contact.frequency"></audio>
 <ion-button (click)="presentDeleteConfirmation(contact)"  [attr.aria-label]="'Delete ' + contact.frequency"><ion-icon name="close-circle-outline"></ion-icon></ion-button>

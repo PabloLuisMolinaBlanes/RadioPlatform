@@ -10,7 +10,7 @@
       <ion-title size="large">Perfil</ion-title>
     </ion-toolbar>
   </ion-header>
-  <img src="">
+  <img [src]="imageUrl">
   <p>Country</p>
   <ion-input [(ngModel)]="country"></ion-input>
   <p>Preferred frequency</p>
@@ -34,6 +34,5 @@
   <ion-input [(ngModel)]="callsign"></ion-input>
   <p>Profile picture</p>
   <input type="file" (change)="onFileSelected($event)">
-  <img [src]="imageUrl">
   <ion-button (click)="setUser()">Update info</ion-button>
 </ion-content>

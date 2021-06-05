@@ -7,7 +7,7 @@ export class Contact {
     location?: string;
     coordinates?: string;
     id?: string;
-    number?: number;
+    number?: string;
     constructor(frequency: string, recording?: SafeResourceUrl, location?: string,callsign?:string, coordinates?: string, id?: string) {
         this.frequency = frequency;
         this.recording = recording

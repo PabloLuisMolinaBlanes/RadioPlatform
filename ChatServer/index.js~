@@ -11,10 +11,10 @@ var jsonParser = bodyParser.json();
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var blockedUsers = [];
 let db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'Mrhacker,thisisapersonalproject.',
-    database: 'radioplatform',
+    host: 'remotemysql.com',
+    user: 'X5vRsaJ0dH',
+    password: '6CL9k94YML',
+    database: 'X5vRsaJ0dH',
     port: '3306'
 });
 server.listen(port, function() {

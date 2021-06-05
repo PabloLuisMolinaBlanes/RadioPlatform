@@ -11,9 +11,9 @@
         <td>{{radioset.brand}}</td>
         <td>{{radioset.type}}</td>
         <td>{{radioset.amplitude}}</td>
-        <td>{{radioset.price}}</td>
-        <ion-button *ngIf="!(isadmin)" (click)="presentDeleteConfirmation(radioset)" [attr.aria-label]="'Delete ' + radioset.name"><ion-icon name="close-circle-outline"></ion-icon></ion-button>
-<ion-button *ngIf="!(isadmin)" (click)="presentModalModify(radioset)" [attr.aria-label]="'Modify ' + radioset.name"><ion-icon name="brush" ></ion-icon></ion-button>
+        <td>{{radioset.price}}$</td>
+        <ion-button *ngIf="!(isadmin)" (click)="presentDeleteConfirmationUser(radioset)" [attr.aria-label]="'Delete ' + radioset.name"><ion-icon name="close-circle-outline"></ion-icon></ion-button>
+<ion-button *ngIf="!(isadmin)" (click)="presentModalModifyUser(radioset)" [attr.aria-label]="'Modify ' + radioset.name"><ion-icon name="brush" ></ion-icon></ion-button>
 <ion-button *ngIf="isadmin" (click)="presentDeleteConfirmation(radioset)" [attr.aria-label]="'Delete ' + radioset.name"><ion-icon name="close-circle"></ion-icon></ion-button>
 <ion-button *ngIf="isadmin" (click)="presentModalModify(radioset)" [attr.aria-label]="'Modify ' + radioset.name"><ion-icon name="create" ></ion-icon></ion-button>
 <ion-checkbox *ngIf="!(isadmin)" [(ngModel)]="radioset.isfavourite" (ionChange)="sendFavouriteData(radioset)"></ion-checkbox>

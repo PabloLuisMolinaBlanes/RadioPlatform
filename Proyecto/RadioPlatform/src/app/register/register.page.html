@@ -18,5 +18,5 @@
   <p>Profile picture</p>
   <input type="file" (change)="onFileSelected($event)">
   <img [src]="imageUrl">
-  <ion-button (click)="register()" *ngIf="email && password && country && preferredFrequency">Register</ion-button>
+  <ion-button (click)="register()" *ngIf="email && password">Register</ion-button>
 </ion-content>

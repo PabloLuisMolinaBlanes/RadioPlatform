@@ -23,6 +23,9 @@ export class FirebaseObtainerService {
    listAllContacts(userid: string) {
     return this.afDatabase.database.ref('/users/'+userid+'/contacts').get();
    }
+   listMyself(userid: string) {
+    return this.afDatabase.database.ref('/users/'+userid).get();
+   }
    listAllUserAntennas(userid: string) {
      return this.afDatabase.database.ref('/users/'+userid+"/antennae").get();
    }

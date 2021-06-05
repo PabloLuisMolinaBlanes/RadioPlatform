@@ -11,17 +11,30 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Usuarios"></app-explore-container>
   <ion-item>
-    <ion-select placeholder="País"></ion-select>
+    <ion-select [(ngModel)]="country" (ionChange)="updateArray()" placeholder="País">
+      <ion-select-option value="">All</ion-select-option>
+      <ion-select-option *ngFor="let user of usersTotal" [value]="user.country">{{user.country}}</ion-select-option>
+    </ion-select>
     </ion-item>
   <ion-item>
-    <ion-select placeholder="Frecuencia"></ion-select>
+    <ion-select [(ngModel)]="frequency" (ionChange)="updateArray()" placeholder="Frecuencia">
+      <ion-select-option value="">All</ion-select-option>
+      <ion-select-option *ngFor="let user of usersTotal" [value]="user.preferredFrequency">{{user.preferredFrequency}}</ion-select-option>
+    </ion-select>
   </ion-item>
   <ion-item>
-    <ion-select placeholder="Online"></ion-select></ion-item>
+    <ion-select [(ngModel)]="status" (ionChange)="updateArray()" placeholder="Online">
+      <ion-select-option value="">All</ion-select-option>
+      <ion-select-option value="online">Online</ion-select-option>
+      <ion-select-option value="offline">Offline</ion-select-option>
+      <ion-select-option value="dont">Don't disturb</ion-select-option>
+    </ion-select></ion-item>
       <ion-item>
-        <ion-select placeholder="Emitiendo"></ion-select></ion-item>
+        <ion-select [(ngModel)]="transmitting" (ionChange)="updateArray()" placeholder="Emitiendo">
+          <ion-select-option value="true">True</ion-select-option>
+          <ion-select-option value="false">False</ion-select-option>
+        </ion-select></ion-item>
           <app-useritem [users]="usersVisible"></app-useritem>
         
 </ion-content>

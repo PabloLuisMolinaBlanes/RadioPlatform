@@ -15,10 +15,15 @@ socketio: any;
   constructor(private afauth: AngularFireAuth) { }
 
   ngOnInit() {
+
     this.socketio = socket.io("http://localhost:3001");
     this.socketio.connect();
-    this.socketio.on('newmessage', (data) => {
-      this.messages.push(data);
+    this.socketio.on('newmessage', (data, username, blocked) => {
+      if (blocked === false) {
+        this.messages.push(data);
+      } else if (blocked === true && this.user.email === username) {
+        this.messages.push(data);
+      }
       });
       this.socketio.on('deletethis', (data) => {
         if (this.messages.findIndex(message => data === message) === -1) {

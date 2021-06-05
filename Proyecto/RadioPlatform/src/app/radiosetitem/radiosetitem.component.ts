@@ -21,7 +21,7 @@ isfavourite: boolean = false;
   ngOnInit() {
     setTimeout(() => {
       this.equipment.forEach(eq => {
-        var test = eq.name + ' ' + eq.brand;
+        var test = eq.id + ' ' + eq.name + ' ' + eq.brand;
         if (test === this.favouriteRadioSet) {
           eq.isfavourite = true;
         }
@@ -39,10 +39,43 @@ isfavourite: boolean = false;
         'name': radioset.name,
         'amplitude': radioset.amplitude,
         'brand': radioset.brand,
-        'price': radioset.price
+        'price': radioset.price,
+        'isadmin': true
       }
     });
     return await modal.present();
+  }
+  
+  async presentModalModifyUser(radioset: RadioSet){
+    const modal = await this.modalController.create({
+      component:RadioSetCRUDPagePage,
+      cssClass: 'placeholder',
+      componentProps: {
+        'id': radioset.id,
+        'type': radioset.type,
+        'name': radioset.name,
+        'amplitude': radioset.amplitude,
+        'brand': radioset.brand,
+        'price': radioset.price,
+        'isadmin': false
+      }
+    });
+    return await modal.present();
+  }
+  async presentDeleteConfirmationUser(radioset: RadioSet) {
+    let alert = this.alertCtrl.create({
+      message: 'Are you sure you want to delete ' + radioset.name + '?',
+      buttons: [{
+        text: 'Cancel',
+        role: 'cancel'
+      },
+      {text:'Delete',
+      handler: () => {  
+          this.firebaseUpdaterAndSetter.deleteRadioSetUser(radioset);
+      }
+      }]
+    });
+    (await alert).present();
   }
   async presentDeleteConfirmation(radioset: RadioSet) {
     let alert = this.alertCtrl.create({
@@ -52,12 +85,8 @@ isfavourite: boolean = false;
         role: 'cancel'
       },
       {text:'Delete',
-      handler: () => {
-        if (this.isadmin) {
+      handler: () => {  
           this.firebaseUpdaterAndSetter.deleteRadioSet(radioset);
-        } else {
-          this.firebaseUpdaterAndSetter.deleteRadioSetUser(radioset);
-        }
       }
       }]
     });
@@ -65,7 +94,7 @@ isfavourite: boolean = false;
   }
   sendFavouriteData(radioset: RadioSet) {
     if (radioset.isfavourite) {
-      var favourite = radioset.name + ' ' + radioset.brand;
+      var favourite = radioset.id + ' ' + radioset.name + ' ' + radioset.brand;
     } else {
       var favourite = "";
     }

@@ -18,10 +18,10 @@ export class Tab1Page implements OnInit{
 antennaeVisible: Antenna[] = [];
 antennaeTotal: Antenna[] = [];
 allAntennae: Promise<DataSnapshot>;
-name: string;
-brand: string;
-type: string;
-height: number;
+name: string = "";
+brand: string = "";
+type: string = "";
+height: string = "";
 price: number;
 favouriteAntenna: string;
 isadmin: boolean = false;
@@ -92,7 +92,7 @@ isadmin: boolean = false;
     this.antennaeVisible = this.antennaeTotal.filter(this.filterAntennae, this);
   }
   filterAntennae = function(antenna: Antenna) {
-    if ((this.name === undefined || antenna.name === this.name) && (this.brand === undefined || antenna.brand === this.brand) &&  (this.type === undefined || antenna.type === this.type) && (this.height === undefined || antenna.height === this.height)) {
+    if ((this.name === "" || antenna.name === this.name) && (this.brand === "" || antenna.brand === this.brand) &&  (this.type === "" || antenna.type === this.type) && (this.height === "" || antenna.height === this.height)) {
       return true;
     } else {
       return false;

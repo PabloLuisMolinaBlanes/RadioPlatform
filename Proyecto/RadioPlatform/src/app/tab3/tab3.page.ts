@@ -46,26 +46,59 @@ export class Tab3Page implements OnInit, AfterViewInit {
   ngOnInit() {
   }
   bindingPopups(contact: Contact) {
-    const index = this.contactsVisible.findIndex(c => c.id === contact.id);
-    if (index !== -1) {
-      if (this.markers[index] !== undefined) {
-        this.map.removeLayer(this.markers[index]);
-        this.contactsTotal.forEach(c => {
-          var index = this.contactsTotal.findIndex(contact => c.location === contact.location);
-          if (index !== -1 && this.contactsTotal.findIndex((contact, index2) => c.location === contact.location && index < index2) !== -1) {
-            this.markers[index].bindPopup(`<div>Frecuencia: ${this.contactsTotal[index].frequency}</div>` + `<div>Localización: ${this.contactsTotal[index].location}</div>` + `<div>Signo de llamada: ${this.contactsTotal[index].callsign}</div>`);
-          }
-        })
+    this.markers.forEach(marker => {
+      this.map.removeLayer(marker);
+    });
+    this.markers = [];
+    console.log("Removed all markers");
+    this.contactsVisible.forEach(contact2 => {
+        const lat = contact2.coordinates.substr(0, contact2.coordinates.search(",")) as unknown as number;
+        const lon = contact2.coordinates.substr(contact2.coordinates.search(",") + 1, contact2.coordinates.length) as unknown as number;
+        const marker = L.marker([lat, lon]);
+        this.markers.push(marker);
+        marker.bindPopup(`<div>Frecuencia: ${contact2.frequency}</div>` + `<div>Localización: ${contact2.location}</div>` + `<div>Signo de llamada: ${contact2.callsign}</div>`);
+        marker.addTo(this.map);
+    });
+    var found = false;
+    var contactsFound = [];
+    for (let i = 0; i < this.contactsVisible.length; i += 1) {
+      let originalArray = [];
+      this.contactsVisible.forEach(contact => {
+            originalArray.push(contact);
+      })
+      var rearrangedArray = this.contactsVisible.reverse();
+      var countArrays = 0;
+     rearrangedArray.forEach(contact => {
+        if (contactsFound[''+contact.location] === undefined) {
+          contactsFound[''+contact.location] = countArrays;
+        }
+        countArrays += 1;
+      })
+  
+      this.contactsVisible = originalArray;
+      for (let j = 0; j < this.contactsVisible.length; j += 1) {
+        if (this.contactsVisible[i].location === this.contactsVisible[j].location && contactsFound[''+this.contactsVisible[j].location] !== this.contactsVisible.length - 1 - j && contactsFound[''+this.contactsVisible[i].location+"_found"] !== 1) {
+          found = true;
+          let originalArray2 = [];
+          this.contactsVisible.forEach(contact => {
+            originalArray2.push(contact);
+          })
+          var rearrangedArray = this.contactsVisible.reverse();
+          this.contactsVisible = originalArray2;
+          var indexfound = rearrangedArray.findIndex((contact4) => contact4.location === this.contactsVisible[j].location);
+          this.markers[this.markers.length - 1 - indexfound].bindPopup(this.markers[this.markers.length - 1 - indexfound].getPopup().getContent() + ` | ` + `<div>Frecuencia: ${this.contactsVisible[j].frequency}</div>` + `<div>Localización: ${this.contactsVisible[j].location}</div>` + `<div>Signo de llamada: ${this.contactsVisible[j].callsign}</div>`)
+        }
       }
+      contactsFound[''+this.contactsVisible[i].location+"_found"] = 1;
     }
-    this.checkExistingPopups(contact); 
   }
   checkExistingPopups(contact: Contact) {
     var found = false;
     this.contactsTotal.forEach(contact2 => {
-      if (contact.location === contact2.location && contact !== contact2) {
+      if (contact.location === contact2.location && contact.id !== contact2.id) {
         found = true;
-        var index = this.contactsTotal.findIndex((contact3) => contact3 === contact2);
+        var index = this.contactsTotal.findIndex((contact3) => contact3.id === contact2.id);
+        console.log(index);
         this.markers[index].bindPopup(this.markers[index].getPopup().getContent() + ` | ` + `<div>Frecuencia: ${contact.frequency}</div>` + `<div>Localización: ${contact.location}</div>` + `<div>Signo de llamada: ${contact.callsign}</div>`)
       }
     });
@@ -88,7 +121,6 @@ export class Tab3Page implements OnInit, AfterViewInit {
 
     this.initMap();
     this.store.create();
-
     this.auth.currentUser.then((user) => {
       this.auth.currentUser.then(user => {
         this.afDatabase.database.ref("users/" + user.uid + "/contacts").on("child_added", function (childsnapshot) {
@@ -96,6 +128,7 @@ export class Tab3Page implements OnInit, AfterViewInit {
             this.storage.ref(user.uid).listAll().subscribe(data => {
               this.counter++;
               var contact = childsnapshot.val() as unknown as Contact;
+              console.log(contact.updated);
               var isitthere = false;
               var index = 0;
               console.log(data.items.length);
@@ -110,16 +143,16 @@ export class Tab3Page implements OnInit, AfterViewInit {
                   console.log(data);
                   const contact = childsnapshot.val() as unknown as Contact;
                   contact.recording = this.sanitizer.bypassSecurityTrustResourceUrl(data);
-                  this.checkExistingPopups(contact);
                   this.contactsTotal.push(contact);
                   this.contactsVisible = this.contactsTotal;
+                  this.bindingPopups(contact);
                 })
               } else {
                 const contact = childsnapshot.val() as unknown as Contact;
                 contact.recording = undefined;
-                this.checkExistingPopups(contact);
                 this.contactsTotal.push(contact);
                 this.contactsVisible = this.contactsTotal;
+                this.bindingPopups(contact);
               }
             });
           }, 3000)
@@ -130,7 +163,7 @@ export class Tab3Page implements OnInit, AfterViewInit {
           const index = this.contactsVisible.findIndex(c => c.id === child.id);
           this.contactsVisible = this.contactsVisible.filter(c => c.id !== child.id);
           this.contactsTotal = this.contactsVisible;
-          this.map.removeLayer(this.markers[index]);
+          this.bindingPopups(null);
         }, () => { console.log("error here") }, this)
 
         this.afDatabase.database.ref("users/" + user.uid + "/contacts").on("child_changed", function (childsnapshot) {
@@ -141,7 +174,7 @@ export class Tab3Page implements OnInit, AfterViewInit {
               contact2.id = contact.id;
             }
           });
-          this.bindingPopups(contact);
+          
           console.log("checkpoint 1");
           setTimeout(() => {
             this.storage.ref(user.uid).listAll().subscribe(data => {
@@ -165,9 +198,11 @@ export class Tab3Page implements OnInit, AfterViewInit {
                       contact2.coordinates = contact.coordinates;
                       contact2.id = contact.id;
                       contact2.number = contact.number;
+                      contact2.updated = contact.updated;
                     }
                   })
                   this.contactsTotal = this.contactsVisible;
+                  this.bindingPopups(contact);
                   console.log("finished 1");
                 });
               } else {
@@ -180,9 +215,11 @@ export class Tab3Page implements OnInit, AfterViewInit {
                     contact2.coordinates = contact.coordinates;
                     contact2.id = contact.id;
                     contact2.number = contact.number;
+                    contact2.updated = contact.updated;
                   }
                 })
                 this.contactsTotal = this.contactsVisible;
+                this.bindingPopups(contact);
                 console.log("finished 2");
               }
             })
@@ -201,7 +238,7 @@ export class Tab3Page implements OnInit, AfterViewInit {
     const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 18,
       minZoom: 3,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <a href="http://localhost:3001/listall"> - Get all coordinate data</a>'
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <a href="https://radioplatforminfrastructure.herokuapp.com/listall"> - Get all coordinate data</a>'
     });
     tiles.addTo(this.map);
   }
@@ -220,6 +257,7 @@ export class Tab3Page implements OnInit, AfterViewInit {
   updateArray() {
     this.contactsVisibleTotal = this.contactsVisible;
     this.contactsVisible = this.contactsTotal.filter(this.filterContacts, this);
+    this.bindingPopups(null);
   }
   filterContacts = function (contact: Contact) {
     let contactcountry = contact.location;

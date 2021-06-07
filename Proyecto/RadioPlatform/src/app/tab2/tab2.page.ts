@@ -18,10 +18,10 @@ radiosetsVisible: RadioSet[] = [];
 radiosetsTotal: RadioSet[] = [];
 allEquipment: Promise<DataSnapshot>
 favouriteRadioSet: string;
-amplitude: number;
-name: string;
-type: string;
-brand: string;
+amplitude: string = "";
+name: string = "";
+type: string = "";
+brand: string = "";
 isadmin: boolean = false;
   constructor(private firebaseObtainerService: FirebaseObtainerService, public modalController: ModalController, public storage: Storage,public afDatabase: AngularFireDatabase, public auth: AngularFireAuth) {}
   async ngOnInit() {
@@ -87,7 +87,7 @@ updateArray() {
   this.radiosetsVisible = this.radiosetsTotal.filter(this.filterAntennae, this);
 }
 filterAntennae = function(radioset: RadioSet) {
-  if ((this.name === undefined || radioset.name === this.name) && (this.brand === undefined || radioset.brand === this.brand) &&  (this.type === undefined || radioset.type === this.type) && (this.amplitude === undefined || radioset.amplitude === this.amplitude)) {
+  if ((this.name === "" || radioset.name === this.name) && (this.brand === "" || radioset.brand === this.brand) &&  (this.type === "" || radioset.type === this.type) && (this.amplitude === "" || radioset.amplitude === this.amplitude)) {
     return true;
   } else {
     return false;

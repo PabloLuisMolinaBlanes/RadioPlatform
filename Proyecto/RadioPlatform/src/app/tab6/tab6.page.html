@@ -27,7 +27,7 @@
     <ion-select-option value="no">No</ion-select-option>
   </ion-select>
   <p *ngIf="transmitting === 'yes'">Frequency of transmission</p>
-  <ion-input *ngIf="transmitting === 'yes'"></ion-input>
+  <ion-input [(ngModel)]="transmittingFrequency" *ngIf="transmitting === 'yes'"></ion-input>
   <p>Update password</p>
   <ion-input type="password"></ion-input>
   <p>Callsign</p>

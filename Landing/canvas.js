@@ -4,12 +4,13 @@ window.onload = function() {
     var clicked = false;
     var clickedTrue = false;
     ctx.font = "30px Arial";
-    ctx.strokeText("Enter", 10, 50);
+    ctx.strokeText("Enter", 50, 50);
     canvas.addEventListener('click', function() {
-        window.location.href = "http://localhost:8081/login"
+        window.location.href = "http://localhost:8100/login"
     })
     var hamburger = document.getElementById("hamburger");
     var divs = document.getElementsByClassName("link");
+    var menu = document.getElementById("navbar");
     hamburger.onclick = function() {
         if (hamburger.style.visibility != "hidden") {
             if (clicked === false) {

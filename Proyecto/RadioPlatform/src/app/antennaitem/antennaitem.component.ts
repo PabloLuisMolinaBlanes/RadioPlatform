@@ -19,7 +19,7 @@ export class AntennaitemComponent implements OnInit {
   ngOnInit() {
     setTimeout(() => {
       this.antennae.forEach(ant => {
-        var test = ant.id + ant.name + ' ' + ant.brand;
+        var test = ant.id + ' ' + ant.name + ' ' + ant.brand;
         if (test === this.favouriteAntenna) {
           ant.isfavourite = true;
         }
@@ -96,7 +96,7 @@ export class AntennaitemComponent implements OnInit {
   }
   sendFavouriteData(antenna: Antenna) {
     if (antenna.isfavourite) {
-      var favourite = antenna.id + antenna.name + ' ' + antenna.brand;
+      var favourite = antenna.id + ' ' + antenna.name + ' ' + antenna.brand;
     } else {
       var favourite = "";
     }

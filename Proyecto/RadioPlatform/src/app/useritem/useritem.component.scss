@@ -1,3 +1,18 @@
 table td, table th {
     padding: 20px;
 }
+@media (max-width:673px) {
+    table td, table th {
+        padding: 0px;
+    }
+}
+@media (max-height:673px) {
+    table td, table th {
+        padding: 5px;
+    }
+}
+@media (max-height:400px) {
+    table td, table th {
+        padding: 0px;
+    }
+}

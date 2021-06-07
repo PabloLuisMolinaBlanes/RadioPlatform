@@ -19,6 +19,7 @@ contact: Contact;
 @Input() frequency: string = null;
 @Input() recording?: SafeResourceUrl = null;
 @Input() id?: string;
+@Input() updated?: string;
 filename: string;
 audio: File = null;
 audioUrl: SafeResourceUrl;
@@ -79,7 +80,7 @@ audioUrl: SafeResourceUrl;
         this.firebaseUpdaterAndSetter.setContact(this.contact, this.audio);
       })
     } else {
-    this.contact = new Contact(this.frequency, this.audio, this.location, this.callsign, null, this.id);
+    this.contact = new Contact(this.frequency, this.audio, this.location, this.callsign, null, this.id, this.updated);
     this.contact.number = this.number;
     this.firebaseUpdaterAndSetter.updateContact(this.contact, this.audio);
     }

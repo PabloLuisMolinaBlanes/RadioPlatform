@@ -26,7 +26,8 @@ export class ContactitemComponent implements OnInit {
         'location': contact.location,
         'recording': contact.recording,
         'id': contact.id,
-        'number': contact.number
+        'number': contact.number,
+        'updated': contact.updated
        }
     });
     return await modal.present();

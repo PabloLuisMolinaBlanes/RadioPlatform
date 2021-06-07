@@ -46,6 +46,9 @@ div:not(#navbar, #welcomescreen, #imagecontainer, #audiocontainer) {
   position: relative;
   visibility: visible;
 }
+#hamburger:hover {
+  cursor: pointer;
+}
 
 video {
   align-content: center;

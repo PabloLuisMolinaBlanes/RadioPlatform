@@ -1,3 +1,5 @@
+import { SafeResourceUrl } from "@angular/platform-browser";
+
 export class User {
     id?: string;
     country: string;
@@ -9,7 +11,9 @@ export class User {
     transmitting?: boolean;
     favouriteAntenna?: string;
     favouriteRadioSet?: string;
-    constructor(country: string,preferredFrequency: string,username: string,status?:string,transmitting?: boolean,id?:string, password?: string,profilepicture?: File,callsign?: string) {
+    image?: SafeResourceUrl;
+    transmittingFrequency?: string;
+    constructor(country: string,preferredFrequency: string,username: string,status?:string,transmitting?: boolean,id?:string, password?: string,profilepicture?: File,callsign?: string, transmittingFrequency?: string) {
         this.id = id;
         this.country = country;
         this.preferredFrequency = preferredFrequency;
@@ -18,5 +22,6 @@ export class User {
         this.transmitting = transmitting;
         this.profilepicture = profilepicture;
         this.callsign = callsign;
+        this.transmittingFrequency = transmittingFrequency;
     }
 }

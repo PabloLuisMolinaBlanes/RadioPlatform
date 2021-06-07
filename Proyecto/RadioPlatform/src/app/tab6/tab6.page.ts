@@ -13,12 +13,13 @@ import {User} from '../user'
 })
 export class Tab6Page implements OnInit {
   @Input() email: string;
-  @Input() password: string;
+  @Input() password: string = undefined;
   @Input() status: string;
   @Input() transmitting: string;
   @Input() callsign: string;
   @Input() country: string;
   @Input() preferredFrequency: string;
+  @Input() transmittingFrequency: string;
   myself: User;
   image: File;
   filename: string;
@@ -72,10 +73,10 @@ export class Tab6Page implements OnInit {
   }
   public setUser() {
         this.afauth.currentUser.then(res => {
-            if (this.password !== undefined || this.password !== "") {
+            if (this.password !== undefined && this.password !== "") {
               res.updatePassword(this.password);
             }
-            let thisuser = new User(this.country, this.preferredFrequency, res.email, this.status === 'undefined' ? null : this.status, this.transmitting === 'yes' ? true : false, res.uid, null,null,this.callsign);
+            let thisuser = new User(this.country, this.preferredFrequency, res.email, this.status === 'undefined' ? null : this.status, this.transmitting === 'yes' ? true : false, res.uid, null,null,this.callsign, this.transmittingFrequency === undefined ? null : this.transmittingFrequency);
             if (this.image === undefined) {
               this.firebaseUpdaterAndSetter.updateUser(thisuser);
             } else {

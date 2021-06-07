@@ -1,16 +1,20 @@
 <table>
     <tr>
+        <th>Profile picture</th>
         <th>Nombre</th>
         <th>Callsign</th>
         <th>Country</th>
         <th>Status</th>
         <th>Transmitting</th>
+        <th>Favourites</th>
     </tr>
     <tr *ngFor="let user of users">
-        <td>{{user.name}}</td>
+        <td><img height="50px" width="50px" [src]="user.profilepicture" *ngIf="user.profilepicture !== undefined"><p *ngIf="user.profilepicture === undefined">N/A</p></td>
+        <td>{{user.username}}</td>
         <td>{{user.callsign}}</td>
         <td>{{user.country}}</td>
         <td>{{user.status}}</td>
-        <td>{{user.transmitting}}</td>
+        <td>{{user.transmitting}} <span> ({{ user.transmittingFrequency }})</span></td>
+        <td>{{user.favouriteAntenna}} - {{user.favouriteRadioSet}}</td>
 </tr>
 </table>

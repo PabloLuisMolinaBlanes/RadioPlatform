@@ -18,6 +18,6 @@
 <ion-button *ngIf="!(isadmin)" (click)="presentModalModifyUser(antenna)" [attr.aria-label]="'Modify ' + antenna.name"><ion-icon name="brush"></ion-icon></ion-button>
 <ion-button *ngIf="isadmin" (click)="presentDeleteConfirmation(antenna)" [attr.aria-label]="'Delete ' + antenna.name"><ion-icon name="close-circle"></ion-icon></ion-button>
 <ion-button *ngIf="isadmin" (click)="presentModalModify(antenna)" [attr.aria-label]="'Modify ' + antenna.name"><ion-icon name="create"></ion-icon></ion-button>
-<ion-checkbox [(ngModel)]="antenna.isfavourite" (ionChange)="sendFavouriteData(antenna)"></ion-checkbox>
+<ion-checkbox *ngIf="!(isadmin)" [(ngModel)]="antenna.isfavourite" (ionChange)="sendFavouriteData(antenna)"></ion-checkbox>
     </tr>
 </table>

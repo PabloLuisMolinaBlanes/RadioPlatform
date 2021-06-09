@@ -37,6 +37,20 @@ export class FirebaseUpdaterAndSetterService {
       });
     });
   }
+  setAntennaAdmin(antenna: Antenna) {
+    this.afDatabase.database.ref('/antennae/').push(antenna).then(r => {
+      this.afDatabase.database.ref('/antennae/'+r.key).update({id: r.key}).then(a => {
+        this.makeAddSuccessMessage();
+      });
+    })
+  }
+  setRadioSetAdmin(radioset: RadioSet) {
+    this.afDatabase.database.ref('/equipment/').push(radioset).then(r => {
+      this.afDatabase.database.ref('/equipment/'+r.key).update({id: r.key}).then(a => {
+        this.makeAddSuccessMessage();
+      });
+    })
+  }
   setFavouriteRadioSet(radioset: string) {
     this.auth.currentUser.then(user => {
       this.afDatabase.database.ref('users/' + user.uid).update({ favouriteRadioSet: radioset });

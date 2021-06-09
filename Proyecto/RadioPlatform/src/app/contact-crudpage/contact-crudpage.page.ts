@@ -67,18 +67,11 @@ audioUrl: SafeResourceUrl;
   submit() {
     if (this.id === undefined) {
       console.log("Warning, id has been detected as undefined!");
-      this.id = "placeholder";
-      this.store.get("contacts").then(cs => {
+        this.id = "placeholder";
         this.contact = new Contact(this.frequency, this.audio, this.location, this.callsign, null, this.id);
-        if (cs.length === 0) {
-          // this.contact.number = 0;
-          this.contact.number = "placeholder"
-        } else {
-          // this.contact.number = cs[cs.length-1].number + 1;
-          this.contact.number = "placeholder"
-        }
+        this.contact.number = "placeholder"
         this.firebaseUpdaterAndSetter.setContact(this.contact, this.audio);
-      })
+
     } else {
     this.contact = new Contact(this.frequency, this.audio, this.location, this.callsign, null, this.id, this.updated);
     this.contact.number = this.number;

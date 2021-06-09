@@ -5,8 +5,8 @@
 </ion-header>
 
 <ion-content>
-  <p>Please, choose an antenna if it already exists</p>
-  <ion-item>
+  <p *ngIf="!(isadmin)">Please, choose an antenna if it already exists</p>
+  <ion-item *ngIf="!(isadmin)">
     <ion-select [(ngModel)]="antenna" (ionChange)="updateAntenna()" placeholder="Antennae">
       <ion-select-option *ngFor="let antenna of antennaeTotal" [value]="antenna">{{ antenna.name }}</ion-select-option>
     </ion-select></ion-item>

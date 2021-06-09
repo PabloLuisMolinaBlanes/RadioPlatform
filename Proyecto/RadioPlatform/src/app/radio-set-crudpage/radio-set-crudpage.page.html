@@ -5,8 +5,8 @@
 </ion-header>
 
 <ion-content>
-  <p>Please, choose a radioset if it already exists</p>
-  <ion-item>
+  <p *ngIf="!(isadmin)">Please, choose a radioset if it already exists</p>
+  <ion-item *ngIf="!(isadmin)">
     <ion-select [(ngModel)]="equipment" (ionChange)="updateRadio()" placeholder="Equipment">
       <ion-select-option *ngFor="let radioset of radioSetTotal" [value]="radioset">{{ radioset.name }}</ion-select-option>
     </ion-select></ion-item>

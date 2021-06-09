@@ -17,6 +17,7 @@ export class RadioSetCRUDPagePage implements OnInit {
 @Input() result: boolean = null;
 @Input() id?: string = undefined;
 @Input() price: number = null;
+@Input() isadmin: boolean;
 radioSetTotal: RadioSet[] = [];
 equipment: RadioSet;
   constructor(private firebaseUpdaterAndSetter: FirebaseUpdaterAndSetterService, private firebaseObtainerService: FirebaseObtainerService, private modalController: ModalController) { }
@@ -42,11 +43,16 @@ equipment: RadioSet;
   submit() {
     if (this.id !== undefined) {
       this.radio = new RadioSet(this.brand, this.name, this.type, this.amplitude, this.id, this.price);
+      
       this.firebaseUpdaterAndSetter.updateRadioSet(this.radio);
     } else {
       this.id = "placeholder";
       this.radio = new RadioSet(this.brand, this.name, this.type, this.amplitude, this.id, this.price);
-      this.firebaseUpdaterAndSetter.setRadioSet(this.radio);
+      if (this.isadmin) {
+        this.firebaseUpdaterAndSetter.setRadioSetAdmin(this.radio);
+      } else {
+        this.firebaseUpdaterAndSetter.setRadioSet(this.radio);
+      }
     }
   }
 

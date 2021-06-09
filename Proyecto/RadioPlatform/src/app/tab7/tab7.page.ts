@@ -2,11 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { Antenna } from '../antenna';
 import { AlertController } from '@ionic/angular'
+import {ModalController} from '@ionic/angular'
 import { RadioSet } from '../radioset';
 import * as socket from 'socket.io-client';
 import { AngularFireAuth } from '../../../node_modules/@angular/fire/auth'
 import { NavController } from '@ionic/angular'
 import { AngularFireDatabase } from '../../../node_modules/@angular/fire/database'
+import { AntennaCRUDPagePage } from '../antenna-crudpage/antenna-crudpage.page';
+import { RadioSetCRUDPagePage } from '../radio-set-crudpage/radio-set-crudpage.page';
 @Component({
   selector: 'app-tab7',
   templateUrl: './tab7.page.html',
@@ -19,8 +22,16 @@ export class Tab7Page implements OnInit {
   antennaeVisible: Antenna[] = [];
   antennaeTotal: Antenna[] = [];
   socketio: any;
+  radioamplitude: string = "";
+  radioname: string = "";
+  radiotype: string = "";
+  radiobrand: string = "";
+antennaname: string = "";
+antennabrand: string = "";
+antennatype: string = "";
+antennaheight: string = "";
   isadmin: boolean = true;
-  constructor(private socket: Socket, public auth: AngularFireAuth, public afDatabase: AngularFireDatabase, public alertCtrl: AlertController, public router: NavController) { }
+  constructor(private socket: Socket, public auth: AngularFireAuth, public afDatabase: AngularFireDatabase, public alertCtrl: AlertController, public router: NavController, public modalController: ModalController) { }
   ngOnInit() {
     this.auth.currentUser.then(u => {
       if (u === null) {
@@ -39,7 +50,7 @@ export class Tab7Page implements OnInit {
         this.router.navigateRoot("/login");
       }
     });
-    this.socketio = socket.io("http://localhost:3001");
+    this.socketio = socket.io("https://radioplatforminfrastructure.herokuapp.com/");
     this.socketio.connect();
     this.socketio.on('newmessage', (data) => {
       this.messages.push(data);
@@ -154,6 +165,26 @@ export class Tab7Page implements OnInit {
     });
     (await alert).present();
   }
+  async presentModalAntenna(){
+    const modal = await this.modalController.create({
+      component:AntennaCRUDPagePage,
+      cssClass: 'placeholder',
+      componentProps: {
+        'isadmin': true
+      }
+    });
+    return await modal.present();
+  }
+  async presentModalRadioSet(){
+    const modal = await this.modalController.create({
+      component:RadioSetCRUDPagePage,
+      cssClass: 'placeholder',
+      componentProps: {
+        'isadmin': true
+      }
+    });
+    return await modal.present();
+  }
   async presentDeleteConfirmation(message: string) {
     let alert = this.alertCtrl.create({
       message: 'Are you sure you want to delete this message: ' + message + '?',
@@ -170,5 +201,26 @@ export class Tab7Page implements OnInit {
       ]
     });
     (await alert).present();
+  }
+  updateArrayRadio() {
+    this.radiosetsVisible = this.radiosetsTotal.filter(this.filterRadio, this);
+  }
+  filterRadio = function(radioset: RadioSet) {
+    if ((this.radioname === "" || radioset.name === this.radioname) && (this.radiobrand === "" || radioset.brand === this.radiobrand) &&  (this.radiotype === "" || radioset.type === this.radiotype) && (this.radioamplitude === "" || radioset.amplitude === this.radioamplitude)) {
+      return true;
+    } else {
+      return false;
+  }
+  }
+  updateArrayAntenna() {
+    this.antennaeVisible = this.antennaeTotal.filter(this.filterAntennae, this);
+  }
+  filterAntennae = function(antenna: Antenna) {
+    if ((this.antennaname === "" || antenna.name === this.antennaname) && (this.antennabrand === "" || antenna.brand === this.antennabrand) &&  (this.antennatype === "" || antenna.type === this.antennatype) && (this.antennaheight === "" || antenna.height === this.antennaheight)) {
+      return true;
+    } else {
+      return false;
+  }
+
   }
 }

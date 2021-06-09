@@ -16,7 +16,7 @@ socketio: any;
 
   ngOnInit() {
 
-    this.socketio = socket.io("http://localhost:3001");
+    this.socketio = socket.io("https://radioplatforminfrastructure.herokuapp.com/");
     this.socketio.connect();
     this.socketio.on('newmessage', (data, username, blocked) => {
       if (blocked === false) {

@@ -45,12 +45,15 @@ antennaeTotal: Antenna[] = [];
   submit() {
     if (this.id !== undefined) {
       this.antenna = new Antenna(this.type, this.name, this.range, this.height, this.brand, this.id, this.price);
-      if (this.isadmin) {}
       this.firebaseUpdaterAndSetter.updateAntenna(this.antenna);
     } else {
       this.id = "placeholder";
       this.antenna = new Antenna(this.type, this.name, this.range, this.height, this.brand, this.id, this.price);
-      this.firebaseUpdaterAndSetter.setAntenna(this.antenna);
+      if (this.isadmin) {
+        this.firebaseUpdaterAndSetter.setAntennaAdmin(this.antenna);
+      } else {      
+        this.firebaseUpdaterAndSetter.setAntenna(this.antenna);
+      }
     }
   }
 

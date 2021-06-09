@@ -8,7 +8,7 @@ import {environment} from '../environments/environment';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import {SocketIoModule, SocketIoConfig} from 'ngx-socket-io';
 import {Storage} from '@ionic/storage'
-const config: SocketIoConfig = {url: 'http://localhost:3001', options: {}};
+const config: SocketIoConfig = {url: 'http://radioplatforminfrastructure.herokuapp.com/', options: {}};
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {AngularFireDatabaseModule} from '@angular/fire/database';

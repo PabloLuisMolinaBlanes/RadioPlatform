@@ -195,6 +195,9 @@ I did multiple things, big update!
 * Now users can choose preferred antennae and equipment and have it be shown.
 * Now all users' profile pictures appear in the user list.
 * Added in the presentation I will be doing on the 21st.
+* Updated the landing page to reflect the changes.
+* Fixed styling error in canvas in the landing page.
+* Started some code refactoring efforts.
 
 The application is now, functionality-wise, finished, now it would only remain to do bug-fixing, and testing, loads of it.
 

@@ -14,11 +14,12 @@ RadioPlatform is an Angular platform thought for radio amateurs to have a safe p
 # Technologies
 RadioPlatform will use several technologies to accomplish its objectives.
 * Ionic and Angular for the frontend.
-* MySQL for caching coordinate data and usage limitation checking.
+* PostgreSQL for caching coordinate data and usage limitation checking.
 * Firebase Storage for holding users' pictures.
 * Firebase Database for holding users' data.
 * Express and node for holding the chat server and making an API to the MySQL server
 * Socket.io for chat application allowing
+* Heroku for holding the Express API
 * Leaflet for rendering the maps.
 * Nominatim for obtaining OpenStreetMap's data.
 # Mockup
@@ -173,4 +174,36 @@ To-do list:
 * Let users be shown data based on drop-down forms.
 * Improve feedback for the user.
 
+## May 30, 2021 - June 06, 2021
 
+I did multiple things, big update!
+
+* I added the API and database to the cloud (Heroku) and made them both work inside the application.
+* I made the admin panel, with full functionality.
+* Small visual changes on profile.
+* Added in all the chat moderation tools.
+* Added in function to add already existing radio sets and antennas.
+* Small visual changes on how price is shown.
+* Now when an user is blocked only that user will be able to see it.
+* Fixed bug where markers wouldn't show up properly on certain circumstances.
+* Changed MySQL with PostgreSQL as that is what Heroku used as a database system.
+* Fixed bug where registration wouldn't occur properly.
+* Fixed bugs where certain use cases in making contacts wouldn't add contacts properly.
+* Removed buttons from some components or hid them based if the user was in the admin panel or not.
+* Added basic verification to see if an user is admin or not and let them into the panel if they are.
+* Now all lists update and delete items from it in real time.
+* Now users can choose preferred antennae and equipment and have it be shown.
+* Now all users' profile pictures appear in the user list.
+* Added in the presentation I will be doing on the 21st.
+* Updated the landing page to reflect the changes.
+* Fixed styling error in canvas in the landing page.
+* Started some code refactoring efforts.
+
+The application is now, functionality-wise, finished, now it would only remain to do bug-fixing, and testing, loads of it.
+
+To-do list:
+
+* Test on phone.
+* Test on computer
+* Make a tutorial.
+* Make an explanatory video.

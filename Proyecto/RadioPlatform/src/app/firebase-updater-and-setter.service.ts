@@ -234,31 +234,50 @@ export class FirebaseUpdaterAndSetterService {
                 params.append('q', contact.location);
                 params.append('email', 'pablo.molina@iescampanillas.com');
                 this.https.get<any>('https://nominatim.openstreetmap.org/search.php?q=' + contact.location + '&email=pablo.molina@iescampanillas.com&format=json&limit=1', { headers }).toPromise().then(data => {
-                  const lat = data[0].lat;
-                  const lon = data[0].lon;
-                  console.log(lat);
-                  console.log(lon);
-                  contact.coordinates = "" + lat + "," + "" + lon;
-                  this.https.post<any>('https://radioplatforminfrastructure.herokuapp.com/newcoordinate/', { "coordenada": data[0].lat + "," + data[0].lon, "terminobusqueda": contact.location }).toPromise().then(data => {
-                    this.https.post<any>('https://radioplatforminfrastructure.herokuapp.com/operatecon/', {}).toPromise().then(data => {
-                      console.log(data);
-                      setTimeout(() => {
-                        this.https.post<any>('https://radioplatforminfrastructure.herokuapp.com/operatecon/', {}).toPromise().then(data => {
-                          console.log(data);
-                          contact.recording = null;
-                          console.log("uploading... (2)");
-                          this.auth.currentUser.then(user => {
-                            this.afDatabase.database.ref('users/' + user.uid + '/contacts/').push(contact).then((r) => {
-                              contact.number = r.key.replace("-", "").replace("_", "");
-                              this.afDatabase.database.ref('users/' + user.uid + '/contacts/' + r.key).update({ id: r.key, number: r.key.replace("-", "").replace("_", "") })
-                            }).then(r => {
-                              this.setContactMethod(contact, audio);
-                            });
-                          })
+                  if (data[0] === undefined) {
+                    this.alertCtrl.create({
+                      message: "No location has been found, please try another",
+                      buttons: [{
+                        text: "OK",
+                        role: 'ok'
+                      }]
+                    }).then(a => {
+                      a.present();
+                      this.https.post<any>('https://radioplatforminfrastructure.herokuapp.com/operatecon/', {}).toPromise().then(data => {
+                        console.log(data);
+                        setTimeout(() => {
+                          this.https.post<any>('https://radioplatforminfrastructure.herokuapp.com/operatecon/', {}).toPromise().then(data => {
                         });
-                      }, 3000);
+                      });
                     });
                   });
+                  } else {
+                    const lat = data[0].lat;
+                    const lon = data[0].lon;
+                    console.log(lat);
+                    console.log(lon);
+                    contact.coordinates = "" + lat + "," + "" + lon;
+                    this.https.post<any>('https://radioplatforminfrastructure.herokuapp.com/newcoordinate/', { "coordenada": data[0].lat + "," + data[0].lon, "terminobusqueda": contact.location }).toPromise().then(data => {
+                      this.https.post<any>('https://radioplatforminfrastructure.herokuapp.com/operatecon/', {}).toPromise().then(data => {
+                        console.log(data);
+                        setTimeout(() => {
+                          this.https.post<any>('https://radioplatforminfrastructure.herokuapp.com/operatecon/', {}).toPromise().then(data => {
+                            console.log(data);
+                            contact.recording = null;
+                            console.log("uploading... (2)");
+                            this.auth.currentUser.then(user => {
+                              this.afDatabase.database.ref('users/' + user.uid + '/contacts/').push(contact).then((r) => {
+                                contact.number = r.key.replace("-", "").replace("_", "");
+                                this.afDatabase.database.ref('users/' + user.uid + '/contacts/' + r.key).update({ id: r.key, number: r.key.replace("-", "").replace("_", "") })
+                              }).then(r => {
+                                this.setContactMethod(contact, audio);
+                              });
+                            })
+                          });
+                        }, 3000);
+                      });
+                    }); 
+                  }
                 });
               } else {
                 this.alertCtrl.create({
@@ -326,28 +345,47 @@ export class FirebaseUpdaterAndSetterService {
                 params.append('q', contact.location);
                 params.append('email', 'pablo.molina@iescampanillas.com');
                 this.https.get<any>('https://nominatim.openstreetmap.org/search.php?q=' + contact.location + '&email=pablo.molina@iescampanillas.com&format=json&limit=1', { headers }).toPromise().then(data => {
-                  const lat = data[0].lat;
-                  const lon = data[0].lon;
-                  console.log(lat);
-                  console.log(lon);
-                  contact.coordinates = "" + lat + "," + "" + lon;
-                  this.https.post<any>('https://radioplatforminfrastructure.herokuapp.com/newcoordinate/', { "coordenada": data[0].lat + "," + data[0].lon, "terminobusqueda": contact.location }).toPromise().then(data => {
-                    this.https.post<any>('https://radioplatforminfrastructure.herokuapp.com/operatecon/', {}).toPromise().then(data => {
-                      console.log(data);
-                      setTimeout(() => {
-                        this.https.post<any>('https://radioplatforminfrastructure.herokuapp.com/operatecon/', {}).toPromise().then(data => {
-                          console.log(data);
-                          contact.recording = null;
-                          console.log("uploading... (2)");
-                          this.auth.currentUser.then(user => {
-                            this.afDatabase.database.ref('users/' + user.uid + '/contacts/' + contact.id).update(contact).then(r => {
-                              this.updateContactMethod(contact, audio);
-                            });
-                          });
+                  if (data[0] === undefined) {
+                    this.alertCtrl.create({
+                      message: "No location has been found, please try another",
+                      buttons: [{
+                        text: "OK",
+                        role: 'ok'
+                      }]
+                    }).then(a => {
+                      a.present();
+                      this.https.post<any>('https://radioplatforminfrastructure.herokuapp.com/operatecon/', {}).toPromise().then(data => {
+                        console.log(data);
+                        setTimeout(() => {
+                          this.https.post<any>('https://radioplatforminfrastructure.herokuapp.com/operatecon/', {}).toPromise().then(data => {
                         });
-                      }, 3000);
+                      });
                     });
                   });
+                  } else {
+                    const lat = data[0].lat;
+                    const lon = data[0].lon;
+                    console.log(lat);
+                    console.log(lon);
+                    contact.coordinates = "" + lat + "," + "" + lon;
+                    this.https.post<any>('https://radioplatforminfrastructure.herokuapp.com/newcoordinate/', { "coordenada": data[0].lat + "," + data[0].lon, "terminobusqueda": contact.location }).toPromise().then(data => {
+                      this.https.post<any>('https://radioplatforminfrastructure.herokuapp.com/operatecon/', {}).toPromise().then(data => {
+                        console.log(data);
+                        setTimeout(() => {
+                          this.https.post<any>('https://radioplatforminfrastructure.herokuapp.com/operatecon/', {}).toPromise().then(data => {
+                            console.log(data);
+                            contact.recording = null;
+                            console.log("uploading... (2)");
+                            this.auth.currentUser.then(user => {
+                              this.afDatabase.database.ref('users/' + user.uid + '/contacts/' + contact.id).update(contact).then(r => {
+                                this.updateContactMethod(contact, audio);
+                              });
+                            });
+                          });
+                        }, 3000);
+                      });
+                    });
+                  }
                 });
               } else {
                 this.alertCtrl.create({

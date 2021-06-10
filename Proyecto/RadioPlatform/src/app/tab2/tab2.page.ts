@@ -47,7 +47,18 @@ isadmin: boolean = false;
               ant.id = child.id;
             }
           });
-          this.radiosetsTotal = this.radiosetsVisible;
+          this.radiosetsTotal.forEach(ant => {
+            console.log(ant);
+            if (child.id === ant.id || ant.id === "placeholder") {
+              console.log("found radioset");
+              ant.name = child.name;
+              ant.type = child.type;
+              ant.brand = child.brand;
+              ant.amplitude = child.amplitude;
+              ant.price = child.price;
+              ant.id = child.id;
+            }
+          });
           this.storage.set('antennae', this.radiosetsTotal);
         }, () => {console.log("error here")}, this);
         this.afDatabase.database.ref("users/"+user.uid+"/equipment").on("child_removed", function (childsnapshot) {
@@ -59,7 +70,12 @@ isadmin: boolean = false;
               this.radiosetsVisible = this.radiosetsVisible.filter(antenna => antenna !== ant);
             }
           });
-          this.radiosetsTotal = this.radiosetsVisible;
+          this.radiosetsTotal.forEach(ant => {
+            if (child.id === ant.id) {
+              console.log("found deleted radioset");
+              this.radiosetsTotal = this.radiosetsTotal.filter(antenna => antenna !== ant);
+            }
+          });
           this.storage.set('antennae', this.radiosetsTotal);
         }, () => {console.log("error here")}, this);
         this.afDatabase.database.ref("users/"+user.uid+"/favouriteRadioSet").on("value", function (childsnapshot) {

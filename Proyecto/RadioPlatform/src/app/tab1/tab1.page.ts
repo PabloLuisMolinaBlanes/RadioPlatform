@@ -51,7 +51,19 @@ isadmin: boolean = false;
             ant.id = child.id;
           }
         });
-        this.antennaeTotal = this.antennaeVisible;
+        this.antennaeTotal.forEach(ant => {
+          if (child.id === ant.id || ant.id === "placeholder") {
+            console.log(ant);
+            console.log("found antenna");
+            ant.name = child.name;
+            ant.type = child.type;
+            ant.height = child.height;
+            ant.brand = child.brand;
+            ant.range = child.range;
+            ant.price = child.price;
+            ant.id = child.id;
+          }
+        });
         this.storage.set('antennae', this.antennaeTotal);
       }, () => {console.log("error here")}, this);
       this.afDatabase.database.ref("users/"+user.uid+"/antennae").on("child_removed", function (childsnapshot) {
@@ -63,7 +75,12 @@ isadmin: boolean = false;
             this.antennaeVisible = this.antennaeVisible.filter(antenna => antenna !== ant);
           }
         });
-        this.antennaeTotal = this.antennaeVisible;
+        this.antennaeTotal.forEach(ant => {
+          if (child.id === ant.id) {
+            console.log("found deleted");
+            this.antennaeTotal = this.antennaeTotal.filter(antenna => antenna !== ant);
+          }
+        });
         this.storage.set('antennae', this.antennaeTotal);
       }, () => {console.log("error here")}, this);
       this.afDatabase.database.ref("users/"+user.uid+"/favouriteAntenna").on("value", function (childsnapshot) {

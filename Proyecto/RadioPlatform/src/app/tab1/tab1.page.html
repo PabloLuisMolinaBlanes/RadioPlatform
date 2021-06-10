@@ -15,26 +15,33 @@
   <ion-item>
     <ion-select [(ngModel)]="name" (ionChange)="updateArray()" placeholder="Nombre">
       <ion-select-option value="">All</ion-select-option>
-      <ion-select-option *ngFor="let antenna of antennaeTotal" [value]="antenna.name">{{antenna.name}}</ion-select-option>
-    </ion-select></ion-item>
+      <ion-select-option *ngFor="let antenna of antennaeTotal" [value]="antenna.name">{{antenna.name}}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
   <ion-item>
     <ion-select placeholder="Marca" [(ngModel)]="brand" (ionChange)="updateArray()">
       <ion-select-option value="">All</ion-select-option>
-      <ion-select-option *ngFor="let antenna of antennaeTotal" [value]="antenna.brand">{{antenna.brand}}</ion-select-option>
+      <ion-select-option *ngFor="let antenna of antennaeTotal" [value]="antenna.brand">{{antenna.brand}}
+      </ion-select-option>
     </ion-select>
   </ion-item>
   <ion-item>
     <ion-select placeholder="Tipo" [(ngModel)]="type" (ionChange)="updateArray()">
       <ion-select-option value="">All</ion-select-option>
-      <ion-select-option *ngFor="let antenna of antennaeTotal" [value]="antenna.type">{{antenna.type}}</ion-select-option>
-    </ion-select></ion-item>
-    <ion-item>
-        <ion-select placeholder="Altura" [(ngModel)]="height" (ionChange)="updateArray()">
-          <ion-select-option value="">All</ion-select-option>
-          <ion-select-option *ngFor="let antenna of antennaeTotal" [value]="antenna.height">{{antenna.height}}</ion-select-option>
-        </ion-select>
-    </ion-item>
-      <app-antennaitem [antennae]="antennaeVisible" [favouriteAntenna]="favouriteAntenna" [isadmin]="isadmin"></app-antennaitem>
-    <ion-button (click)="presentModal()">Add new</ion-button>
-    <ion-button (click)="presentCalculator()">Price calculator</ion-button>
+      <ion-select-option *ngFor="let antenna of antennaeTotal" [value]="antenna.type">{{antenna.type}}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-select placeholder="Altura" [(ngModel)]="height" (ionChange)="updateArray()">
+      <ion-select-option value="">All</ion-select-option>
+      <ion-select-option *ngFor="let antenna of antennaeTotal" [value]="antenna.height">{{antenna.height}}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+  <app-antennaitem [antennae]="antennaeVisible" [favouriteAntenna]="favouriteAntenna" [isadmin]="isadmin">
+  </app-antennaitem>
+  <ion-button *ngIf="name === '' && brand === '' && type === '' && height === ''" (click)="presentModal()">Add new</ion-button>
+  <ion-button (click)="presentCalculator()">Price calculator</ion-button>
 </ion-content>

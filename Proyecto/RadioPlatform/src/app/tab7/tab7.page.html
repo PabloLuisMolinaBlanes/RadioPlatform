@@ -48,7 +48,7 @@
         </ion-select>
       </ion-item>
       <app-antennaitem [antennae]="antennaeVisible" [isadmin]="isadmin"></app-antennaitem>
-      <ion-button (click)="presentModalAntenna()">Add new</ion-button>
+      <ion-button *ngIf="antennaname === '' && antennabrand === '' && antennatype === '' && antennaheight === ''" (click)="presentModalAntenna()">Add new</ion-button>
     </div>
     <div id="radiocontainer">
       <p>Radios</p>
@@ -81,7 +81,7 @@
         </ion-select>
       </ion-item>
       <app-radiosetitem [equipment]="radiosetsVisible" [isadmin]="isadmin"></app-radiosetitem>
-      <ion-button (click)="presentModalRadioSet()">Add new</ion-button>
+      <ion-button *ngIf="radioname === '' && radiobrand === '' && radiotype === '' && radioamplitude === ''" (click)="presentModalRadioSet()">Add new</ion-button>
     </div>
   </div>
 

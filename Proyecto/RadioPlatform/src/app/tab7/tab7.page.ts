@@ -67,10 +67,12 @@ antennaheight: string = "";
     this.afDatabase.database.ref("/equipment").on("child_added", function (childsnapshot) {
       this.radiosetsTotal.push(childsnapshot.val() as unknown as RadioSet);
       this.radiosetsVisible = this.radiosetsTotal;
+      this.updateArrayRadio();
     }, () => { console.log("error here") }, this);
     this.afDatabase.database.ref("/antennae").on("child_added", function (childsnapshot) {
       this.antennaeTotal.push(childsnapshot.val() as unknown as Antenna);
       this.antennaeVisible = this.antennaeTotal;
+      this.updateArrayAntenna();
     }, () => { console.log("error here") }, this);
     this.afDatabase.database.ref("/antennae").on("child_changed", function (childsnapshot) {
       var child = childsnapshot.val() as unknown as Antenna;
@@ -89,7 +91,19 @@ antennaheight: string = "";
           ant.id = child.id;
         }
       });
-      this.antennaeTotal = this.antennaeVisible;
+      this.antennaeTotal.forEach(ant => {
+        if (child.id === ant.id || ant.id === "placeholder") {
+          console.log(ant);
+          console.log("found antenna");
+          ant.name = child.name;
+          ant.type = child.type;
+          ant.height = child.height;
+          ant.brand = child.brand;
+          ant.range = child.range;
+          ant.price = child.price;
+          ant.id = child.id;
+        }
+      });
       this.storage.set('antennae', this.antennaeTotal);
     }, () => { console.log("error here") }, this);
     this.afDatabase.database.ref("/antennae").on("child_removed", function (childsnapshot) {
@@ -101,7 +115,12 @@ antennaheight: string = "";
           this.antennaeVisible = this.antennaeVisible.filter(antenna => antenna !== ant);
         }
       });
-      this.antennaeTotal = this.antennaeVisible;
+      this.antennaeTotal.forEach(ant => {
+        if (child.id === ant.id) {
+          console.log("found deleted");
+          this.antennaeTotal = this.antennaeTotal.filter(antenna => antenna !== ant);
+        }
+      });
       this.storage.set('antennae', this.antennaeTotal);
     }, () => { console.log("error here") }, this);
     this.afDatabase.database.ref("/equipment").on("child_changed", function (childsnapshot) {
@@ -119,7 +138,18 @@ antennaheight: string = "";
           ant.id = child.id;
         }
       });
-      this.radiosetsTotal = this.radiosetsVisible;
+      this.radiosetsTotal.forEach(ant => {
+        console.log(ant);
+        if (child.id === ant.id || ant.id === "placeholder") {
+          console.log("found radioset");
+          ant.name = child.name;
+          ant.type = child.type;
+          ant.brand = child.brand;
+          ant.amplitude = child.amplitude;
+          ant.price = child.price;
+          ant.id = child.id;
+        }
+      });
       this.storage.set('antennae', this.radiosetsTotal);
     }, () => { console.log("error here") }, this);
     this.afDatabase.database.ref("/equipment").on("child_removed", function (childsnapshot) {
@@ -131,7 +161,12 @@ antennaheight: string = "";
           this.radiosetsVisible = this.radiosetsVisible.filter(antenna => antenna !== ant);
         }
       });
-      this.radiosetsTotal = this.radiosetsVisible;
+      this.radiosetsTotal.forEach(ant => {
+        if (child.id === ant.id) {
+          console.log("found deleted radioset");
+          this.radiosetsTotal = this.radiosetsTotal.filter(antenna => antenna !== ant);
+        }
+      });
       this.storage.set('antennae', this.radiosetsTotal);
     }, () => { console.log("error here") }, this);
   }

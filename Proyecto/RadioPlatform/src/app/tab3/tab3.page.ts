@@ -47,17 +47,23 @@ export class Tab3Page implements OnInit, AfterViewInit {
   }
   bindingPopups(contact: Contact) {
     this.markers.forEach(marker => {
-      this.map.removeLayer(marker);
+      if (marker !== null) {
+        this.map.removeLayer(marker);
+      }
     });
     this.markers = [];
     console.log("Removed all markers");
     this.contactsVisible.forEach(contact2 => {
+      if (contact2.location !== undefined) {
         const lat = contact2.coordinates.substr(0, contact2.coordinates.search(",")) as unknown as number;
         const lon = contact2.coordinates.substr(contact2.coordinates.search(",") + 1, contact2.coordinates.length) as unknown as number;
         const marker = L.marker([lat, lon]);
         this.markers.push(marker);
         marker.bindPopup(`<div>Frecuencia: ${contact2.frequency}</div>` + `<div>Localización: ${contact2.location}</div>` + `<div>Signo de llamada: ${contact2.callsign}</div>`);
         marker.addTo(this.map);
+      } else {
+        this.markers.push(null);
+      }
     });
     var found = false;
     var contactsFound = [];
@@ -69,7 +75,7 @@ export class Tab3Page implements OnInit, AfterViewInit {
       var rearrangedArray = this.contactsVisible.reverse();
       var countArrays = 0;
      rearrangedArray.forEach(contact => {
-        if (contactsFound[''+contact.location] === undefined) {
+        if (contactsFound[''+contact.location] === undefined && contact.location !== undefined) {
           contactsFound[''+contact.location] = countArrays;
         }
         countArrays += 1;
@@ -77,7 +83,7 @@ export class Tab3Page implements OnInit, AfterViewInit {
   
       this.contactsVisible = originalArray;
       for (let j = 0; j < this.contactsVisible.length; j += 1) {
-        if (this.contactsVisible[i].location === this.contactsVisible[j].location && contactsFound[''+this.contactsVisible[j].location] !== this.contactsVisible.length - 1 - j && contactsFound[''+this.contactsVisible[i].location+"_found"] !== 1) {
+        if (this.contactsVisible[i].location === this.contactsVisible[j].location && this.contactsVisible[j].location !== undefined && contactsFound[''+this.contactsVisible[j].location] !== this.contactsVisible.length - 1 - j && contactsFound[''+this.contactsVisible[i].location+"_found"] !== 1) {
           found = true;
           let originalArray2 = [];
           this.contactsVisible.forEach(contact => {
@@ -161,8 +167,8 @@ export class Tab3Page implements OnInit, AfterViewInit {
         this.afDatabase.database.ref("users/" + user.uid + "/contacts").on("child_removed", function (childsnapshot) {
           const child = childsnapshot.val() as unknown as Contact;
           const index = this.contactsVisible.findIndex(c => c.id === child.id);
+          this.contactsTotal = this.contactsTotal.filter(c => c.id !== child.id);
           this.contactsVisible = this.contactsVisible.filter(c => c.id !== child.id);
-          this.contactsTotal = this.contactsVisible;
           this.bindingPopups(null);
         }, () => { console.log("error here") }, this)
 
@@ -201,12 +207,35 @@ export class Tab3Page implements OnInit, AfterViewInit {
                       contact2.updated = contact.updated;
                     }
                   })
-                  this.contactsTotal = this.contactsVisible;
+                  this.contactsTotal.forEach(contact2 => {
+                    if (contact2.id === contact.id || contact2.id === "placeholder") {
+                      contact2.frequency = contact.frequency;
+                      contact2.recording = this.sanitizer.bypassSecurityTrustResourceUrl(data);
+                      contact2.callsign = contact.callsign;
+                      contact2.location = contact.location;
+                      contact2.coordinates = contact.coordinates;
+                      contact2.id = contact.id;
+                      contact2.number = contact.number;
+                      contact2.updated = contact.updated;
+                    }
+                  })
                   this.bindingPopups(contact);
                   console.log("finished 1");
                 });
               } else {
                 this.contactsVisible.forEach(contact2 => {
+                  if (contact2.id === contact.id || contact2.id === "placeholder") {
+                    contact2.frequency = contact.frequency;
+                    contact2.recording = undefined;
+                    contact2.callsign = contact.callsign;
+                    contact2.location = contact.location;
+                    contact2.coordinates = contact.coordinates;
+                    contact2.id = contact.id;
+                    contact2.number = contact.number;
+                    contact2.updated = contact.updated;
+                  }
+                })
+                this.contactsTotal.forEach(contact2 => {
                   if (contact2.id === contact.id || contact2.id === "placeholder") {
                     contact2.frequency = contact.frequency;
                     contact2.recording = undefined;
@@ -261,7 +290,8 @@ export class Tab3Page implements OnInit, AfterViewInit {
   }
   filterContacts = function (contact: Contact) {
     let contactcountry = contact.location;
-    if ((this.country === "placeholder" || contactcountry === this.country)) {
+    let contactfrequency = contact.frequency;
+    if ((this.country === "placeholder" || contactcountry === this.country) && (this.frequency === "placeholder" || contactfrequency === this.frequency)) {
       return true;
     } else {
       return false;

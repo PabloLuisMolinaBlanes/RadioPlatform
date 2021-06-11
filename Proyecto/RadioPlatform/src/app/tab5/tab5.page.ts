@@ -16,7 +16,7 @@ export class Tab5Page implements OnInit {
 usersTotal: User[] = [];
 usersVisible: User[] = [];
 allUsers: Promise<DataSnapshot>;
-transmitting: boolean;
+transmitting: string;
 frequency: string = "";
 status: string = "";
 country: string = "";
@@ -76,7 +76,7 @@ this.allUsers.then(m => {
   }
   filterusers = function(user: User) {
     console.log(this.frequency);
-    if ((this.transmitting === undefined || user.transmitting === this.transmitting) && (this.status === "" || user.status === this.status) &&  (this.country === "" || user.country === this.country) && (this.frequency === "" || user.preferredFrequency === this.frequency)) {
+    if ((this.status === "" || user.status === this.status) &&  (this.country === "" || user.country === this.country) && (this.frequency === "" || user.preferredFrequency === this.frequency) && (this.transmitting === "" || user.transmitting === (this.transmitting === "true" ? true : false))) {
       return true;
     } else {
       return false;

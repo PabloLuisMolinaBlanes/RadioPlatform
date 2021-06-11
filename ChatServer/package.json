@@ -4,7 +4,8 @@
   "description": "A server for the chat in my RadioPlatform hybrid app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "mysql": "^2.18.1",
+    "pg": "^8.6.0",
     "socket.io": "^4.0.1"
   }
 }

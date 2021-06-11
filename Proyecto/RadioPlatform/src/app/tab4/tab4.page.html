@@ -12,9 +12,11 @@
   </ion-header>
 <div id="chat-container">
   <div id="chat-window">
-    <p *ngFor="let message of messages">{{ message }}</p>
+    <p *ngFor="let message of messages">{{ message }}<ion-button (click)="presentBlockConfirmation(message)" [attr.aria-label]="'Block user'"><ion-icon name="close-circle-outline"></ion-icon></ion-button></p>
   </div>
   <ion-input type="text" placeholder="Write your message here" [(ngModel)]="message"></ion-input>  
 </div>
 <ion-button (click)="send()">Send</ion-button>
+<p>Blocked people.</p>
+<p *ngFor="let blocked of blockedusers">{{blocked}}<ion-button (click)="presentUnBlockConfirmation(blocked)" [attr.aria-label]="'Unblock user'"><ion-icon name="close-circle-outline"></ion-icon></ion-button></p>
 </ion-content>

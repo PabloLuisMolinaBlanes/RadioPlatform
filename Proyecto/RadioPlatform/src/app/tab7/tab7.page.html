@@ -11,10 +11,15 @@
     </ion-toolbar>
   </ion-header>
   <div id="grid">
-    <div id="chat-window">
-      <p *ngFor="let message of messages">{{ message }}
-        <ion-button (click)="presentBlockDialog(message)" [attr.aria-label]="'Block user'"><ion-icon name="stopwatch"></ion-icon></ion-button>
-        <ion-button (click)="presentDeleteConfirmation(message)" [attr.aria-label]="'Delete message'"><ion-icon name="close-circle-outline"></ion-icon></ion-button>
+    <div id="chat">
+      <div id="chat-window">
+        <p *ngFor="let message of messages">{{ message }}
+          <ion-button (click)="presentBlockDialog(message)" [attr.aria-label]="'Block user'"><ion-icon name="stopwatch"></ion-icon></ion-button>
+          <ion-button (click)="presentDeleteConfirmation(message)" [attr.aria-label]="'Delete message'"><ion-icon name="close-circle-outline"></ion-icon></ion-button>
+        </p>
+      </div>
+      <p>Blocked users:</p>
+      <p *ngFor="let blocked of indefblockedusers">{{blocked}}<ion-button (click)="presentUnblockConfirmation(blocked)" [attr.aria-label]="'Unblock user'"><ion-icon name="close-circle-outline"></ion-icon></ion-button>
       </p>
     </div>
     <div id="antennacontainer">

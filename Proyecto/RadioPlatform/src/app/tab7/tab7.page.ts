@@ -30,6 +30,7 @@ antennaname: string = "";
 antennabrand: string = "";
 antennatype: string = "";
 antennaheight: string = "";
+indefblockedusers: string[] = [];
   isadmin: boolean = true;
   constructor(private socket: Socket, public auth: AngularFireAuth, public afDatabase: AngularFireDatabase, public alertCtrl: AlertController, public router: NavController, public modalController: ModalController) { }
   ngOnInit() {
@@ -50,6 +51,7 @@ antennaheight: string = "";
         this.router.navigateRoot("/login");
       }
     });
+
     this.socketio = socket.io("https://radioplatforminfrastructure.herokuapp.com/");
     this.socketio.connect();
     this.socketio.on('newmessage', (data) => {
@@ -63,6 +65,43 @@ antennaheight: string = "";
         console.log("It should have worked");
 
       }
+    });
+    this.socketio.on('addthisadmin', (data) => {
+      console.log("indefblocked");
+      console.log(data);
+      this.indefblockedusers = data;
+    })
+    this.socketio.on('addthisadmin2', (data) => {
+      if (Object.keys(data) !== undefined) {
+        this.indefblockedusers.forEach((key, index) => {
+          var ignore = false;
+          if (!(ignore)) {
+            if (this.indefblockedusers[index].indexOf("(") !== -1) {
+              key = this.indefblockedusers[index].substr(0, this.indefblockedusers[index].indexOf("(")-1);
+            }
+            if (!(data[key] === 0)) {
+              if (this.indefblockedusers[index] === undefined) {
+                  this.indefblockedusers.push(key);
+              } else {
+                if (this.indefblockedusers[index].indexOf("(") !== -1) {
+                    this.indefblockedusers[index] = this.indefblockedusers[index].substr(0, this.indefblockedusers[index].indexOf("(")-1);
+                }
+              }
+             } else {
+              if (this.indefblockedusers[index] !== undefined) {
+                if (this.indefblockedusers[index].indexOf("(") === -1) {
+                    this.indefblockedusers[index] = this.indefblockedusers[index] + " (not blocked anymore)";
+                  }
+              }
+            }
+          }
+        })
+        console.log(data);
+        console.log(this.indefblockedusers);
+      }
+    })
+    this.socketio.on('addthis', data => {
+      console.log(data);
     });
     this.afDatabase.database.ref("/equipment").on("child_added", function (childsnapshot) {
       this.radiosetsTotal.push(childsnapshot.val() as unknown as RadioSet);
@@ -170,6 +209,25 @@ antennaheight: string = "";
       this.storage.set('antennae', this.radiosetsTotal);
     }, () => { console.log("error here") }, this);
   }
+  async presentUnblockConfirmation(message: string) {
+    let alert = this.alertCtrl.create({
+      message: 'Are you sure you want to unblock this user: ' + message + '?',
+      buttons: [{
+        text: 'Cancel',
+        role: 'cancel'
+      },
+      {
+        text: 'Unblock',
+        handler: () => {
+          console.log("executed");
+          this.socketio.emit('unblock', message);
+          this.indefblockedusers = this.indefblockedusers.filter(user => user !== message);
+        }
+      }
+      ]
+    });
+    (await alert).present();
+  }
   async presentBlockDialog(message: string) {
 
     let alert = this.alertCtrl.create({
@@ -181,19 +239,26 @@ antennaheight: string = "";
       {
         text: '5 min',
         handler: () => {
-          this.socketio.emit('block', message.substr(0, message.search(":")), 30000);
+          this.socketio.emit('block', message.substr(0, message.search(":")), 300000);
         }
       },
       {
         text: '10 min',
         handler: () => {
-          this.socketio.emit('block', message.substr(0, message.search(":")), 60000);
-        }
+          this.socketio.emit('block', message.substr(0, message.search(":")), 600000);     
+         }
       },
       {
         text: '15 min',
         handler: () => {
-          this.socketio.emit('block', message.substr(0, message.search(":")), 90000);
+          this.socketio.emit('block', message.substr(0, message.search(":")), 900000);     
+        }
+      },
+      {
+        text: 'Indefinitely',
+        handler: () => {
+          this.socketio.emit('block', message.substr(0, message.search(":")), -1);
+          this.indefblockedusers.push(message.substr(0, message.search(":")));
         }
       }
       ]

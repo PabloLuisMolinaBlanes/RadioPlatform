@@ -12,8 +12,8 @@ const config: SocketIoConfig = {url: 'http://radioplatforminfrastructure.herokua
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
-import { FirebaseUpdaterAndSetterService } from './firebase-updater-and-setter.service';
-import { FirebaseObtainerService } from './firebase-obtainer.service';
+import { FirebaseUpdaterAndSetterService } from './services/firebase-updater-and-setter.service';
+import { FirebaseObtainerService } from './services/firebase-obtainer.service';
 import { HttpClientModule } from '@angular/common/http';
 import {IonicStorageModule} from '@ionic/storage-angular'
 @NgModule({

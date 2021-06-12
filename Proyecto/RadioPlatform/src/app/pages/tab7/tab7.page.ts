@@ -30,7 +30,7 @@ antennaname: string = "";
 antennabrand: string = "";
 antennatype: string = "";
 antennaheight: string = "";
-indefblockedusers: string[] = [];
+indefblockedusers: {};
   isadmin: boolean = true;
   constructor(private socket: Socket, public auth: AngularFireAuth, public afDatabase: AngularFireDatabase, public alertCtrl: AlertController, public router: NavController, public modalController: ModalController) { }
   ngOnInit() {
@@ -73,31 +73,32 @@ indefblockedusers: string[] = [];
     })
     this.socketio.on('addthisadmin2', (data) => {
       if (Object.keys(data) !== undefined) {
-        this.indefblockedusers.forEach((key, index) => {
+        Object.keys(data).forEach((key, index) => {
           var ignore = false;
           if (!(ignore)) {
-            if (this.indefblockedusers[index].indexOf("(") !== -1) {
-              key = this.indefblockedusers[index].substr(0, this.indefblockedusers[index].indexOf("(")-1);
+            if (this.indefblockedusers[key]  !== undefined) {
+              if (this.indefblockedusers[key].indexOf("(") !== -1) {
+                key = this.indefblockedusers[key].substr(0, this.indefblockedusers[key].indexOf("(")-1);
+              }
             }
             if (!(data[key] === 0)) {
-              if (this.indefblockedusers[index] === undefined) {
-                  this.indefblockedusers.push(key);
+              if (this.indefblockedusers[key] === undefined) {
+                  this.indefblockedusers[key] = key;
               } else {
-                if (this.indefblockedusers[index].indexOf("(") !== -1) {
-                    this.indefblockedusers[index] = this.indefblockedusers[index].substr(0, this.indefblockedusers[index].indexOf("(")-1);
+                if (this.indefblockedusers[key].indexOf("(") !== -1) {
+                    this.indefblockedusers[key] = this.indefblockedusers[key].substr(0, this.indefblockedusers[key].indexOf("(")-1);
                 }
               }
              } else {
-              if (this.indefblockedusers[index] !== undefined) {
-                if (this.indefblockedusers[index].indexOf("(") === -1) {
-                    this.indefblockedusers[index] = this.indefblockedusers[index] + " (not blocked anymore)";
+              if (this.indefblockedusers[key] !== undefined) {
+                if (this.indefblockedusers[key].indexOf("(") === -1) {
+                    this.indefblockedusers[key] = this.indefblockedusers[key] + " (not blocked anymore)";
                   }
               }
             }
           }
         })
         console.log(data);
-        console.log(this.indefblockedusers);
       }
     })
     this.socketio.on('addthis', data => {
@@ -221,7 +222,7 @@ indefblockedusers: string[] = [];
         handler: () => {
           console.log("executed");
           this.socketio.emit('unblock', message);
-          this.indefblockedusers = this.indefblockedusers.filter(user => user !== message);
+          delete this.indefblockedusers[message];
         }
       }
       ]
@@ -240,26 +241,34 @@ indefblockedusers: string[] = [];
         text: '5 min',
         handler: () => {
           this.socketio.emit('block', message.substr(0, message.search(":")), 300000);
+          var temparray = Object.entries(this.indefblockedusers);
+          temparray[message.substr(0, message.search(":"))] = message.substr(0, message.search(":"));
+          this.indefblockedusers = Object.assign(temparray);
         }
       },
       {
         text: '10 min',
         handler: () => {
-          this.socketio.emit('block', message.substr(0, message.search(":")), 600000);     
-         }
+          this.socketio.emit('block', message.substr(0, message.search(":")), 600000); 
+          var temparray = Object.entries(this.indefblockedusers);
+          temparray[message.substr(0, message.search(":"))] = message.substr(0, message.search(":"));
+          this.indefblockedusers = Object.assign(temparray);         }
       },
       {
         text: '15 min',
         handler: () => {
-          this.socketio.emit('block', message.substr(0, message.search(":")), 900000);     
-        }
+          this.socketio.emit('block', message.substr(0, message.search(":")), 900000); 
+          var temparray = Object.entries(this.indefblockedusers);
+          temparray[message.substr(0, message.search(":"))] = message.substr(0, message.search(":"));
+          this.indefblockedusers = Object.assign(temparray);        }
       },
       {
         text: 'Indefinitely',
         handler: () => {
           this.socketio.emit('block', message.substr(0, message.search(":")), -1);
-          this.indefblockedusers.push(message.substr(0, message.search(":")));
-        }
+          var temparray = Object.entries(this.indefblockedusers);
+          temparray[message.substr(0, message.search(":"))] = message.substr(0, message.search(":"));
+          this.indefblockedusers = Object.assign(temparray);        }
       }
       ]
     });

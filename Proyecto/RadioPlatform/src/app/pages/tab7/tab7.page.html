@@ -19,7 +19,7 @@
         </p>
       </div>
       <p>Blocked users:</p>
-      <p *ngFor="let blocked of indefblockedusers">{{blocked}}<ion-button (click)="presentUnblockConfirmation(blocked)" [attr.aria-label]="'Unblock user'"><ion-icon name="close-circle-outline"></ion-icon></ion-button>
+      <p *ngFor="let blocked of indefblockedusers | keyvalue">{{blocked.value}}<ion-button (click)="presentUnblockConfirmation(blocked.value)" [attr.aria-label]="'Unblock user'"><ion-icon name="close-circle-outline"></ion-icon></ion-button>
       </p>
     </div>
     <div id="antennacontainer">

@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import  * as rxjs  from 'rxjs';
 import * as firebase from 'firebase/app';
 import {NavController} from '@ionic/angular'
+import { AlertController } from '@ionic/angular'
 import { AngularFireAuth } from '../../../../node_modules/@angular/fire/auth'
 import { AngularFireDatabase } from '../../../../node_modules/@angular/fire/database'
 @Component({
@@ -13,7 +14,7 @@ export class LoginPage implements OnInit {
   testResult: string;
   @Input() username: string;
   @Input() password: string;
-  constructor(public afauth: AngularFireAuth, public router: NavController, public afDatabase: AngularFireDatabase) { 
+  constructor(public afauth: AngularFireAuth, public router: NavController, public afDatabase: AngularFireDatabase, public alertCtrl: AlertController) { 
 
   }
 
@@ -30,7 +31,16 @@ export class LoginPage implements OnInit {
           } else {
             this.afauth.signInWithEmailAndPassword(u.val() as unknown as string, this.password).then(
               res => {this.router.navigateForward("/tabs")},
-              err => {return false;}
+              err => {let alert = this.alertCtrl.create({
+                message: 'Name or password are incorrect',
+                buttons: [{
+                  text: 'Ok',
+                  role: 'cancel'
+                }
+                ]
+              }).then(a => {
+                a.present();
+              });}
             )
           }
         })}
@@ -39,18 +49,5 @@ export class LoginPage implements OnInit {
   }
   register() {
     this.router.navigateForward("/register");
-  }
-  public testLogin(user: string, password: string) {
-      this.afauth.signInWithEmailAndPassword("test@example.com", "test123").then(
-        res => {
-          this.testResult = "success!";
-          this.router.navigateForward("/tabs")
-          return true
-        },
-        err => {
-          this.testResult = "failure";
-          return false
-        }
-      );
   }
 }

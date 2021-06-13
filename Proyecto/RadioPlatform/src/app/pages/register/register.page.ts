@@ -15,9 +15,9 @@ export class RegisterPage implements OnInit {
   constructor(public afauth: AngularFireAuth, public sanitizer: DomSanitizer, public firebaseUpdaterAndSetter: FirebaseUpdaterAndSetterService, public firestore: AngularFireStorage, public router: NavController) { }
 @Input() email: string;
 @Input() password: string;
-@Input() callsign: string;
-@Input() country: string;
-@Input() preferredFrequency: string;
+@Input() callsign: string = null;
+@Input() country: string = null;
+@Input() preferredFrequency: string = null;
 filename: string;
 image: File;
 imageUrl: SafeResourceUrl;
@@ -28,7 +28,7 @@ imageUrl: SafeResourceUrl;
         res => {
           this.afauth.signInWithEmailAndPassword(this.email, this.password).then(res => {
               let useruid = res.user.uid;
-              let thisuser = new User(this.country, this.preferredFrequency, this.email, "online", false, res.user.uid, null,null, this.callsign);
+              let thisuser = new User(this.country, this.preferredFrequency, this.email, "online", false, res.user.uid, null,null, this.callsign, null);
               if (this.image === undefined) {
                 this.firebaseUpdaterAndSetter.setUser(thisuser).then(() => {
                   this.router.navigateRoot("/tabs");

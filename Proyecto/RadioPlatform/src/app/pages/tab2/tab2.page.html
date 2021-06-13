@@ -15,28 +15,28 @@
   <ion-item>
     <ion-select [(ngModel)]="name" (ionChange)="updateArray()" placeholder="Nombre">
       <ion-select-option value="">All</ion-select-option>
-      <ion-select-option *ngFor="let radioset of radiosetsTotal" [value]="radioset.name">{{radioset.name}}
+      <ion-select-option *ngFor="let radioset of names" [value]="radioset">{{radioset}}
       </ion-select-option>
     </ion-select>
   </ion-item>
   <ion-item>
     <ion-select [(ngModel)]="brand" (ionChange)="updateArray()" placeholder="Marca">
       <ion-select-option value="">All</ion-select-option>
-      <ion-select-option *ngFor="let radioset of radiosetsTotal" [value]="radioset.brand">{{radioset.brand}}
+      <ion-select-option *ngFor="let radioset of brands" [value]="radioset">{{radioset}}
       </ion-select-option>
     </ion-select>
   </ion-item>
   <ion-item>
     <ion-select [(ngModel)]="type" (ionChange)="updateArray()" placeholder="Tipo">
       <ion-select-option value="">All</ion-select-option>
-      <ion-select-option *ngFor="let radioset of radiosetsTotal" [value]="radioset.type">{{radioset.type}}
+      <ion-select-option *ngFor="let radioset of types" [value]="radioset">{{radioset}}
       </ion-select-option>
     </ion-select>
   </ion-item>
   <ion-item>
     <ion-select [(ngModel)]="amplitude" (ionChange)="updateArray()" placeholder="Amplitud">
       <ion-select-option value="">All</ion-select-option>
-      <ion-select-option *ngFor="let radioset of radiosetsTotal" [value]="radioset.amplitude">{{radioset.amplitude}}
+      <ion-select-option *ngFor="let radioset of amplitudes" [value]="radioset">{{radioset}}
       </ion-select-option>
     </ion-select>
   </ion-item>

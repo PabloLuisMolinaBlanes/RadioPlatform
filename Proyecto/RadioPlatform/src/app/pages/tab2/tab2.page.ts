@@ -22,6 +22,10 @@ amplitude: string = "";
 name: string = "";
 type: string = "";
 brand: string = "";
+names: string[] = [];
+brands: string[] = [];
+types: string[] = [];
+amplitudes: string[] = [];
 isadmin: boolean = false;
   constructor(private firebaseObtainerService: FirebaseObtainerService, public modalController: ModalController, public storage: Storage,public afDatabase: AngularFireDatabase, public auth: AngularFireAuth) {}
   async ngOnInit() {
@@ -30,10 +34,28 @@ isadmin: boolean = false;
         this.afDatabase.database.ref("users/"+user.uid+"/equipment").on("child_added", function (childsnapshot) {
           this.radiosetsTotal.push(childsnapshot.val() as unknown as RadioSet);
           this.radiosetsVisible = this.radiosetsTotal;
+        const child = childsnapshot.val() as unknown as RadioSet;
+        this.names.push(child.name);
+        this.brands.push(child.brand);
+        this.types.push(child.type);
+        this.amplitudes.push(child.amplitude);
+        this.names = [...new Set(this.names)];
+        this.brands = [...new Set(this.brands)];
+        this.types = [...new Set(this.types)];
+        this.amplitudes = [...new Set(this.amplitudes)];
           this.storage.set('equipment', this.radiosetsVisible);
         }, () => {console.log("error here")}, this);
         this.afDatabase.database.ref("users/"+user.uid+"/equipment").on("child_changed", function (childsnapshot) {
           var child = childsnapshot.val() as unknown as RadioSet;
+          this.names.push(child.name);
+          this.brands.push(child.brand);
+          this.types.push(child.type);
+          this.heights.push(child.amplitude);
+          this.names = [...new Set(this.names)];
+          this.brands = [...new Set(this.brands)];
+          this.types = [...new Set(this.types)];
+          this.amplitudes = [...new Set(this.amplitudes)];
+          this.storage.set('antennae', this.antennaeTotal);
           console.log("detected change");
           this.radiosetsVisible.forEach(ant => {
             console.log(ant);

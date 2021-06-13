@@ -20,16 +20,20 @@ transmitting: string;
 frequency: string = "";
 status: string = "";
 country: string = "";
-user: User = new User("Spain", "440mhz", "mygreatcat", "offline", false);
+frequencies: string[] = [];
+countries: string[] = [];
   constructor(public firebaseObtainerService: FirebaseObtainerService,public afDatabase: AngularFireDatabase, public storage: AngularFireStorage, private sanitizer: ɵDomSanitizerImpl) { }
 
   ngOnInit() {
-    this.usersTotal.push(this.user);
     this.usersVisible = this.usersTotal;
     this.usersVisible = this.usersTotal;
     this.allUsers = this.firebaseObtainerService.listAllUsers();
 this.afDatabase.database.ref("users").on("child_changed", function (childsnapshot) {
   const child = childsnapshot.val() as unknown as User;
+  this.countries.push(child.country);
+        this.frequencies.push(child.preferredFrequency);
+        this.countries = [...new Set(this.countries)];
+        this.frequencies = [...new Set(this.frequencies)];
   this.usersVisible.forEach(user => {
     if (child.id === user.id) {
       user.username = child.username;
@@ -47,6 +51,10 @@ this.afDatabase.database.ref("users").on("child_changed", function (childsnapsho
 this.allUsers.then(m => {
       m.forEach(user => {
       const thisuser = user.val() as unknown as User;
+      this.countries.push(thisuser.country);
+        this.frequencies.push(thisuser.preferredFrequency);
+        this.countries = [...new Set(this.countries)];
+        this.frequencies = [...new Set(this.frequencies)];
       if (thisuser.favouriteAntenna !== undefined) {
         thisuser.favouriteAntenna = thisuser.favouriteAntenna.substr(thisuser.favouriteAntenna.indexOf(' '), thisuser.favouriteAntenna.length);
       }

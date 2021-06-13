@@ -40,6 +40,8 @@ export class Tab3Page implements OnInit, AfterViewInit {
   allContacts: Promise<DataSnapshot>;
   country: string = "placeholder";
   counter: number = 0;
+  countries: string[] = [];
+  frequencies: string[] = [];
   private map;
   constructor(private modalController: ModalController, private firebaseObtainerService: FirebaseObtainerService, private storage: AngularFireStorage, private auth: AngularFireAuth, private sanitizer: ɵDomSanitizerImpl, private afDatabase: AngularFireDatabase, public store: Storage) { }
 
@@ -124,12 +126,17 @@ export class Tab3Page implements OnInit, AfterViewInit {
   }
   contact: Contact;
   ngAfterViewInit() {
-
+    
     this.initMap();
     this.store.create();
     this.auth.currentUser.then((user) => {
       this.auth.currentUser.then(user => {
         this.afDatabase.database.ref("users/" + user.uid + "/contacts").on("child_added", function (childsnapshot) {
+        const child = childsnapshot.val() as unknown as Contact;
+        this.countries.push(child.location);
+        this.frequencies.push(child.frequency);
+        this.countries = [...new Set(this.countries)];
+        this.frequencies = [...new Set(this.frequencies)];
           setTimeout(() => {
             this.storage.ref(user.uid).listAll().subscribe(data => {
               this.counter++;
@@ -175,6 +182,10 @@ export class Tab3Page implements OnInit, AfterViewInit {
         this.afDatabase.database.ref("users/" + user.uid + "/contacts").on("child_changed", function (childsnapshot) {
           console.log("child changed... here we go");
           const contact = childsnapshot.val() as unknown as Contact;
+        this.countries.push(contact.location);
+        this.frequencies.push(contact.frequency);
+        this.countries = [...new Set(this.countries)];
+        this.frequencies = [...new Set(this.frequencies)];
           this.contactsVisible.forEach(contact2 => {
             if (contact2.id === "placeholder") {
               contact2.id = contact.id;

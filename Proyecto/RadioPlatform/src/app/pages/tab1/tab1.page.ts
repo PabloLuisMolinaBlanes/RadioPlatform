@@ -22,6 +22,11 @@ name: string = "";
 brand: string = "";
 type: string = "";
 height: string = "";
+names: string[] = [];
+brands: string[] = [];
+types: string[] = [];
+heights: string[] = [];
+
 price: number;
 favouriteAntenna: string;
 isadmin: boolean = false;
@@ -32,10 +37,27 @@ isadmin: boolean = false;
       this.afDatabase.database.ref("users/"+user.uid+"/antennae").on("child_added", function (childsnapshot) {
         this.antennaeTotal.push(childsnapshot.val() as unknown as Antenna);
         this.antennaeVisible = this.antennaeTotal;
+        const child = childsnapshot.val() as unknown as Antenna;
+        this.names.push(child.name);
+        this.brands.push(child.brand);
+        this.types.push(child.type);
+        this.heights.push(child.height);
+        this.names = [...new Set(this.names)];
+        this.brands = [...new Set(this.brands)];
+        this.types = [...new Set(this.types)];
+        this.heights = [...new Set(this.heights)];
         this.storage.set('antennae', this.antennaeTotal);
       }, () => {console.log("error here")}, this);
       this.afDatabase.database.ref("users/"+user.uid+"/antennae").on("child_changed", function (childsnapshot) {
         var child = childsnapshot.val() as unknown as Antenna;
+        this.names.push(child.name);
+        this.brands.push(child.brand);
+        this.types.push(child.type);
+        this.heights.push(child.height);
+        this.names = [...new Set(this.names)];
+        this.brands = [...new Set(this.brands)];
+        this.types = [...new Set(this.types)];
+        this.heights = [...new Set(this.heights)];
         console.log("detected change");
         console.log(this.antennaeVisible);
         this.antennaeVisible.forEach(ant => {

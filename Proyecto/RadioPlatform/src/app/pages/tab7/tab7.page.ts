@@ -30,6 +30,14 @@ antennaname: string = "";
 antennabrand: string = "";
 antennatype: string = "";
 antennaheight: string = "";
+antennanames: string[] = [];
+antennabrands: string[] = [];
+antennatypes: string[] = [];
+antennaheights: string[] = [];
+radionames: string[] = [];
+radiobrands: string[] = [];
+radiotypes: string[] = [];
+radioamplitudes: string[] = [];
 indefblockedusers: {};
   isadmin: boolean = true;
   constructor(private socket: Socket, public auth: AngularFireAuth, public afDatabase: AngularFireDatabase, public alertCtrl: AlertController, public router: NavController, public modalController: ModalController) { }
@@ -107,15 +115,41 @@ indefblockedusers: {};
     this.afDatabase.database.ref("/equipment").on("child_added", function (childsnapshot) {
       this.radiosetsTotal.push(childsnapshot.val() as unknown as RadioSet);
       this.radiosetsVisible = this.radiosetsTotal;
+      const child = childsnapshot.val() as unknown as RadioSet;
+        this.radionames.push(child.name);
+        this.radiobrands.push(child.brand);
+        this.radiotypes.push(child.type);
+        this.radioamplitudes.push(child.amplitude);
+        this.radionames = [...new Set(this.radionames)];
+        this.radiobrands = [...new Set(this.radiobrands)];
+        this.radiotypes = [...new Set(this.radiotypes)];
+        this.radioamplitudes = [...new Set(this.radioamplitudes)];
       this.updateArrayRadio();
     }, () => { console.log("error here") }, this);
     this.afDatabase.database.ref("/antennae").on("child_added", function (childsnapshot) {
       this.antennaeTotal.push(childsnapshot.val() as unknown as Antenna);
+      const child = childsnapshot.val() as unknown as Antenna;
+       this.antennanames.push(child.name);
+        this.antennabrands.push(child.brand);
+        this.antennatypes.push(child.type);
+        this.antennaheights.push(child.height);
+        this.antennanames = [...new Set(this.antennanames)];
+        this.antennabrands = [...new Set(this.antennabrands)];
+        this.antennatypes = [...new Set(this.antennatypes)];
+        this.antennaheights = [...new Set(this.antennaheights)];
       this.antennaeVisible = this.antennaeTotal;
       this.updateArrayAntenna();
     }, () => { console.log("error here") }, this);
     this.afDatabase.database.ref("/antennae").on("child_changed", function (childsnapshot) {
       var child = childsnapshot.val() as unknown as Antenna;
+      this.antennanames.push(child.name);
+      this.antennabrands.push(child.brand);
+      this.antennatypes.push(child.type);
+      this.antennaheights.push(child.height);
+      this.antennanames = [...new Set(this.antennanames)];
+      this.antennabrands = [...new Set(this.antennabrands)];
+      this.antennatypes = [...new Set(this.antennatypes)];
+      this.antennaheights = [...new Set(this.antennaheights)];
       console.log("detected change");
       console.log(this.antennaeVisible);
       this.antennaeVisible.forEach(ant => {
@@ -165,6 +199,14 @@ indefblockedusers: {};
     }, () => { console.log("error here") }, this);
     this.afDatabase.database.ref("/equipment").on("child_changed", function (childsnapshot) {
       var child = childsnapshot.val() as unknown as RadioSet;
+      this.radionames.push(child.name);
+      this.radiobrands.push(child.brand);
+      this.radiotypes.push(child.type);
+      this.radioamplitudes.push(child.amplitude);
+      this.radionames = [...new Set(this.radionames)];
+      this.radiobrands = [...new Set(this.radiobrands)];
+      this.radiotypes = [...new Set(this.radiotypes)];
+      this.radioamplitudes = [...new Set(this.radioamplitudes)];
       console.log("detected change");
       this.radiosetsVisible.forEach(ant => {
         console.log(ant);

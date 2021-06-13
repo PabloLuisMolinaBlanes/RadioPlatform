@@ -14,13 +14,13 @@
   <ion-item>
     <ion-select [(ngModel)]="country" (ionChange)="updateArray()" placeholder="País">
       <ion-select-option value="">All</ion-select-option>
-      <ion-select-option *ngFor="let user of usersTotal" [value]="user.country">{{user.country}}</ion-select-option>
+      <ion-select-option *ngFor="let user of countries" [value]="user">{{user}}</ion-select-option>
     </ion-select>
     </ion-item>
   <ion-item>
     <ion-select [(ngModel)]="frequency" (ionChange)="updateArray()" placeholder="Frecuencia">
       <ion-select-option value="">All</ion-select-option>
-      <ion-select-option *ngFor="let user of usersTotal" [value]="user.preferredFrequency">{{user.preferredFrequency}}</ion-select-option>
+      <ion-select-option *ngFor="let user of frequencies" [value]="user">{{user}}</ion-select-option>
     </ion-select>
   </ion-item>
   <ion-item>

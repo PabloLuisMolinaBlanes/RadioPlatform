@@ -15,13 +15,13 @@
   <ion-item>
     <ion-select  [(ngModel)]="country" (ionChange)="updateArray()" placeholder="País">
       <ion-select-option value="placeholder">All</ion-select-option>
-      <ion-select-option *ngFor="let contact of contactsTotal" [value]="contact.location">{{ contact.location}}</ion-select-option>
+      <ion-select-option *ngFor="let contact of countries" [value]="contact">{{ contact}}</ion-select-option>
     </ion-select>
   </ion-item>
   <ion-item>
     <ion-select  [(ngModel)]="frequency" (ionChange)="updateArray()" placeholder="País">
       <ion-select-option value="placeholder">All</ion-select-option>
-      <ion-select-option *ngFor="let contact of contactsTotal" [value]="contact.frequency">{{ contact.frequency}}</ion-select-option>
+      <ion-select-option *ngFor="let contact of frequencies" [value]="contact">{{ contact}}</ion-select-option>
     </ion-select>
   </ion-item>
     <app-contactitem [contacts]="contactsVisible"></app-contactitem>

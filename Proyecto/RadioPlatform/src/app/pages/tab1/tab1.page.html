@@ -15,28 +15,28 @@
   <ion-item>
     <ion-select [(ngModel)]="name" (ionChange)="updateArray()" placeholder="Nombre">
       <ion-select-option value="">All</ion-select-option>
-      <ion-select-option *ngFor="let antenna of antennaeTotal" [value]="antenna.name">{{antenna.name}}
+      <ion-select-option *ngFor="let antenna of names" [value]="antenna">{{antenna}}
       </ion-select-option>
     </ion-select>
   </ion-item>
   <ion-item>
     <ion-select placeholder="Marca" [(ngModel)]="brand" (ionChange)="updateArray()">
       <ion-select-option value="">All</ion-select-option>
-      <ion-select-option *ngFor="let antenna of antennaeTotal" [value]="antenna.brand">{{antenna.brand}}
+      <ion-select-option *ngFor="let antenna of brands" [value]="brand">{{antenna}}
       </ion-select-option>
     </ion-select>
   </ion-item>
   <ion-item>
     <ion-select placeholder="Tipo" [(ngModel)]="type" (ionChange)="updateArray()">
       <ion-select-option value="">All</ion-select-option>
-      <ion-select-option *ngFor="let antenna of antennaeTotal" [value]="antenna.type">{{antenna.type}}
+      <ion-select-option *ngFor="let antenna of types" [value]="antenna">{{antenna}}
       </ion-select-option>
     </ion-select>
   </ion-item>
   <ion-item>
     <ion-select placeholder="Altura" [(ngModel)]="height" (ionChange)="updateArray()">
       <ion-select-option value="">All</ion-select-option>
-      <ion-select-option *ngFor="let antenna of antennaeTotal" [value]="antenna.height">{{antenna.height}}
+      <ion-select-option *ngFor="let antenna of heights" [value]="antenna">{{antenna}}
       </ion-select-option>
     </ion-select>
   </ion-item>

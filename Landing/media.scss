@@ -1,0 +1,37 @@
+@media (max-width:957px) {
+    nav {
+        justify-content:flex-start;
+    }
+}
+@media (min-width:1000px) {
+    #imagecontainer {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    #audiocontainer {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media (max-width:1000px) {
+    #imagecontainer {
+        img {
+            margin: 0 auto 0 auto;
+        }
+    }
+}
+@media (min-width:572px) {
+    #hamburger {
+        visibility: hidden;
+        position: absolute;
+    }
+    nav {
+        visibility:visible;
+        position:relative;
+        flex-direction: row;
+    }
+}
+@media (max-width:572px) {
+    nav:active {
+        animation-name:hamburger;
+        animation-duration:1s;
+    }
+}

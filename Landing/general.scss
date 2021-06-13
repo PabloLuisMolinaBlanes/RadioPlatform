@@ -1,0 +1,63 @@
+nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    visibility: hidden;
+    position: absolute;
+    width:100vw;
+    z-index:4;
+}
+div:not(#navbar, #welcomescreen, #imagecontainer, #audiocontainer) {
+    color:cyan;
+    background-color:cyan;
+    border:1px solid black;
+    align-self:center;
+}
+#buttonContainer {
+    width:100vw;
+    display:flex;
+justify-content: center
+;}
+#navbar {
+    display:flex;
+    flex-direction: row;
+    justify-content:space-between;
+}
+
+#hamburger {
+    position:relative;
+    visibility:visible;
+}
+video {
+    align-content:center;
+    margin:61px auto 0 auto;
+}
+a {
+   text-decoration:none;
+}
+h1, h2, p {
+    margin:5% 0 5% 0;
+    z-index:2;
+    text-align:center;
+}
+#navbar img {
+    height:50px;
+    align-self:end;
+}
+video {
+    z-index:3;
+    width:100vw;
+}
+
+canvas {
+    margin: 0 auto 0 auto;
+}
+img {
+    height:20vh;
+}
+#imagecontainer {
+    display:grid;
+}
+#audiocontainer {
+    display:grid;
+}

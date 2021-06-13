@@ -1,0 +1,25 @@
+#welcomescreen {
+    display:flex;
+    flex-direction: column;
+    width:100vw;
+    margin: 2% 0 12% 0;
+}
+#welcomescreen {
+    h1 {
+        color:white;
+    }
+    h2 {
+        color:white;
+        margin:-31% 0 15% 0;
+        z-index:4;
+    }
+    p {
+        color:white;
+    }
+    display:flex;
+    text-align:center;
+}
+#welcomescreen img {
+    height:150px;
+    z-index:2;
+}

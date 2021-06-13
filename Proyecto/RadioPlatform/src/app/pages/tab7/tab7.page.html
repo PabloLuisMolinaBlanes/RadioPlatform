@@ -26,28 +26,28 @@
       <p>Antenas</p>
       <ion-item>
         <ion-select [(ngModel)]="antennaname" (ionChange)="updateArrayAntenna()" placeholder="Nombre">
-          <ion-select-option value="">All</ion-select-option>
+          <ion-select-option value="">All names</ion-select-option>
           <ion-select-option *ngFor="let antenna of antennanames" [value]="antenna">{{antenna}}
           </ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item>
         <ion-select placeholder="Marca" [(ngModel)]="antennabrand" (ionChange)="updateArrayAntenna()">
-          <ion-select-option value="">All</ion-select-option>
+          <ion-select-option value="">All brands</ion-select-option>
           <ion-select-option *ngFor="let antenna of antennabrands" [value]="antenna">{{antenna}}
           </ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item>
         <ion-select placeholder="Tipo" [(ngModel)]="antennatype" (ionChange)="updateArrayAntenna()">
-          <ion-select-option value="">All</ion-select-option>
+          <ion-select-option value="">All types</ion-select-option>
           <ion-select-option *ngFor="let antenna of antennatypes" [value]="antenna.type">{{antenna}}
           </ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item>
         <ion-select placeholder="Altura" [(ngModel)]="antennaheight" (ionChange)="updateArrayAntenna()">
-          <ion-select-option value="">All</ion-select-option>
+          <ion-select-option value="">All heights</ion-select-option>
           <ion-select-option *ngFor="let antenna of antennaheights" [value]="antenna.height">{{antenna}}
           </ion-select-option>
         </ion-select>
@@ -59,28 +59,28 @@
       <p>Radios</p>
       <ion-item>
         <ion-select [(ngModel)]="radioname" (ionChange)="updateArrayRadio()" placeholder="Nombre">
-          <ion-select-option value="">All</ion-select-option>
+          <ion-select-option value="">All names</ion-select-option>
           <ion-select-option *ngFor="let radioset of radionames" [value]="radioset">{{radioset}}
           </ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item>
         <ion-select [(ngModel)]="radiobrand" (ionChange)="updateArrayRadio()" placeholder="Marca">
-          <ion-select-option value="">All</ion-select-option>
+          <ion-select-option value="">All brands</ion-select-option>
           <ion-select-option *ngFor="let radioset of radiobrands" [value]="radioset">{{radioset}}
           </ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item>
         <ion-select [(ngModel)]="radiotype" (ionChange)="updateArrayRadio()" placeholder="Tipo">
-          <ion-select-option value="">All</ion-select-option>
+          <ion-select-option value="">All types</ion-select-option>
           <ion-select-option *ngFor="let radioset of radiotypes" [value]="radioset">{{radioset}}
           </ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item>
         <ion-select [(ngModel)]="radioamplitude" (ionChange)="updateArrayRadio()" placeholder="Amplitud">
-          <ion-select-option value="">All</ion-select-option>
+          <ion-select-option value="">All amps</ion-select-option>
           <ion-select-option *ngFor="let radioset of radioamplitudes" [value]="radioset">{{radioset}}
           </ion-select-option>
         </ion-select>

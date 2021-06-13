@@ -18,20 +18,7 @@ div:not(#navbar, #welcomescreen, #imagecontainer, #audiocontainer) {
     display:flex;
 justify-content: center
 ;}
-#navbar {
-    display:flex;
-    flex-direction: row;
-    justify-content:space-between;
-}
 
-#hamburger {
-    position:relative;
-    visibility:visible;
-}
-video {
-    align-content:center;
-    margin:61px auto 0 auto;
-}
 a {
    text-decoration:none;
 }
@@ -40,15 +27,6 @@ h1, h2, p {
     z-index:2;
     text-align:center;
 }
-#navbar img {
-    height:50px;
-    align-self:end;
-}
-video {
-    z-index:3;
-    width:100vw;
-}
-
 canvas {
     margin: 0 auto 0 auto;
 }

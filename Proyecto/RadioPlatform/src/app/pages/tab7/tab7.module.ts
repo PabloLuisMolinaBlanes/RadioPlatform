@@ -7,16 +7,17 @@ import { IonicModule } from '@ionic/angular';
 import { Tab7PageRoutingModule } from './tab7-routing.module';
 
 import { Tab7Page } from './tab7.page';
-import { RadiosetitemComponent } from '../../components/radiosetitem/radiosetitem.component';
-import {AntennaitemComponent} from '../../components/antennaitem/antennaitem.component';
+import {ComponentsModule} from '../../components/components.module';
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    Tab7PageRoutingModule
+    Tab7PageRoutingModule,
+    ComponentsModule
   ],
-  declarations: [Tab7Page, RadiosetitemComponent, AntennaitemComponent]
+  declarations: [Tab7Page]
 })
 export class Tab7PageModule {}

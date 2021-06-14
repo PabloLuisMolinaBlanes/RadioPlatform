@@ -33,6 +33,8 @@ isadmin: boolean = false;
   constructor(private firebaseObtainerService: FirebaseObtainerService,public modalController: ModalController, public storage: Storage,public afDatabase: AngularFireDatabase, public auth: AngularFireAuth) {}
   async ngOnInit() {
     this.antennaeVisible = this.antennaeTotal;
+    this.storage.create();
+    this.storage.set('antennae', this.antennaeTotal);
     this.auth.currentUser.then(user => {
       this.afDatabase.database.ref("users/"+user.uid+"/antennae").on("child_added", function (childsnapshot) {
         this.antennaeTotal.push(childsnapshot.val() as unknown as Antenna);

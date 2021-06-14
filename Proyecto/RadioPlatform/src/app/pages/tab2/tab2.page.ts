@@ -30,6 +30,8 @@ isadmin: boolean = false;
   constructor(private firebaseObtainerService: FirebaseObtainerService, public modalController: ModalController, public storage: Storage,public afDatabase: AngularFireDatabase, public auth: AngularFireAuth) {}
   async ngOnInit() {
     this.radiosetsVisible = this.radiosetsTotal;
+    this.storage.create();
+    this.storage.set('equipment', this.radiosetsVisible);
     this.auth.currentUser.then(user => {
         this.afDatabase.database.ref("users/"+user.uid+"/equipment").on("child_added", function (childsnapshot) {
           this.radiosetsTotal.push(childsnapshot.val() as unknown as RadioSet);
@@ -50,7 +52,7 @@ isadmin: boolean = false;
           this.names.push(child.name);
           this.brands.push(child.brand);
           this.types.push(child.type);
-          this.heights.push(child.amplitude);
+          this.amplitudes.push(child.amplitude);
           this.names = [...new Set(this.names)];
           this.brands = [...new Set(this.brands)];
           this.types = [...new Set(this.types)];
@@ -81,7 +83,7 @@ isadmin: boolean = false;
               ant.id = child.id;
             }
           });
-          this.storage.set('antennae', this.radiosetsTotal);
+          this.storage.set('equipment', this.radiosetsTotal);
         }, () => {console.log("error here")}, this);
         this.afDatabase.database.ref("users/"+user.uid+"/equipment").on("child_removed", function (childsnapshot) {
           var child = childsnapshot.val() as unknown as RadioSet
@@ -98,7 +100,7 @@ isadmin: boolean = false;
               this.radiosetsTotal = this.radiosetsTotal.filter(antenna => antenna !== ant);
             }
           });
-          this.storage.set('antennae', this.radiosetsTotal);
+          this.storage.set('equipment', this.radiosetsTotal);
         }, () => {console.log("error here")}, this);
         this.afDatabase.database.ref("users/"+user.uid+"/favouriteRadioSet").on("value", function (childsnapshot) {
           this.favouriteRadioSet = childsnapshot.val() as unknown as string;

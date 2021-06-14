@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab2Page } from './tab2.page';
 import { ExploreContainerComponentModule } from '../../explore-container/explore-container.module';
-import { RadiosetitemComponent } from '../../components/radiosetitem/radiosetitem.component';
+import {ComponentsModule} from '../../components/components.module';
 
 import { Tab2PageRoutingModule } from './tab2-routing.module';
 
@@ -16,7 +16,8 @@ import { Tab2PageRoutingModule } from './tab2-routing.module';
     FormsModule,
     ExploreContainerComponentModule,
     Tab2PageRoutingModule,
+    ComponentsModule
   ],
-  declarations: [Tab2Page, RadiosetitemComponent]
+  declarations: [Tab2Page]
 })
 export class Tab2PageModule {}

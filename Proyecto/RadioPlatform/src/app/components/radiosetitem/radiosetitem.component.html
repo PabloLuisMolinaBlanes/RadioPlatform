@@ -17,5 +17,6 @@
 <ion-button *ngIf="isadmin" (click)="presentDeleteConfirmation(radioset)" [attr.aria-label]="'Delete ' + radioset.name"><ion-icon name="close-circle"></ion-icon></ion-button>
 <ion-button *ngIf="isadmin" (click)="presentModalModify(radioset)" [attr.aria-label]="'Modify ' + radioset.name"><ion-icon name="create" ></ion-icon></ion-button>
 <ion-checkbox *ngIf="!(isadmin)" [(ngModel)]="radioset.isfavourite" (ionChange)="sendFavouriteData(radioset)"></ion-checkbox>
+
         </tr>
     </table>

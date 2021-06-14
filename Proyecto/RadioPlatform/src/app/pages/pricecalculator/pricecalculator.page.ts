@@ -37,19 +37,9 @@ equipmentChosen: RadioSet[] = [];
     this.calculateTotal();
   }
   updateAntennaMultiplier(antenna: Antenna) {
-    this.antennae.forEach(a => {
-      if (a.id === antenna.id) {
-        a.multiplier = this.antennaeMultiplier;
-      }
-    })
     this.calculateTotal();
   }
   updateEquipmentMultiplier(equipment: RadioSet) {
-    this.equipment.forEach(e => {
-      if (e.name === equipment.name) {
-        e.multiplier = this.equipmentMultiplier;
-      }
-    })
    this.calculateTotal();
   }
   updateEquipmentChosen() {

@@ -25,13 +25,39 @@ export class LoginPage implements OnInit {
     return new Promise<any>((resolve, reject) => {
       this.afauth.signInWithEmailAndPassword(this.username, this.password).then(
         res => {this.router.navigateForward("/tabs")},
-        err => {this.afDatabase.database.ref('callsigns/'+this.username).get().then(u => {
-          if (u.val() === null) {
-            return false;
+        err => {
+          if (this.username.indexOf("@") !== -1) {
+            let alert = this.alertCtrl.create({
+              message: 'Name or password are incorrect',
+              buttons: [{
+                text: 'Ok',
+                role: 'cancel'
+              }
+              ]
+            }).then(a => {
+              a.present();
+            });
           } else {
-            this.afauth.signInWithEmailAndPassword(u.val() as unknown as string, this.password).then(
-              res => {this.router.navigateForward("/tabs")},
-              err => {let alert = this.alertCtrl.create({
+            this.afDatabase.database.ref('callsigns/'+this.username).get().then(u => {
+              if (u.val() === null) {
+                return false;
+              } else {
+                this.afauth.signInWithEmailAndPassword(u.val() as unknown as string, this.password).then(
+                  res => {this.router.navigateForward("/tabs")},
+                  err => {let alert = this.alertCtrl.create({
+                    message: 'Name or password are incorrect',
+                    buttons: [{
+                      text: 'Ok',
+                      role: 'cancel'
+                    }
+                    ]
+                  }).then(a => {
+                    a.present();
+                  });}
+                )
+              }
+            }).catch(err => {
+              let alert = this.alertCtrl.create({
                 message: 'Name or password are incorrect',
                 buttons: [{
                   text: 'Ok',
@@ -40,10 +66,9 @@ export class LoginPage implements OnInit {
                 ]
               }).then(a => {
                 a.present();
-              });}
-            )
+              });
+            })}
           }
-        })}
       );
     });
   }

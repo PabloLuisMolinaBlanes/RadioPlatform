@@ -40,7 +40,16 @@ export class LoginPage implements OnInit {
           } else {
             this.afDatabase.database.ref('callsigns/'+this.username).get().then(u => {
               if (u.val() === null) {
-                return false;
+                let alert = this.alertCtrl.create({
+                  message: 'Name or password are incorrect',
+                  buttons: [{
+                    text: 'Ok',
+                    role: 'cancel'
+                  }
+                  ]
+                }).then(a => {
+                  a.present();
+                });
               } else {
                 this.afauth.signInWithEmailAndPassword(u.val() as unknown as string, this.password).then(
                   res => {this.router.navigateForward("/tabs")},

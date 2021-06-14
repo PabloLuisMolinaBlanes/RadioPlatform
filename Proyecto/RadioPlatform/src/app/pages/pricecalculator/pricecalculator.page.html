@@ -5,6 +5,7 @@
 </ion-header>
 
 <ion-content>
+  <p>Antenas</p>
   <ion-select (ionChange)="updateAntennaChosen()" [(ngModel)]="antennaChosen">
     <ion-select-option *ngFor="let antenna of antennae" [value]="antenna">{{antenna.name}}</ion-select-option>
   </ion-select>
@@ -28,6 +29,7 @@
         <td><ion-input type="number" [(ngModel)]="antenna.multiplier"  (ionChange)="updateAntennaMultiplier(antenna)"></ion-input></td>
         </tr>
   </table>
+  <p>Radios</p>
   <ion-select (ionChange)="updateEquipmentChosen()" [(ngModel)]="radiosetChosen">
     <ion-select-option *ngFor="let radioset of equipment"  [value]="radioset" >{{radioset.name}}</ion-select-option>
   </ion-select>

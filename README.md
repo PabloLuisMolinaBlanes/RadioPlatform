@@ -207,3 +207,19 @@ To-do list:
 * Test on computer
 * Make a tutorial.
 * Make an explanatory video.
+
+## June 06, 2021 - June 13, 2021:
+
+Multiple bug fixes and new changes:
+
+* Fixed a bug where undefined markers would break the contacts map.
+* Reorganized the folders where the project resides.
+* Fixed repeated component imports.
+* Added in improved blocking capabilities and a list of blocked people in both the admin and the individual user pages.
+* Deployed the web application: https://pabloluismolinablanes.github.io/RadioPlatformDeployed/ (credentials will be shown later, not yet up, although it is functional)
+* Deployed the landing page: https://pabloluismolinablanes.github.io/RadioPlatformLandingPage/
+* Improved filtering dropdowns, now it only shows unique options to choose from.
+* Added in a tutorial.
+* Added in a preliminary video (yet to add the last one, taking into account the latest version).
+* Modified a little the presentation.
+* Updated the .apk.

@@ -499,6 +499,13 @@ export class FirebaseUpdaterAndSetterService {
   }
   updateUser(user: User) {
     if (user.callsign !== null && user.callsign !== undefined) {
+      this.afDatabase.database.ref('callsigns/').get().then(res => {
+        res.forEach(r => {
+          if (r.val() as unknown as string === user.username && r.key !== user.callsign) {
+            this.afDatabase.database.ref('callsigns/'+r.key).remove();
+          }
+        })
+      })
       this.afDatabase.database.ref('callsigns/' + user.callsign).get().then((result => {
         console.log(result.val() as unknown as string);
         console.log(user.callsign);
@@ -533,6 +540,13 @@ export class FirebaseUpdaterAndSetterService {
   }
   updateUserAndPhoto(user: User) {
         if (user.callsign !== null && user.callsign !== undefined) {
+          this.afDatabase.database.ref('callsigns/').get().then(res => {
+            res.forEach(r => {
+              if (r.val() as unknown as string === user.username && r.key !== user.callsign) {
+                this.afDatabase.database.ref('callsigns/'+r.key).remove();
+              }
+            })
+          })
       this.afDatabase.database.ref('callsigns/' + user.callsign).get().then((result => {
         console.log(result.val() as unknown as string);
         console.log(user.callsign);

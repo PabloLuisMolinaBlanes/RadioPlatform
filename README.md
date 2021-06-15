@@ -1,6 +1,6 @@
 # RadioPlatform - A Platform for Radio Amateurs
 
-RadioPlatform is an Angular platform thought for radio amateurs to have a safe place to chat and manage their next purchase of equipment.
+RadioPlatform is an Angular platform thought for radio amateurs to have a safe place to chat and manage their equipment.
 
 # Objectives
 * Users can share antennae used for their equipment, along with transceivers they may use, and make it known to other radio amateurs.
@@ -241,3 +241,4 @@ Multiple bug fixes and new changes:
  * Updated tutorial.
  * Added some clarity to the crud pages, now it should be more clear what is mandatory and what isn't.
  * Added GitHub Pages as a new technology
+ * Changed application description

@@ -229,6 +229,7 @@ Multiple bug fixes and new changes:
  At last, the application seems to be complete.
  
  * Finally deployed the web version of the application: https://pabloluismolinablanes.github.io/RadioPlatformDeployed/login/ (will add credentials tomorrow).
+ * The video is available in this link: https://github.com/PabloLuisMolinaBlanes/RadioPlatform/blob/main/Video/definitivevideo.mkv?raw=true
  * Improved feedback on login, now it shows better if there has been an error signing in.
  * Updated video to be more relevant.
  * Fixed problems with storage saving where it would be wrong.

@@ -22,6 +22,7 @@ RadioPlatform will use several technologies to accomplish its objectives.
 * Heroku for holding the Express API
 * Leaflet for rendering the maps.
 * Nominatim for obtaining OpenStreetMap's data.
+* GitHub Pages for web app hosting.
 # Mockup
 
 ![Mockup 1](https://github.com/PabloLuisMolinaBlanes/RadioPlatform/blob/main/Mockup/Web%201920%20%E2%80%93%201.png)
@@ -239,3 +240,4 @@ Multiple bug fixes and new changes:
  * Fixed bug where the original callsign would remain to use to login when modified.
  * Updated tutorial.
  * Added some clarity to the crud pages, now it should be more clear what is mandatory and what isn't.
+ * Added GitHub Pages as a new technology

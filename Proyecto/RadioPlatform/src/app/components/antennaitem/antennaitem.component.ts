@@ -86,7 +86,7 @@ export class AntennaitemComponent implements OnInit {
       },
       {text:'Delete',
       handler: () => {
-          this.firebaseUpdaterAndSetter.deleteAntennaUser(antenna);
+          this.firebaseUpdaterAndSetter.deleteAntenna(antenna);
       }
       }
     ]

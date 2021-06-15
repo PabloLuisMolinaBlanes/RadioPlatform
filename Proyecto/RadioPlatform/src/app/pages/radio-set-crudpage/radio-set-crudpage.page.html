@@ -20,7 +20,7 @@
 <p>Amplitude</p>
 <ion-input [(ngModel)]="amplitude"></ion-input>
 <p>Price</p>
-<ion-input [(ngModel)]="price"></ion-input>
+<ion-input type="number" [(ngModel)]="price"></ion-input>
 <ion-button (click)="submit()" *ngIf="brand && name && type && amplitude">Submit</ion-button>
 <ion-button (click)="dismiss()">Exit</ion-button>
 

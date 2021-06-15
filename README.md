@@ -216,10 +216,25 @@ Multiple bug fixes and new changes:
 * Reorganized the folders where the project resides.
 * Fixed repeated component imports.
 * Added in improved blocking capabilities and a list of blocked people in both the admin and the individual user pages.
-* Deployed the web application: https://pabloluismolinablanes.github.io/RadioPlatformDeployed/ (credentials will be shown later, not yet up, although it is functional)
+* Deployed the web application: https://pabloluismolinablanes.github.io/RadioPlatformDeployed/login/ (credentials will be shown later, not yet up, although it is functional)
 * Deployed the landing page: https://pabloluismolinablanes.github.io/RadioPlatformLandingPage/
 * Improved filtering dropdowns, now it only shows unique options to choose from.
 * Added in a tutorial.
 * Added in a preliminary video (yet to add the last one, taking into account the latest version).
 * Modified a little the presentation.
 * Updated the .apk.
+
+ ## June 14, 2021 - June 16, 2021:
+ 
+ At last, the application seems to be complete.
+ 
+ * Finally deployed the web version of the application: https://pabloluismolinablanes.github.io/RadioPlatformDeployed/login/ (will add credentials tomorrow).
+ * Improved feedback on login, now it shows better if there has been an error signing in.
+ * Updated video to be more relevant.
+ * Fixed problems with storage saving where it would be wrong.
+ * Fixed coding typos in filtering in admin page that would make it not filter well.
+ * Fixed not properly working delete button in admin page.
+ * Fixed bug in calculator page wherein quantitites of elements would not show up repeated.
+ * Fixed bug where the original callsign would remain to use to login when modified.
+ * Updated tutorial.
+ * Added some clarity to the crud pages, now it should be more clear what is mandatory and what isn't.

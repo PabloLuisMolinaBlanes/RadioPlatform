@@ -11,13 +11,13 @@
       <ion-select-option *ngFor="let radioset of radioSetTotal" [value]="radioset">{{ radioset.name }}</ion-select-option>
     </ion-select></ion-item>
   <br>
-  <p>Brand</p>
+  <p>Brand (mandatory)</p>
 <ion-input [(ngModel)]="brand"></ion-input>
-<p>Name</p>
+<p>Name (mandatory)</p>
 <ion-input [(ngModel)]="name"></ion-input>
-<p>Type</p>
+<p>Type (mandatory)</p>
 <ion-input [(ngModel)]="type"></ion-input>
-<p>Amplitude</p>
+<p>Amplitude (mandatory)</p>
 <ion-input [(ngModel)]="amplitude"></ion-input>
 <p>Price</p>
 <ion-input type="number" [(ngModel)]="price"></ion-input>

@@ -11,13 +11,13 @@
       <ion-select-option *ngFor="let antenna of antennaeTotal" [value]="antenna">{{ antenna.name }}</ion-select-option>
     </ion-select></ion-item>
   <br>
-  <p>Type</p>
+  <p>Type (mandatory)</p>
 <ion-input [(ngModel)]="type"></ion-input>
-<p>Name</p>
+<p>Name (mandatory)</p>
 <ion-input [(ngModel)]="name"></ion-input>
-<p>Range</p>
+<p>Range (mandatory)</p>
 <ion-input [(ngModel)]="range"></ion-input>
-<p>Height</p>
+<p>Height (mandatory)</p>
 <ion-input [(ngModel)]="height"></ion-input>
 <p>Brand</p>
 <ion-input [(ngModel)]="brand"></ion-input>

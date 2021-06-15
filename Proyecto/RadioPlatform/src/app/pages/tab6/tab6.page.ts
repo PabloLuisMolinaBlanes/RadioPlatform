@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AngularFireAuth } from '../../../../node_modules/@angular/fire/auth'
+import { AngularFireDatabase } from '../../../../node_modules/@angular/fire/database'
 import {FirebaseUpdaterAndSetterService} from '../../services/firebase-updater-and-setter.service';
 import {FirebaseObtainerService} from '../../services/firebase-obtainer.service'
 import {DomSanitizer, SafeHtml, SafeResourceUrl, SafeUrl, ɵDomSanitizerImpl} from "@angular/platform-browser";
@@ -24,7 +25,7 @@ export class Tab6Page implements OnInit {
   image: File;
   filename: string;
   imageUrl: SafeResourceUrl;
-  constructor(private afauth: AngularFireAuth, private sanitizer: ɵDomSanitizerImpl, private firebaseObtainer: FirebaseObtainerService, private firebaseUpdaterAndSetter: FirebaseUpdaterAndSetterService, private firestore: AngularFireStorage) { }
+  constructor(private afauth: AngularFireAuth, private sanitizer: ɵDomSanitizerImpl, private afDatabase: AngularFireDatabase, private firebaseObtainer: FirebaseObtainerService, private firebaseUpdaterAndSetter: FirebaseUpdaterAndSetterService, private firestore: AngularFireStorage) { }
 
   ngOnInit() {
     this.afauth.currentUser.then((user) => {

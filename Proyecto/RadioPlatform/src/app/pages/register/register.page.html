@@ -17,6 +17,6 @@
   <ion-input [(ngModel)]="preferredFrequency"></ion-input>
   <p>Profile picture</p>
   <input type="file" (change)="onFileSelected($event)">
-  <img [src]="imageUrl">
+  <img [src]="imageUrl" alt="Your profile picture">
   <ion-button (click)="register()" *ngIf="email && password">Register</ion-button>
 </ion-content>

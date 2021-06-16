@@ -7,7 +7,7 @@
 <ion-content>
   <p>Antenas</p>
   <ion-select (ionChange)="updateAntennaChosen()" [(ngModel)]="antennaChosen">
-    <ion-select-option *ngFor="let antenna of antennae" [value]="antenna">{{antenna.name}}</ion-select-option>
+    <ion-select-option *ngFor="let antenna of antennae" [value]="antenna">{{antenna.name}} - {{antenna.price}}$</ion-select-option>
   </ion-select>
   <table>
     <tr>
@@ -31,7 +31,7 @@
   </table>
   <p>Radios</p>
   <ion-select (ionChange)="updateEquipmentChosen()" [(ngModel)]="radiosetChosen">
-    <ion-select-option *ngFor="let radioset of equipment"  [value]="radioset" >{{radioset.name}}</ion-select-option>
+    <ion-select-option *ngFor="let radioset of equipment"  [value]="radioset" >{{radioset.name}} - {{radioset.price}}$</ion-select-option>
   </ion-select>
   <table>
     <tr>

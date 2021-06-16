@@ -36,8 +36,8 @@ export class AntennaitemComponent implements OnInit {
         'name': antenna.name,
         'range': antenna.range,
         'height': antenna.height,
-        'brand': antenna.brand,
-        'price': antenna.price,
+        'brand': antenna.brand === undefined ? null : antenna.brand,
+        'price': antenna.price === undefined ? null : antenna.price,
         'isadmin': false
       }
     });
@@ -53,8 +53,8 @@ export class AntennaitemComponent implements OnInit {
         'name': antenna.name,
         'range': antenna.range,
         'height': antenna.height,
-        'brand': antenna.brand,
-        'price': antenna.price,
+        'brand': antenna.brand === undefined ? null : antenna.brand,
+        'price': antenna.price === undefined ? null : antenna.price,
         'isadmin': true
       }
     });

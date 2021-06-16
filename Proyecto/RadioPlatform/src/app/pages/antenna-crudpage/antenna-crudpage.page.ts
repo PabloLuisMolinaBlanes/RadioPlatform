@@ -35,9 +35,9 @@ antennaeTotal: Antenna[] = [];
     this.name = this.antenna.name;
     this.range = this.antenna.range;
     this.height = this.antenna.height;
-    this.brand = this.antenna.brand;
+    this.brand = this.antenna.brand === undefined ? null : this.antenna.brand;
     this.id = this.antenna.id;
-    this.price = this.antenna.price;
+    this.price = this.antenna.price === undefined ? null : this.antenna.price;
   }
   dismiss() {
     this.modalController.dismiss();

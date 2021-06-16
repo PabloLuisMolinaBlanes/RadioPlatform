@@ -39,7 +39,7 @@ isfavourite: boolean = false;
         'name': radioset.name,
         'amplitude': radioset.amplitude,
         'brand': radioset.brand,
-        'price': radioset.price,
+        'price': radioset.price === undefined ? null : radioset.price,
         'isadmin': true
       }
     });
@@ -56,7 +56,7 @@ isfavourite: boolean = false;
         'name': radioset.name,
         'amplitude': radioset.amplitude,
         'brand': radioset.brand,
-        'price': radioset.price,
+        'price': radioset.price === undefined ? null : radioset.price,
         'isadmin': false
       }
     });

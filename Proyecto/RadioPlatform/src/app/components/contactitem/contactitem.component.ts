@@ -22,9 +22,9 @@ export class ContactitemComponent implements OnInit {
       cssClass: 'placeholder',
       componentProps: {
         'frequency': contact.frequency,
-        'callsign': contact.callsign,
-        'location': contact.location,
-        'recording': contact.recording,
+        'callsign': contact.callsign === undefined ? null : contact.callsign,
+        'location': contact.location === undefined ? null : contact.location,
+        'recording': contact.recording === undefined ? null : contact.recording,
         'id': contact.id,
         'number': contact.number,
         'updated': contact.updated

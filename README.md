@@ -1,4 +1,4 @@
-![Logo](https://github.com/PabloLuisMolinaBlanes/RadioPlatform/blob/main/Mockup/logoRadioPlatform.svg)
+
 # RadioPlatform - A Platform for Radio Amateurs
 
 Link to the app: https://pabloluismolinablanes.github.io/RadioPlatformDeployed/login/ (test@example.com: test123 and admin@example.com: test123 are the credentials).

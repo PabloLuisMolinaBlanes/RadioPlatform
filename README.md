@@ -1,6 +1,6 @@
 # RadioPlatform - A Platform for Radio Amateurs
 
-RadioPlatform is an Angular platform thought for radio amateurs to have a safe place to chat and manage their next purchase of equipment.
+RadioPlatform is an Angular platform thought for radio amateurs to have a safe place to chat and manage their equipment.
 
 # Objectives
 * Users can share antennae used for their equipment, along with transceivers they may use, and make it known to other radio amateurs.
@@ -22,6 +22,7 @@ RadioPlatform will use several technologies to accomplish its objectives.
 * Heroku for holding the Express API
 * Leaflet for rendering the maps.
 * Nominatim for obtaining OpenStreetMap's data.
+* GitHub Pages for web app hosting.
 # Mockup
 
 ![Mockup 1](https://github.com/PabloLuisMolinaBlanes/RadioPlatform/blob/main/Mockup/Web%201920%20%E2%80%93%201.png)
@@ -228,7 +229,7 @@ Multiple bug fixes and new changes:
  
  At last, the application seems to be complete.
  
- * Finally deployed the web version of the application: https://pabloluismolinablanes.github.io/RadioPlatformDeployed/login/ (will add credentials tomorrow).
+ * Finally deployed the web version of the application: https://pabloluismolinablanes.github.io/RadioPlatformDeployed/login/ (test@example.com: test123 and admin@example.com: test123 are the credentials).
  * The video is available in this link: https://github.com/PabloLuisMolinaBlanes/RadioPlatform/blob/main/Video/definitivevideo.mkv?raw=true
  * Improved feedback on login, now it shows better if there has been an error signing in.
  * Updated video to be more relevant.
@@ -239,3 +240,9 @@ Multiple bug fixes and new changes:
  * Fixed bug where the original callsign would remain to use to login when modified.
  * Updated tutorial.
  * Added some clarity to the crud pages, now it should be more clear what is mandatory and what isn't.
+ * Added GitHub Pages as a new technology
+ * Changed application description
+
+Bibliography:
+
+https://stackoverflow.com/questions/53036381/how-to-deploy-ionic-4-app-to-github-pages

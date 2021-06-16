@@ -252,11 +252,13 @@ Multiple bug fixes and new changes:
  * Fixed bug in calculator page wherein quantitites of elements would not show up repeated.
  * Fixed bug where the original callsign would remain to use to login when modified.
  * Updated tutorial.
- * Added some clarity to the crud pages, now it should be more clear what is mandatory and what isn't.
+ * Added some clarity to the crud and registration pages, now it should be more clear what is mandatory and what isn't.
  * Added GitHub Pages as a new technology
  * Changed application description
  * Improved accesibility, now all images should have alt attributes.
- * Fixed bug where antennae wouldn't be added if there wasn't a price set, a non-mandatory attribute.
+ * Fixed bug where antennae or radio sets wouldn't be added if there wasn't a price set, a non-mandatory attribute.
+ * Fixed bug where anything wouldn't be able to be modified unless it had all attributes set, including non-mandatory ones.
+ * Modified the tutorial to reflect on lesser known functionality.
 
 Bibliography:
 

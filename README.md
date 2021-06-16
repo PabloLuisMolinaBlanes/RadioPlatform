@@ -242,6 +242,8 @@ Multiple bug fixes and new changes:
  * Added some clarity to the crud pages, now it should be more clear what is mandatory and what isn't.
  * Added GitHub Pages as a new technology
  * Changed application description
+ * Improved accesibility, now all images should have alt attributes.
+ * Fixed bug where antennae wouldn't be added if there wasn't a price set, a non-mandatory attribute.
 
 Bibliography:
 

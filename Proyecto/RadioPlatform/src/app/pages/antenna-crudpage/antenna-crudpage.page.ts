@@ -16,7 +16,7 @@ export class AntennaCRUDPagePage implements OnInit {
 @Input() height:string = null;
 @Input() brand?:string = null;
 @Input() id?:string;
-@Input() price?:number;
+@Input() price?:number = null;
 @Input() isadmin: boolean;
 antenna: Antenna;
 antennaeTotal: Antenna[] = [];

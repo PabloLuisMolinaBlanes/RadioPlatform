@@ -229,7 +229,7 @@ Multiple bug fixes and new changes:
  
  At last, the application seems to be complete.
  
- * Finally deployed the web version of the application: https://pabloluismolinablanes.github.io/RadioPlatformDeployed/login/ (will add credentials tomorrow).
+ * Finally deployed the web version of the application: https://pabloluismolinablanes.github.io/RadioPlatformDeployed/login/ (test@example.com: test123 and admin@example.com: test123 are the credentials).
  * The video is available in this link: https://github.com/PabloLuisMolinaBlanes/RadioPlatform/blob/main/Video/definitivevideo.mkv?raw=true
  * Improved feedback on login, now it shows better if there has been an error signing in.
  * Updated video to be more relevant.
@@ -242,3 +242,7 @@ Multiple bug fixes and new changes:
  * Added some clarity to the crud pages, now it should be more clear what is mandatory and what isn't.
  * Added GitHub Pages as a new technology
  * Changed application description
+
+Bibliography:
+
+https://stackoverflow.com/questions/53036381/how-to-deploy-ionic-4-app-to-github-pages

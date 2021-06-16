@@ -15,12 +15,12 @@ import {User} from '../../classes/user'
 export class Tab6Page implements OnInit {
   @Input() email: string;
   @Input() password: string = undefined;
-  @Input() status: string;
-  @Input() transmitting: string;
-  @Input() callsign: string;
-  @Input() country: string;
-  @Input() preferredFrequency: string;
-  @Input() transmittingFrequency: string;
+  @Input() status: string = null;
+  @Input() transmitting: string = null;
+  @Input() callsign: string = null;
+  @Input() country: string = null;
+  @Input() preferredFrequency: string = null;
+  @Input() transmittingFrequency: string = null;
   myself: User;
   image: File;
   filename: string;

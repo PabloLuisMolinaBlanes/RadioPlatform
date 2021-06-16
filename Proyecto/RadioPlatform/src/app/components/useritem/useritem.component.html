@@ -9,7 +9,7 @@
         <th>Favourites</th>
     </tr>
     <tr *ngFor="let user of users">
-        <td><img height="50px" width="50px" [src]="user.profilepicture" *ngIf="user.profilepicture !== undefined"><p *ngIf="user.profilepicture === undefined">N/A</p></td>
+        <td><img height="50px" width="50px" alt="Profile picture of user" [src]="user.profilepicture" *ngIf="user.profilepicture !== undefined"><p *ngIf="user.profilepicture === undefined">N/A</p></td>
         <td>{{user.username}}</td>
         <td>{{user.callsign}}</td>
         <td>{{user.country}}</td>

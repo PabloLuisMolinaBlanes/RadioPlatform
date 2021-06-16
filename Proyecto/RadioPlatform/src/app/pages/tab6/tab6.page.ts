@@ -32,11 +32,11 @@ export class Tab6Page implements OnInit {
       this.firebaseObtainer.listMyself(user.uid).then((result) => {
         const me = result.val() as unknown as User;
         this.email = me.username;
-        this.status = me.status;
+        this.status = me.status === undefined ? null : me.status;
         this.transmitting = me.transmitting ? "true" : "false";
-        this.callsign = me.callsign;
-        this.country = me.country;
-        this.preferredFrequency = me.preferredFrequency;
+        this.callsign = me.callsign === undefined ? null : me.callsign;
+        this.country = me.country === undefined ? null : me.country;
+        this.preferredFrequency = me.preferredFrequency === undefined ? null : me.preferredFrequency;
         this.firestore.ref(user.uid).getDownloadURL().toPromise().then(data => {
           const urlSan = this.sanitizer.bypassSecurityTrustResourceUrl(data);
           this.imageUrl = urlSan;

@@ -1,4 +1,17 @@
+![Logo](https://github.com/PabloLuisMolinaBlanes/RadioPlatform/blob/main/Mockup/logoRadioPlatform.svg)
 # RadioPlatform - A Platform for Radio Amateurs
+
+Link to the app: https://pabloluismolinablanes.github.io/RadioPlatformDeployed/login/ (test@example.com: test123 and admin@example.com: test123 are the credentials).
+
+Link to the landing page: https://pabloluismolinablanes.github.io/RadioPlatformLandingPage/
+
+Link to the apk: https://github.com/PabloLuisMolinaBlanes/RadioPlatform/blob/main/Proyecto/apk/radioplatform.apk?raw=true
+
+Link to the tutorial: https://github.com/PabloLuisMolinaBlanes/RadioPlatform/blob/main/Tutorial/Tutorial.pdf
+
+Link to the video: https://github.com/PabloLuisMolinaBlanes/RadioPlatform/blob/main/Video/definitivevideo.mkv?raw=true
+
+Link to the presentation: https://github.com/PabloLuisMolinaBlanes/RadioPlatform/blob/main/Presentacion/presentacion.pdf
 
 RadioPlatform is an Angular platform thought for radio amateurs to have a safe place to chat and manage their equipment.
 

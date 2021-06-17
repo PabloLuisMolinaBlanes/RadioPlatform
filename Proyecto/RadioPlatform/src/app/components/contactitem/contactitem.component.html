@@ -10,7 +10,7 @@
         <td>{{contact.location}}</td>
         <td>{{contact.callsign}}</td>
         <td><audio controls [src]="contact.recording" [attr.aria-label]="'Recording of ' + contact.frequency"></audio>
-<ion-button (click)="presentDeleteConfirmation(contact)"  [attr.aria-label]="'Delete ' + contact.frequency"><ion-icon name="close-circle-outline"></ion-icon></ion-button>
-<ion-button (click)="presentModalModify(contact)" [attr.aria-label]="'Modify ' + contact.frequency"><ion-icon name="brush"></ion-icon></ion-button>
+<ion-button (click)="presentDeleteConfirmation(contact)" *ngIf="contact.id !== 'placeholder'" [attr.aria-label]="'Delete ' + contact.frequency"><ion-icon name="close-circle-outline"></ion-icon></ion-button>
+<ion-button (click)="presentModalModify(contact)" *ngIf="contact.id !== 'placeholder'" [attr.aria-label]="'Modify ' + contact.frequency"><ion-icon name="brush"></ion-icon></ion-button>
         </td>
 

@@ -259,6 +259,8 @@ Multiple bug fixes and new changes:
  * Fixed bug where antennae or radio sets wouldn't be added if there wasn't a price set, a non-mandatory attribute.
  * Fixed bug where anything wouldn't be able to be modified unless it had all attributes set, including non-mandatory ones.
  * Modified the tutorial to reflect on lesser known functionality.
+ * Modified logo of the apk.
+ * Beautified the presentation a little.
 
 Bibliography:
 

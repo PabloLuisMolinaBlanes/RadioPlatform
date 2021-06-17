@@ -100,27 +100,6 @@ export class Tab3Page implements OnInit, AfterViewInit {
       contactsFound[''+this.contactsVisible[i].location+"_found"] = 1;
     }
   }
-  checkExistingPopups(contact: Contact) {
-    var found = false;
-    this.contactsTotal.forEach(contact2 => {
-      if (contact.location === contact2.location && contact.id !== contact2.id) {
-        found = true;
-        var index = this.contactsTotal.findIndex((contact3) => contact3.id === contact2.id);
-        console.log(index);
-        this.markers[index].bindPopup(this.markers[index].getPopup().getContent() + ` | ` + `<div>Frecuencia: ${contact.frequency}</div>` + `<div>Localización: ${contact.location}</div>` + `<div>Signo de llamada: ${contact.callsign}</div>`)
-      }
-    });
-    if (!(found)) {
-      if (contact.coordinates !== undefined) {
-        const lat = contact.coordinates.substr(0, contact.coordinates.search(",")) as unknown as number;
-        const lon = contact.coordinates.substr(contact.coordinates.search(",") + 1, contact.coordinates.length) as unknown as number;
-        const marker = L.marker([lat, lon]);
-        this.markers.push(marker);
-        marker.bindPopup(`<div>Frecuencia: ${contact.frequency}</div>` + `<div>Localización: ${contact.location}</div>` + `<div>Signo de llamada: ${contact.callsign}</div>`);
-        marker.addTo(this.map);
-      }
-    }
-  }
   ngAfterViewChecked() {
     this.map.invalidateSize();
   }

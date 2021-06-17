@@ -263,7 +263,7 @@ export class Tab3Page implements OnInit, AfterViewInit {
                 console.log("finished 2");
               }
             })
-          }, 5000);
+          }, 6000);
         }, () => { console.log("error here") }, this)
       })
     });
